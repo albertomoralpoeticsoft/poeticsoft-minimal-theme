@@ -1,0 +1,12 @@
+#Page.Gamification {
+
+  .Rain {
+
+    @include absolutebox();
+
+    #canvas {      
+        
+      @include absolutebox();
+    }
+  }
+}

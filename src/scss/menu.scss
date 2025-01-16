@@ -1,0 +1,54 @@
+#Menu {
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  .Launcher {
+
+    background-color: $color-corp-a;
+    padding: $space * 2;
+    cursor: pointer;
+    transition: padding 0.3s ease-out 0.3s;
+  }
+
+  .Options {
+
+    position: absolute;
+    top: 0;
+    right: $space * 8;
+
+    transform: translateY(-100%);
+    transition-property: transform;
+    transition: transform 0.3s ease-out;
+
+    .Option {
+
+      background-color: $color-corp-c;
+      padding: $space * 2 $space * 3;
+      color: $color-light;
+      cursor: pointer;
+      font-family: "Montserrat SemiBold";
+
+      &:hover {
+
+        background-color: $color-accent-a;
+      }
+    }
+  }
+
+  &:hover {
+
+    .Launcher {
+    
+      padding: $space * 2.5;
+      transition: padding 0.3s ease-out;
+    }
+
+    .Options {
+
+      transform: translateY(0); 
+      transition: transform 0.3s ease-out  0.3s; 
+    }
+  }
+}

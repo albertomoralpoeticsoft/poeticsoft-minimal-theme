@@ -1,0 +1,43 @@
+.Page.Wordpress,
+.Page.React{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .Text {
+
+    font-family: "Montserrat ExtraBold";
+    font-size: 50vw;
+    line-height: 1em;
+    white-space: nowrap;
+    position: absolute;
+    top: 20%;
+    left: 0;
+    color: $color-text-a;
+    transform: translateX(0);
+    transition: transform 1s ease-in;
+  }
+
+  .Description {
+
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    top: 20%;
+    padding: $space * 3;
+    background-color: $color-dark-transparent-a;
+    box-sizing: border-box;
+    border-radius: $space * 0.5;
+    color: $color-text-b;
+  }
+
+  &:hover {
+
+    .Text {
+
+      transform: translateX(-100%);
+    }
+  }
+}

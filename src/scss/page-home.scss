@@ -1,0 +1,41 @@
+#Page.Home {
+
+  .Clouds {
+
+    @include absolutebox();
+
+    iframe {
+
+      width: 100%;
+      height: 100%;
+      border: none;
+      position: relative;
+      z-index: 0;
+    }
+  }
+
+  .Text {
+
+    font-family: "Barlow Condensed ExtraBold";
+    font-size: clamp(120px, 30.1vw, 200px);
+    line-height: 0.7em;
+    white-space: nowrap;
+    position: absolute;
+    bottom: 5px;
+    left: -4px;
+    color: $color-text-a;
+    z-index: 1;
+    mix-blend-mode: luminosity;
+    letter-spacing: -0.07em;  
+    opacity: 0;  
+          
+    transition-property: opacity;
+    transition-duration: 1.5s;
+    transition-timing-function: ease-in-out;
+
+    &.visible { 
+      
+      opacity: 1;        
+    }
+  }
+}
