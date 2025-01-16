@@ -60,15 +60,35 @@ export default RainyDay => {
 
       width = this.canvas.width;
       height = this.canvas.height;
-    }
+    }    
 
     var context = this.canvas.getContext("2d");
     context.clearRect(0, 0, width, height);
     context.drawImage(this.img, 0, 0, width, height);
 
-    if (isNaN(radius) || radius < 1) return;
+    const self = this
 
-    this.stackBlurCanvasRGB(0, 0, width, height, radius);
+    this.img.onload = function() {
+
+      context.drawImage(self.img, 0, 0, width, height);
+
+      if (isNaN(radius) || radius < 1) return;
+
+      self.stackBlurCanvasRGB(0, 0, width, height, radius);
+
+      self.w = self.canvas.width;
+      self.h = self.canvas.height;
+
+      self.prepareGlass(0.9);
+      self.prepareMiniatures();
+
+      self.rain([
+        self.preset(0, 2, 0.88),
+        self.preset(3, 3, 1)
+      ], 1);
+
+      // this.handDraw()
+    }
   };
 
   RainyDay.prototype.stackBlurCanvasRGB = function(

@@ -17,6 +17,8 @@
     position: absolute;
     top: 0;
     right: $space * 8;
+    background-color: $color-corp-c;
+    padding: $space * 2 0;
 
     transform: translateY(-100%);
     transition-property: transform;
@@ -28,7 +30,8 @@
       padding: $space * 2 $space * 3;
       color: $color-light;
       cursor: pointer;
-      font-family: "Montserrat SemiBold";
+      font-family: "Barlow Condensed SemiBold";
+      font-size: 1.4rem;
 
       &:hover {
 

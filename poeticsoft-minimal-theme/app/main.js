@@ -161,8 +161,18 @@ function BlurStack() {
     var context = this.canvas.getContext("2d");
     context.clearRect(0, 0, width, height);
     context.drawImage(this.img, 0, 0, width, height);
-    if (isNaN(radius) || radius < 1) return;
-    this.stackBlurCanvasRGB(0, 0, width, height, radius);
+    var self = this;
+
+    this.img.onload = function () {
+      context.drawImage(self.img, 0, 0, width, height);
+      if (isNaN(radius) || radius < 1) return;
+      self.stackBlurCanvasRGB(0, 0, width, height, radius);
+      self.w = self.canvas.width;
+      self.h = self.canvas.height;
+      self.prepareGlass(0.9);
+      self.prepareMiniatures();
+      self.rain([self.preset(0, 2, 0.88), self.preset(3, 3, 1)], 1); // this.handDraw()
+    };
   };
 
   RainyDay.prototype.stackBlurCanvasRGB = function (top_x, top_y, width, height, radius) {
@@ -560,20 +570,13 @@ __webpack_require__.r(__webpack_exports__);
 function RainyDay(rainelm, canvaselm, imageelm) {
   this.rainelm = rainelm;
   this.canvas = canvaselm;
-  this.img = imageelm; // window.addEventListener(
-  //   'resize',
-  //   this.init
-  // )
-
+  this.img = imageelm;
+  window.addEventListener('resize', this.init);
   this.init();
 }
 
 RainyDay.prototype.init = function () {
-  this.prepareBackground(20, this.rainelm.clienttWidth, this.rainelm.clienttHeight);
-  this.w = this.canvas.width;
-  this.h = this.canvas.height; // this.prepareGlass(0.9);
-  // this.prepareMiniatures();
-  // this.handDraw()
+  this.prepareBackground(20, this.rainelm.clientWidth, this.rainelm.clientHeight);
 };
 
 RainyDay.prototype.prepareMiniatures = function () {
@@ -749,7 +752,6 @@ __webpack_require__.r(__webpack_exports__);
       engine.trail = engine.TRAIL_DROPS;
       engine.reflection = engine.REFLECTION_HQ;
       engine.gravity = engine.GRAVITY_SIMPLE;
-      engine.rain([engine.preset(0, 2, 0.88), engine.preset(4, 3, 1)], 1);
     }
   }, [canvasRef.current, imageRef.current, rainRef.current]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -757,10 +759,7 @@ __webpack_require__.r(__webpack_exports__);
     ref: rainRef
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
     src: assets_images_pueblo_jpg__WEBPACK_IMPORTED_MODULE_2__,
-    ref: imageRef,
-    style: {
-      display: 'none'
-    }
+    ref: imageRef
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("canvas", {
     id: "canvas",
     ref: canvasRef

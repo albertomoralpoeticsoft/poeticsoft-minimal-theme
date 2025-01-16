@@ -13,10 +13,10 @@ function RainyDay(
 	this.canvas = canvaselm;
 	this.img = imageelm;
 
-  // window.addEventListener(
-  //   'resize',
-  //   this.init
-  // )
+  window.addEventListener(
+    'resize',
+    this.init
+  )
 
 	this.init();
 }
@@ -25,15 +25,9 @@ RainyDay.prototype.init = function() {
 
 	this.prepareBackground(
     20, 
-    this.rainelm.clienttWidth,
-    this.rainelm.clienttHeight, 
+    this.rainelm.clientWidth,
+    this.rainelm.clientHeight, 
   );
-	this.w = this.canvas.width;
-	this.h = this.canvas.height;
-
-	// this.prepareGlass(0.9);
-	// this.prepareMiniatures();
-  // this.handDraw()
 };
 
 RainyDay.prototype.prepareMiniatures = function() {

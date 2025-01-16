@@ -129,6 +129,8 @@ body {
   position: absolute;
   top: 0;
   right: 64px;
+  background-color: #414141;
+  padding: 16px 0;
   transform: translateY(-100%);
   transition-property: transform;
   transition: transform 0.3s ease-out;
@@ -138,7 +140,8 @@ body {
   padding: 16px 24px;
   color: #ffffff;
   cursor: pointer;
-  font-family: "Montserrat SemiBold";
+  font-family: "Barlow Condensed SemiBold";
+  font-size: 1.4rem;
 }
 #Menu .Options .Option:hover {
   background-color: #b63913;
@@ -238,8 +241,6 @@ body {
 #Page.Gamification .Rain #canvas {
   position: absolute;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
 }
 

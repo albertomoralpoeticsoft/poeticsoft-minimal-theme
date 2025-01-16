@@ -28,10 +28,6 @@ export default props => {
       engine.trail = engine.TRAIL_DROPS;
       engine.reflection = engine.REFLECTION_HQ;
       engine.gravity = engine.GRAVITY_SIMPLE;
-      engine.rain([
-        engine.preset(0, 2, 0.88),
-        engine.preset(4, 3, 1)
-      ], 1);
     }
 
   }, [ 
@@ -47,9 +43,6 @@ export default props => {
     <img 
       src={ image }
       ref={ imageRef }
-      style={{
-        display: 'none'
-      }}
     />
     <canvas 
       id="canvas" 

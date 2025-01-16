@@ -9,7 +9,7 @@ function Drop(
 	this.x = Math.floor(centerX);
 	this.y = Math.floor(centerY);
 	this.r1 = (Math.random() * base) + min;
-	this.rainyday = rainyday;
+	this.rainyday = rainyday; 
 	var iterations = 5;
 	this.r2 = 0.88 * this.r1;
 	this.linepoints = rainyday.getLinepoints(iterations);

@@ -7,7 +7,13 @@ export default RainyDay => {
     if (!drop.trail_y || drop.y - drop.trail_y >= Math.random()*10*drop.r1) {
 
       drop.trail_y = drop.y;
-      this.putDrop(new Drop(this, drop.x, drop.y - drop.r1 - 5, 0, Math.ceil(drop.r1 / 5)));
+      this.putDrop(new Drop(
+        this, 
+        drop.x, 
+        drop.y - drop.r1 - 5, 
+        0, 
+        Math.ceil(drop.r1 / 5)
+      ));
     }
   };
 
