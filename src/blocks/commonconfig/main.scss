@@ -1,0 +1,132 @@
+.PlaymotivCloudBlockEditorBlockId {
+
+  input.components-text-control__input {
+
+    font-size: 12px;
+  }
+}
+
+.ColorsWrapper {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .ButtonColorPicker {
+  
+    padding: 0;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: auto;
+  
+    &.Selected {
+  
+      border: 1px solid;
+    }
+  
+    .ColorPicker {
+  
+      margin: 0px;
+    }
+  }
+}
+
+.components-panel__row.Interceptor {
+
+  .components-base-control__help {
+
+    margin-bottom: 0;
+  }
+}
+
+.components-panel__row.Expand {
+
+  flex-direction: column;
+  padding: 16px 0 0 0;
+  border: solid #ccc;
+  border-width: 1px 0 0 0;
+
+  .components-base-control {
+
+    width: 100%;
+    margin-bottom: 4px;
+  }
+}
+
+.components-panel__row.ContentType {
+
+  .components-base-control {
+
+    width: 100%;
+    margin-bottom: 4px;
+  }
+}
+
+.CoreGroupPanel {
+
+  padding: 0;
+
+  .components-panel__body-title {
+
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+  
+  &.is-opened {
+    
+    padding: 16px 0 0 0;
+  }
+  
+  .CoreGroup {
+
+    flex-direction: column;
+
+    .kpiseditor {
+
+      .kpis {
+
+        display: flex;
+        gap: 8px;
+        justify-content: space-between;
+        margin: 0 0 8px 0;
+        border: solid #ccc;
+        border-width: 0 0 1px 0;
+        padding: 0 0 8px 0;
+
+        .form {
+
+          flex: 1;
+          display: flex;
+          justify-content: flex-end;
+          gap: 4px;
+          flex-wrap: wrap;
+
+          input,
+          select {
+
+            height: 36px;
+          }
+
+          .kpi {
+
+            width: calc(60% - 2px);
+          }
+
+          .value,
+          .operation {
+
+            width: calc(40% - 2px);
+          }
+        }
+      }
+    }
+
+    > .actions {
+
+      width: 100%;
+      text-align: right;
+    }
+  }
+}

@@ -85,6 +85,7 @@ body {
 body {
   font-family: "Barlow Condensed Light";
   line-height: 1.6rem;
+  background-color: #000000;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -196,12 +197,22 @@ body {
   transform: translateX(-100%);
 }
 
+@keyframes home-text-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 #Page.Home .Clouds {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  background-color: #326696;
+  background: linear-gradient(356deg, #000763 0%, #326696 100%);
 }
 #Page.Home .Clouds iframe {
   width: 100%;
@@ -223,9 +234,11 @@ body {
   mix-blend-mode: luminosity;
   letter-spacing: -0.07em;
   opacity: 0;
-  transition-property: opacity;
-  transition-duration: 1.5s;
-  transition-timing-function: ease-in-out;
+  animation-name: home-text-fade-in;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 #Page.Home .Text.visible {
   opacity: 1;
@@ -238,10 +251,104 @@ body {
   bottom: 0;
   left: 0;
 }
-#Page.Gamification .Rain #canvas {
+#Page.Gamification .Rain .videobg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#Page.Gamification .Rain canvas#container {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+@keyframes react-text-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+#Page.React .Text {
+  position: relative;
+  font-family: "Barlow Condensed ExtraBold";
+  font-size: clamp(120px, 30.1vw, 200px);
+  line-height: 0.7em;
+  white-space: nowrap;
+  position: absolute;
+  bottom: 30%;
+  left: -4px;
+  color: #c50000;
+  letter-spacing: -0.07em;
+  opacity: 0;
+  z-index: 0;
+  animation-name: react-text-fade-in;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+#Page.React .Fire {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  mix-blend-mode: color-burn;
+  z-index: 1;
+}
+#Page.React .Fire canvas#view {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@keyframes react-text-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+#Page.Wordpress .Text {
+  position: relative;
+  font-family: "Barlow Condensed ExtraBold";
+  font-size: clamp(120px, 30.1vw, 200px);
+  line-height: 0.7em;
+  white-space: nowrap;
+  position: absolute;
+  bottom: 30%;
+  left: -4px;
+  color: #ffffff;
+  letter-spacing: -0.07em;
+  opacity: 0;
+  z-index: 0;
+  animation-name: react-text-fade-in;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+#Page.Wordpress .Blur {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  filter: sepia(100%) saturate(12) hue-rotate(233deg) brightness(2);
+  mix-blend-mode: difference;
+}
+#Page.Wordpress .Blur #container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /*# sourceMappingURL=main.css.map*/

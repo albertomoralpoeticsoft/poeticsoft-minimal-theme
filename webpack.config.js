@@ -78,7 +78,7 @@ module.exports = env => {
         },
         // Assets
         {
-          test: /\.(jpg|jpeg|png|gif|svg|woff|ttf|eot|mp3|woff|woff2)$/,
+          test: /\.(jpg|jpeg|png|gif|svg|woff|ttf|eot|mp3|woff|woff2|webm|mp4)$/,
           type: 'asset/resource',
           generator: {
             emit: false,

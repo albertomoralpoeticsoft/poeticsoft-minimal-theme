@@ -4,7 +4,12 @@
 
     @include absolutebox();
 
-    #canvas {      
+    .videobg {
+
+      @include absolutebox();
+    }
+
+    canvas#container {      
         
       position: absolute;
       top: 0; 

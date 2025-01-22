@@ -1,6 +1,6 @@
 import React from 'react'
 import Fuser from './fuser'
-import Rain from './page-gamification-rain'
+import Rain from './rain/page-gamification-rain'
 
 export default props => { 
 

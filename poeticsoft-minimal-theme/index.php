@@ -7,6 +7,6 @@
     </head>
   <body>
     <div id="APP"></div>
-    <script src="<?php echo get_stylesheet_directory_uri() . '/app/main.js' ?>"></script>
+    <script src="<?php echo get_stylesheet_directory_uri() . '/app/main.js?cache=' . rand(1111, 9999) ?>"></script>
   </body>
 </html>
