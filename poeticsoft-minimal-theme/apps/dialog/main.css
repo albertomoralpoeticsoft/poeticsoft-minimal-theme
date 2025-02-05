@@ -37,7 +37,8 @@ article,
 #Dialog {
   position: absolute;
   left: var(--wp--custom--ast-default-block-left-padding);
-  bottom: var(--wp--custom--ast-default-block-bottom-padding);
+  bottom: 50%;
+  transform: translateY(50%);
   width: 80%;
   max-width: 500px;
   overflow: hidden;
@@ -46,8 +47,10 @@ article,
   position: absolute;
   bottom: 100%;
   box-sizing: border-box;
+  transition-property: bottom;
+  transition-duration: 0.5s;
 }
-#Dialog .Slide#Init {
+#Dialog .Slide.Current {
   bottom: 0;
 }
 

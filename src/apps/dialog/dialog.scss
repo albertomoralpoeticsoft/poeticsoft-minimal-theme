@@ -2,7 +2,8 @@
 
   position: absolute;
   left: $pad-left;
-  bottom: $pad-bottom;
+  bottom: 50%;
+  transform: translateY(50%);
   width: 80%;
   max-width: 500px;
   overflow: hidden;
@@ -12,8 +13,10 @@
     position: absolute;
     bottom: 100%;
     box-sizing: border-box;
+    transition-property: bottom;
+    transition-duration: 0.5s;
 
-    &#Init {
+    &.Current {
 
       bottom: 0;
     }

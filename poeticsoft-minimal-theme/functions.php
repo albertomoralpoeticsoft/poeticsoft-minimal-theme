@@ -19,7 +19,8 @@ function core_log($display) {
  */
 
 $pageapps = [
-  'home' => 'clouds'
+  'home' => 'clouds',
+  'wordpress' => 'rain'
 ];
 
 add_action( 
