@@ -6,17 +6,22 @@ const themename = 'poeticsoft-minimal-theme'
 const destdir = path.join(__dirname, themename)
 const themeplublic = '/wp-content/themes/' + themename
 
-module.exports = env => { 
+module.exports = env => {  
+                                                    
+  const input = Object.keys(env)[2] || ''
+
+  const params = input.split('-')
+  const type = params[0] || 'apps' // apps
+  const unit = params[1] || 'clouds' // clouds | rain | fire | 
+  const mode = params[2] || 'dev' // dev | prod
 
   const paths ={
-    entryjs: './src/app/main.js',
-    entryscss: './src/scss/main.scss',
-    output: destdir  + '/app',
+    entryjs: './src/' + type + '/' + unit + '/main.js',
+    entryscss: './src/' + type + '/' + unit + '/main.scss',
+    output: destdir  + '/' + type + '/' + unit,
     public: themeplublic,
     cssfilename: 'main.css'
   }
-
-  const mode = 'dev'
 
   return {
     context: __dirname,
@@ -98,8 +103,10 @@ module.exports = env => {
     resolve: {
       extensions: ['.js'],
       alias: {
-        ['assets']: path.resolve(destdir + '/assets'),
-        ['fonts']: path.resolve(destdir + '/assets/fonts')
+        jscommon: path.join(__dirname, 'src/apps/common/js'),
+        scsscommon: path.join(__dirname, 'src/apps/common/scss'),
+        assets: path.resolve(destdir + '/assets'),
+        fonts: path.resolve(destdir + '/assets/fonts')
       }
     }
   }

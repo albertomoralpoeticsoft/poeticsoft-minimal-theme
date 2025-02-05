@@ -2,6 +2,10 @@
   "name": "playmotiv-cloud",
   "version": "0.0.0",
   "license": "GPL-2.0-or-later",
+  "scripts": {
+    "dialogdev": "webpack --env=apps-dialog-dev",
+    "cloudsdev": "webpack --env=apps-clouds-dev"
+  },
   "dependencies": {
     "@babel/core": "^7.18.10",
     "@babel/preset-env": "^7.18.10",
@@ -35,5 +39,8 @@
     "presets": [
       "@babel/preset-env"
     ]
+  },
+  "devDependencies": {
+    "webpack-cli": "^6.0.1"
   }
 }

@@ -1,0 +1,21 @@
+#Dialog {
+
+  position: absolute;
+  left: $pad-left;
+  bottom: $pad-bottom;
+  width: 80%;
+  max-width: 500px;
+  overflow: hidden;
+
+  .Slide {
+
+    position: absolute;
+    bottom: 100%;
+    box-sizing: border-box;
+
+    &#Init {
+
+      bottom: 0;
+    }
+  }
+}
