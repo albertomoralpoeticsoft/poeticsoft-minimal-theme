@@ -4,8 +4,15 @@
   "license": "GPL-2.0-or-later",
   "scripts": {
     "dialogdev": "webpack --env=apps-dialog-dev",
+    "dialogprod": "webpack --env=apps-dialog-prod",
     "cloudsdev": "webpack --env=apps-clouds-dev",
-    "raindev": "webpack --env=apps-rain-dev"
+    "cloudsprod": "webpack --env=apps-clouds-prod",
+    "raindev": "webpack --env=apps-rain-dev",
+    "rainprod": "webpack --env=apps-rain-prod",
+    "firedev": "webpack --env=apps-fire-dev",
+    "fireprod": "webpack --env=apps-fire-prod",
+    "blurdev": "webpack --env=apps-blur-dev",
+    "blurprod": "webpack --env=apps-blur-prod"
   },
   "dependencies": {
     "@babel/core": "^7.18.10",

@@ -37,7 +37,7 @@ module.exports = env => {
       publicPath: paths.public
     },
     mode: mode == 'prod' ? 'production' : 'development',
-    devtool: mode == 'prod' ? 'none' : 'source-map',
+    devtool: mode == 'prod' ? false : 'source-map',
     module: {
       rules: [
         {

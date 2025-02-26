@@ -20,7 +20,9 @@ function core_log($display) {
 
 $pageapps = [
   'home' => 'clouds',
-  'wordpress' => 'rain'
+  'wordpress' => 'rain',
+  'react' => 'fire',
+  'gamificacion' => 'blur'
 ];
 
 add_action( 
@@ -33,6 +35,8 @@ add_action(
 
       $post_slug = $post->post_name;
       $appname = $pageapps[$post_slug];
+
+      core_log($appname);
 
       // Apps
 

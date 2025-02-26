@@ -1,7 +1,7 @@
 #Dialog {
 
   position: absolute;
-  left: $pad-left;
+  left: 0;
   bottom: 50%;
   transform: translateY(50%);
   width: 80%;
@@ -19,6 +19,43 @@
     &.Current {
 
       bottom: 0;
+    }
+  }
+
+  .wp-block-button.common {
+
+    @include flexcenter();
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: var(--ast-global-color-2);
+
+    .wp-block-button__link {
+      
+      border: none;
+      background-color: transparent;
+      text-indent: 2000px;
+      width: $space * 4;
+      height: $space * 4;
+      padding: 0;
+      filter: invert(1);
+    }
+
+    &.home {
+
+      .wp-block-button__link {
+
+        @include bgimage("~assets/images/home-alt.svg");
+        background-size: 60%;
+      }
+    }
+
+    &.root {
+
+      .wp-block-button__link {
+
+        @include bgimage("~assets/images/arrow-circle-up.svg");
+        background-size: 60%;
+      }
     }
   }
 }

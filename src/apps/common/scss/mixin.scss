@@ -22,7 +22,14 @@
 @mixin bgimage($img: "") {
 
   background-image: url($img);
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+@mixin flexcenter() {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

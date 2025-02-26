@@ -3,8 +3,6 @@ import { createRoot } from 'react-dom/client';
 import APP from './js/app'
 const init = () => {
 
-  console.log('rain')
-
   const app = document.createElement("div");
   app.setAttribute('id', 'APP')
   document.body.prepend(app)

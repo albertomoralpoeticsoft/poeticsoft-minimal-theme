@@ -24,17 +24,21 @@
           'click',
           function() {
 
+            if(linkid == '/') {
+
+              location = '/'
+
+              return false
+            }
+
             $slides.each(function() { 
 
               const $link = $(this)
+              $link.removeClass('Current')
 
               if($link.attr('id') == linkid) {
 
                 $link.addClass('Current')
-
-              } else {
-              
-                $link.removeClass('Current')
               }
             })
 
@@ -46,6 +50,7 @@
       if($this.hasClass('First')) {
 
         $this.addClass('Current')
+        $this.find('.wp-block-button.common.root').remove()
       }
     })
 
