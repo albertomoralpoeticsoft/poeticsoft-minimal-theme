@@ -4,7 +4,6 @@ import React, {
 } from 'react'
 import init from './init'
 import videojpg from 'assets/images/video.jpg'
-import videowebm from 'assets/images/video.webm'
 import videomp4 from 'assets/images/video.mp4'
 
 export default props => { 
@@ -36,7 +35,6 @@ export default props => {
       muted
       ref={ videoRef }
     >
-      <source src={ videowebm } type="video/web" />
       <source src={ videomp4 } type="video/mp4" />
     </video>
     <canvas

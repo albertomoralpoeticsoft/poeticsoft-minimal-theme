@@ -3,6 +3,29 @@
   const $dialog = $('#Dialog')
   const $slides = $dialog.find('.Slide')
 
+  /* Init slides */
+
+  $slides.each(function() {
+      
+    const $this = $(this)     
+
+    $this.removeClass('Current')
+
+    if(location.pathname == '/') {
+
+      $this.find('.wp-block-button.common.home').remove()
+    }
+  
+    if($this.hasClass('First')) {
+
+      $this.addClass('Current')
+
+      $this.find('.wp-block-button.common.root').remove()
+    }
+  })
+
+  /* Slides height */
+
   const calculateHeight = () => {
 
     let height = 0;
@@ -10,48 +33,6 @@
       
       const $this = $(this)
       height = Math.max(height, $this.outerHeight())
-
-      $this.find('.wp-block-button__link')
-      .each(function() {
-
-        const $button = $(this)
-        const link = $button.attr('href')
-        const linkid = link ? link.replace('#', '') : ''
-
-        if(linkid == '') { return }
-
-        $button.on(
-          'click',
-          function() {
-
-            if(linkid == '/') {
-
-              location = '/'
-
-              return false
-            }
-
-            $slides.each(function() { 
-
-              const $link = $(this)
-              $link.removeClass('Current')
-
-              if($link.attr('id') == linkid) {
-
-                $link.addClass('Current')
-              }
-            })
-
-            return false
-          }
-        )
-      })
-
-      if($this.hasClass('First')) {
-
-        $this.addClass('Current')
-        $this.find('.wp-block-button.common.root').remove()
-      }
     })
 
     $dialog.height(height)
@@ -63,5 +44,30 @@
   )
 
   calculateHeight()
+  
+  /* Hash changes */
+
+  const hashchanged = () => {
+
+    const hash = location.hash
+    const $targetSlide = $dialog.find(hash)
+
+    if($targetSlide.length) {      
+
+      $slides.each(function() {
+        
+        $(this).removeClass('Current')
+      })
+
+      $targetSlide.addClass('Current')
+    }
+  }
+
+  window.addEventListener(
+    'hashchange', 
+    hashchanged
+  )
+
+  hashchanged()
 
 })(jQuery);

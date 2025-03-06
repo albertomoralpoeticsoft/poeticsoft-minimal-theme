@@ -1,1 +1,157 @@
-html,body{padding:0;margin:0;height:100%;overflow:hidden;-webkit-overflow-scrolling:touch}body{-webkit-user-select:none;-ms-user-select:none;user-select:none}#APP,#page,#content,.ast-container,#primary,#main,article,.entry-content{position:absolute;top:0;right:0;bottom:0;left:0;padding:0;margin:0;overflow:hidden}#Dialog{position:absolute;left:0;bottom:50%;transform:translateY(50%);width:80%;max-width:500px;overflow:hidden}#Dialog .Slide{position:absolute;bottom:100%;box-sizing:border-box;transition-property:bottom;transition-duration:.5s}#Dialog .Slide.Current{bottom:0}#Dialog .wp-block-button.common{display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:50%;background-color:var(--ast-global-color-2)}#Dialog .wp-block-button.common .wp-block-button__link{border:none;background-color:rgba(0,0,0,0);text-indent:2000px;width:32px;height:32px;padding:0;filter:invert(1)}#Dialog .wp-block-button.common.home .wp-block-button__link{background-image:url(/wp-content/themes/poeticsoft-minimal-theme/assets/images/home-alt.svg);background-size:contain;background-position:center;background-repeat:no-repeat;background-size:60%}#Dialog .wp-block-button.common.root .wp-block-button__link{background-image:url(/wp-content/themes/poeticsoft-minimal-theme/assets/images/arrow-circle-up.svg);background-size:contain;background-position:center;background-repeat:no-repeat;background-size:60%}
+/*!********************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/apps/dialog/main.scss ***!
+  \********************************************************************************************************************/
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#APP,
+#page,
+#content,
+.ast-container,
+#primary,
+#main,
+article,
+.entry-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 921px) {
+  .ast-builder-menu-mobile .main-navigation .main-header-menu {
+    background-color: transparent;
+  }
+  .ast-builder-menu-mobile .main-navigation .main-header-menu .menu-link,
+.ast-builder-menu-mobile .main-navigation .main-header-menu .sub-menu {
+    background-color: var(--ast-global-color-7);
+    background-image: none;
+  }
+  .ast-builder-menu-mobile .main-navigation .main-header-menu .current-menu-item .menu-link {
+    background-color: var(--ast-global-color-6);
+  }
+}
+#ast-mobile-header {
+  width: 200px;
+  margin-left: auto;
+}
+#Dialog {
+  position: absolute;
+  left: 0;
+  bottom: 50%;
+  transform: translateY(50%);
+  width: 90%;
+  max-width: 500px;
+  overflow: hidden;
+}
+#Dialog .fitcontent {
+  width: fit-content;
+}
+#Dialog .Slide {
+  position: absolute;
+  bottom: 100%;
+  box-sizing: border-box;
+  transition-property: bottom;
+  transition-duration: 0.5s;
+}
+#Dialog .Slide.Current {
+  bottom: 0;
+}
+#Dialog .Slide h2 {
+  line-height: 0.55em;
+  margin-block-end: 0.05em;
+  text-shadow: 0 0 1px #000;
+  position: relative;
+  z-index: 1;
+}
+#Dialog .Slide h2 a {
+  text-shadow: 0 0 1px #000;
+}
+#Dialog .wp-block-button.common {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+}
+#Dialog .wp-block-button.common .wp-block-button__link {
+  text-indent: 2000px;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+}
+#Dialog .wp-block-button.common.home .wp-block-button__link {
+  background-image: url(/wp-content/themes/poeticsoft-minimal-theme/assets/images/home-alt.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 60%;
+}
+#Dialog .wp-block-button.common.root .wp-block-button__link {
+  background-image: url(/wp-content/themes/poeticsoft-minimal-theme/assets/images/arrow-circle-up.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 60%;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes spingo {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
+@keyframes spinreverse {
+  from {
+    --angle: 360deg;
+  }
+  to {
+    --angle: 0deg;
+  }
+}
+#Dialog .wp-block-button {
+  position: relative;
+}
+#Dialog .wp-block-button:after, #Dialog .wp-block-button:before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: calc(100% + 2px);
+  background-image: conic-gradient(from var(--angle), transparent 0grad, transparent 70grad, var(--ast-global-color-0) 80grad, var(--ast-global-color-0) 100grad, transparent 110grad, transparent 250grad, var(--ast-global-color-0) 260grad, var(--ast-global-color-0) 280grad, transparent 290grad, transparent 360grad);
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  animation: 10s spingo linear infinite;
+  filter: blur(3px);
+  opacity: 1;
+}
+#Dialog .wp-block-button:hover:after, #Dialog .wp-block-button:hover:before {
+  background-image: conic-gradient(from var(--angle), transparent 0grad, transparent 70grad, var(--ast-global-color-6) 80grad, var(--ast-global-color-6) 100grad, transparent 110grad, transparent 250grad, var(--ast-global-color-6) 260grad, var(--ast-global-color-6) 280grad, transparent 290grad, transparent 360grad);
+  animation: 1s spinreverse linear infinite;
+}
+
+/*# sourceMappingURL=main.css.map*/

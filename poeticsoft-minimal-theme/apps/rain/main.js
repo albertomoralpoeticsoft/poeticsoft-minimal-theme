@@ -16,9 +16,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _init__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./init */ "./src/apps/rain/js/init.js");
 /* harmony import */ var assets_images_video_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! assets/images/video.jpg */ "./poeticsoft-minimal-theme/assets/images/video.jpg");
-/* harmony import */ var assets_images_video_webm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! assets/images/video.webm */ "./poeticsoft-minimal-theme/assets/images/video.webm");
-/* harmony import */ var assets_images_video_mp4__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! assets/images/video.mp4 */ "./poeticsoft-minimal-theme/assets/images/video.mp4");
-
+/* harmony import */ var assets_images_video_mp4__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! assets/images/video.mp4 */ "./poeticsoft-minimal-theme/assets/images/video.mp4");
 
 
 
@@ -35,17 +33,14 @@ __webpack_require__.r(__webpack_exports__);
     id: "Rain"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("video", {
     id: "videobg",
-    src: assets_images_video_mp4__WEBPACK_IMPORTED_MODULE_4__,
+    src: assets_images_video_mp4__WEBPACK_IMPORTED_MODULE_3__,
     poster: assets_images_video_jpg__WEBPACK_IMPORTED_MODULE_2__,
     autoPlay: true,
     loop: true,
     muted: true,
     ref: videoRef
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("source", {
-    src: assets_images_video_webm__WEBPACK_IMPORTED_MODULE_3__,
-    type: "video/web"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("source", {
-    src: assets_images_video_mp4__WEBPACK_IMPORTED_MODULE_4__,
+    src: assets_images_video_mp4__WEBPACK_IMPORTED_MODULE_3__,
     type: "video/mp4"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("canvas", {
     id: "container",
@@ -40740,17 +40735,6 @@ module.exports = __webpack_require__.p + "/assets/images/video.jpg";
 
 "use strict";
 module.exports = __webpack_require__.p + "/assets/images/video.mp4";
-
-/***/ }),
-
-/***/ "./poeticsoft-minimal-theme/assets/images/video.webm":
-/*!***********************************************************!*\
-  !*** ./poeticsoft-minimal-theme/assets/images/video.webm ***!
-  \***********************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-module.exports = __webpack_require__.p + "/assets/images/video.webm";
 
 /***/ })
 

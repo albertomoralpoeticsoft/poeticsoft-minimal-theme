@@ -1,12 +1,14 @@
+// https://www.khronos.org/opengl/wiki/Fragment_Shader
+
 import * as THREE from 'three';
 
 import fragmentShader from './frag';
 
 export default (container) => {
 
-  const variation = Math.floor(Math.random() * 3);
-  // const variation = 2;
-  console.log(variation)
+  // const variation = Math.floor(Math.random() * 3);
+  const variation = 0;
+  // console.log(variation)
 
   // Scene setup
   const scene = new THREE.Scene();

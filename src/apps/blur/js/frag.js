@@ -79,13 +79,13 @@ void main() {
     vec2 posMouse = mx * vec2(1., -1.) + 0.5;
     
     /* sdf (Round Rect) params */
-    float size = 1.2;
+    float size = 1.4;
     float roundness = 0.4;
     float borderSize = 0.05;
     
     /* sdf Circle params */
     float circleSize = 0.3;
-    float circleEdge = 0.5;
+    float circleEdge = 0.7;
     
     /* sdf Circle */
     float sdfCircle = fill(

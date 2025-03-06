@@ -1,1 +1,55 @@
-(()=>{var t,n,r,e;t=jQuery,n=t("#Dialog"),r=n.find(".Slide"),e=function(){var e=0;r.each((function(){var n=t(this);e=Math.max(e,n.outerHeight()),n.find(".wp-block-button__link").each((function(){var n=t(this),e=n.attr("href"),a=e?e.replace("#",""):"";""!=a&&n.on("click",(function(){return"/"==a?(location="/",!1):(r.each((function(){var n=t(this);n.removeClass("Current"),n.attr("id")==a&&n.addClass("Current")})),!1)}))})),n.hasClass("First")&&(n.addClass("Current"),n.find(".wp-block-button.common.root").remove())})),n.height(e)},window.addEventListener("resize",e),e()})();
+/******/ (() => { // webpackBootstrap
+/*!*********************************!*\
+  !*** ./src/apps/dialog/main.js ***!
+  \*********************************/
+(function ($) {
+  var $dialog = $('#Dialog');
+  var $slides = $dialog.find('.Slide');
+  /* Init slides */
+
+  $slides.each(function () {
+    var $this = $(this);
+    $this.removeClass('Current');
+
+    if (location.pathname == '/') {
+      $this.find('.wp-block-button.common.home').remove();
+    }
+
+    if ($this.hasClass('First')) {
+      $this.addClass('Current');
+      $this.find('.wp-block-button.common.root').remove();
+    }
+  });
+  /* Slides height */
+
+  var calculateHeight = function calculateHeight() {
+    var height = 0;
+    $slides.each(function () {
+      var $this = $(this);
+      height = Math.max(height, $this.outerHeight());
+    });
+    $dialog.height(height);
+  };
+
+  window.addEventListener('resize', calculateHeight);
+  calculateHeight();
+  /* Hash changes */
+
+  var hashchanged = function hashchanged() {
+    var hash = location.hash;
+    var $targetSlide = $dialog.find(hash);
+
+    if ($targetSlide.length) {
+      $slides.each(function () {
+        $(this).removeClass('Current');
+      });
+      $targetSlide.addClass('Current');
+    }
+  };
+
+  window.addEventListener('hashchange', hashchanged);
+  hashchanged();
+})(jQuery);
+/******/ })()
+;
+//# sourceMappingURL=main.js.map

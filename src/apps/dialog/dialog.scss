@@ -4,9 +4,14 @@
   left: 0;
   bottom: 50%;
   transform: translateY(50%);
-  width: 80%;
+  width: 90%;
   max-width: 500px;
   overflow: hidden;
+
+  .fitcontent {
+
+    width: fit-content;
+  }
 
   .Slide {
 
@@ -20,6 +25,20 @@
 
       bottom: 0;
     }
+
+    h2 {
+
+      line-height: 0.55em;
+      margin-block-end: 0.05em;
+      text-shadow: 0 0 1px #000;
+      position: relative;
+      z-index: 1;
+
+      a {
+
+        text-shadow: 0 0 1px #000;
+      }
+    }
   }
 
   .wp-block-button.common {
@@ -27,17 +46,13 @@
     @include flexcenter();
     overflow: hidden;
     border-radius: 50%;
-    background-color: var(--ast-global-color-2);
 
     .wp-block-button__link {
       
-      border: none;
-      background-color: transparent;
       text-indent: 2000px;
-      width: $space * 4;
-      height: $space * 4;
+      width: $space * 6;
+      height: $space * 6;
       padding: 0;
-      filter: invert(1);
     }
 
     &.home {

@@ -34,6 +34,16 @@ article,
   overflow: hidden;
 }
 
+@media (max-width: 921px) {
+  .ast-builder-menu-mobile .main-navigation .main-header-menu .menu-link,
+.ast-builder-menu-mobile .main-navigation .main-header-menu .sub-menu {
+    background-color: var(--ast-global-color-4);
+    background-image: none;
+  }
+  .ast-builder-menu-mobile .main-navigation .main-header-menu .current-menu-item .menu-link {
+    background-color: var(--ast-global-color-6);
+  }
+}
 #Rain {
   position: absolute;
   top: 0;

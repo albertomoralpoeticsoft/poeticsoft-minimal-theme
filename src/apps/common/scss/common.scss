@@ -1,3 +1,6 @@
+// https://coolors.co/eaeaea-cbc5ea
+
+
 html,
 body {
 
@@ -28,4 +31,35 @@ article,
   padding: 0;
   margin: 0;
   overflow: hidden;
+}
+
+@media (max-width: 921px) {
+
+  .ast-builder-menu-mobile .main-navigation .main-header-menu {
+
+    background-color: transparent;
+    
+    .menu-link,
+    .sub-menu {
+
+      background-color: $color-7;
+      background-image: none;
+    }
+
+    .current-menu-item .menu-link {
+
+      background-color: $color-6;
+    }
+  }
+}
+
+#ast-mobile-header {
+  
+  width: 200px;
+  margin-left: auto;
+
+  .ast-mobile-header-content {
+
+    // margin-top: 24px;
+  }
 }
