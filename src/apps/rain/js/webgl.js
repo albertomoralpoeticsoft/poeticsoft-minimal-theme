@@ -3,9 +3,12 @@ export function getContext(canvas, options={}) {
   let context = null;
 
   contexts.some(name=>{
+
     try{
+
       context = canvas.getContext(name,options);
-    }catch(e){};
+    } catch(e){ };
+
     return context!=null;
   });
 
@@ -41,8 +44,6 @@ export function createProgram(
 
   var positionLocation = gl.getAttribLocation(program, "a_position");
   var texCoordLocation = gl.getAttribLocation(program, "a_texCoord");
-
-  console.log(texCoordLocation)
 
   var texCoordBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);

@@ -7,6 +7,8 @@ export default `
   uniform vec4 filterArea;  
   uniform vec2 dimensions;
   uniform float time;
+  uniform float horpos;
+  uniform float verpos;
   
   float rand(vec2 co) {
     return fract(sin(dot(co.xy ,vec2(12.9898, 78.233))) * 43758.5453);
@@ -34,7 +36,7 @@ export default `
     uv.y = 1.0 - uv.y;
     
     vec2 _uv = uv;
-    uv -= vec2(0.2);
+    uv -= vec2(horpos, 0.5);
     uv.y /= dimensions.x / dimensions.y;      
     
     vec2 centerUV = uv;
@@ -51,7 +53,8 @@ export default `
     uv += rotz(((f - 0.5) / l) * smoothstep(-0.2, 0.4, _uv.y) * 0.45) * uv;    
     
     // flame thickness
-    float flame = 1.3 - length(uv.x) * 3.0;
+    float flame = 1.3 - clamp(length(uv.x), 0.0, 1.0) * 3.0;
+    // float flame = 1.3 - length(uv.x) * 3.0;
     
     // bottom of flame 
     float blueflame = pow(flame * 0.9, 15.0);
@@ -79,7 +82,7 @@ export default `
     gl_FragColor.a = flame;
     
     // bg halo
-    float haloSize = 0.8;
+    float haloSize = 0.9;
     float centerL = 1.0 - (length(centerUV + vec2(0.0, 0.1)) / haloSize);
     vec4 halo = vec4(0.8, 0.3, 0.3, 0.0) * 1.0 * fbm(vec2(time * 0.035)) * centerL + 0.02;
     vec4 finalCol = mix(halo, gl_FragColor, gl_FragColor.a);

@@ -26,24 +26,28 @@
 
   /* Slides height */
 
-  const calculateHeight = () => {
+  const calculateSize = () => {
 
+    let width = 0;
     let height = 0;
+
     $slides.each(function() {
       
       const $this = $(this)
+      width = Math.max(height, $this.outerWidth())
       height = Math.max(height, $this.outerHeight())
     })
 
+    $dialog.height(width)
     $dialog.height(height)
   }
 
   window.addEventListener(
     'resize',
-    calculateHeight
+    calculateSize
   )
 
-  calculateHeight()
+  calculateSize()
   
   /* Hash changes */
 

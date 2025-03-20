@@ -1,4 +1,4 @@
-import * as PIXI from './pixi.js'
+import * as PIXI from 'jscommon/pixi.js'
 import flameFrag from './flame-frag.js'
 import noisetexture from 'assets/images/noise-texture.png'
 
@@ -15,13 +15,15 @@ const manifest = [
 
 class FlameFilter extends PIXI.Filter {
   
-  constructor(texture, time = 0.0) {    
+  constructor(texture, time = 0.0, horpos = 0.0, verpos = 0.0) {    
 
     super(null, flameFrag);
        
     this.uniforms.dimensions = new Float32Array(2);   
     this.texture = texture;
     this.time = time;
+    this.horpos = horpos;
+    this.verpos = verpos;
   }
   
   get texture() {
@@ -39,7 +41,9 @@ class FlameFilter extends PIXI.Filter {
           
     this.uniforms.dimensions[0] = input.sourceFrame.width;
     this.uniforms.dimensions[1] = input.sourceFrame.height;    
-    this.uniforms.time = this.time;
+    this.uniforms.time = this.time;    
+    this.uniforms.horpos = this.horpos;
+    this.uniforms.verpos = this.verpos;
 
     filterManager.applyFilter(this, input, output, clear);
   }
@@ -62,8 +66,6 @@ class Application extends PIXI.Application {
     PIXI.settings.PRECISION_FRAGMENT = "highp";
 
     const container = document.querySelector("#container")
-
-    console.log(container)
     
     super({
       view: container,
@@ -95,7 +97,16 @@ class Application extends PIXI.Application {
 
     this.ticker.add(this.update, this); 
 
-    window.addEventListener("resize", () => this.isResized = true);
+    window.addEventListener("resize", () => this.isResized = true);      
+
+    const move = e => {
+      
+      this.x = e.clientX || e.changedTouches[0].clientX
+      this.y = e.clientY || e.changedTouches[0].clientY
+    }
+
+    document.addEventListener('mousemove', move); 
+    document.addEventListener('touchmove', move); 
   }
    
   update(delta) {
@@ -105,8 +116,10 @@ class Application extends PIXI.Application {
       this.renderer.resize(window.innerWidth, window.innerHeight);
       this.isResized = false;
     }
-    
+
     this.flame.time += 0.1 * delta;
+    this.flame.horpos = this.x / window.innerWidth;
+    this.flame.verpos = this.y / window.innerHeight;
   }
 }
 

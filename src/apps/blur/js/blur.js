@@ -29,7 +29,16 @@ export default (container) => {
   const onPointerMove = (e) => { vMouse.set(e.pageX, e.pageY) }
   document.addEventListener('mousemove', onPointerMove);
   document.addEventListener('pointermove', onPointerMove);
-  document.body.addEventListener('touchmove', function (e) { e.preventDefault(); }, { passive: false });
+  document.body.addEventListener(
+    'touchmove', 
+    function (e) { 
+      
+      e.preventDefault(); 
+    },
+    { 
+      passive: false 
+    }
+  );
 
   // Plane geometry covering the full viewport
   const geo = new THREE.PlaneGeometry(1, 1);  // Scaled to cover full viewport
@@ -63,6 +72,7 @@ export default (container) => {
   // Animation loop to render
   let time, lastTime = 0;
   const update = () => {
+
     // calculate delta time
     time = performance.now() * 0.001;
     const dt = time - lastTime;
@@ -71,7 +81,16 @@ export default (container) => {
     // ease mouse motion with damping
     for (const k in vMouse) {
       
-      if (k == 'x' || k == 'y') vMouseDamp[k] = THREE.MathUtils.damp(vMouseDamp[k], vMouse[k], 8, dt);
+      if (k == 'x' || k == 'y') {
+        
+        vMouseDamp[k] = THREE.MathUtils
+        .damp(
+          vMouseDamp[k], 
+          vMouse[k], 
+          8, 
+          dt
+        )
+      }
     }
 
     // render scene

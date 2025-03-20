@@ -119,7 +119,9 @@ __webpack_require__.r(__webpack_exports__);
     lastTime = time; // ease mouse motion with damping
 
     for (var k in vMouse) {
-      if (k == 'x' || k == 'y') vMouseDamp[k] = three__WEBPACK_IMPORTED_MODULE_1__.MathUtils.damp(vMouseDamp[k], vMouse[k], 8, dt);
+      if (k == 'x' || k == 'y') {
+        vMouseDamp[k] = three__WEBPACK_IMPORTED_MODULE_1__.MathUtils.damp(vMouseDamp[k], vMouse[k], 8, dt);
+      }
     } // render scene
 
 

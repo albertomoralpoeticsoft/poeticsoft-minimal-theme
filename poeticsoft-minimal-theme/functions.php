@@ -14,70 +14,21 @@ function core_log($display) {
   );
 }
 
-/**
- * Apps
- */
+add_action(
+  'wp_head', 
+  function() {
 
-$pageapps = [
-  'home' => 'clouds',
-  'wordpress' => 'rain',
-  'react' => 'fire',
-  'gamificacion' => 'blur'
-];
-
-add_action( 
-	'wp_enqueue_scripts', 
-	function () use ($pageapps) {
-
-    global $post;
-
-    if(null != $post) {
-
-      $post_slug = $post->post_name;
-      $appname = $pageapps[$post_slug];
-
-      core_log($appname);
-
-      // Apps
-
-      wp_enqueue_script(
-        'poeticsoft-theme-app', 
-        get_stylesheet_directory_uri() . '/apps/' . $appname . '/main.js',
-        [], 
-        filemtime(get_stylesheet_directory() . '/apps/' . $appname . '/main.js'),
-        true
-      );
-  
-      wp_enqueue_style( 
-        'poeticsoft-theme-app',
-        get_stylesheet_directory_uri() . '/apps/' . $appname . '/main.css', 
-        array(
-          'astra-theme-css'
-        ), 
-        filemtime(get_stylesheet_directory() . '/apps/' . $appname . '/main.css'),
-        'all' 
-      );
-
-      // Dialog
-
-      wp_enqueue_script(
-        'poeticsoft-theme-dialog', 
-        get_stylesheet_directory_uri() . '/apps/dialog/main.js',
-        ['jquery'], 
-        filemtime(get_stylesheet_directory() . '/apps/dialog/main.js'),
-        true
-      );
-  
-      wp_enqueue_style( 
-        'poeticsoft-theme-dialog',
-        get_stylesheet_directory_uri() . '/apps/dialog/main.css', 
-        array(
-          'astra-theme-css'
-        ), 
-        filemtime(get_stylesheet_directory() . '/apps/dialog/main.css'),
-        'all' 
-      );
-    }
-	}, 
-	999 
+    echo '<meta name="viewport" 
+          content="width=device-width, 
+                   user-scalable=no, 
+                   initial-scale=1, 
+                   maximum-scale=5"
+    >';
+  },
+  2
 );
+
+  
+require_once(dirname(__FILE__) . '/admin/main.php'); 
+require_once(dirname(__FILE__) . '/api/main.php'); 
+require_once(dirname(__FILE__) . '/apps/main.php');

@@ -23,7 +23,7 @@ const defaultOptions={
   maxR:40,
   maxDrops:900,
   rainChance:0.3,
-  rainLimit:3,
+  rainLimit:1,
   dropletsRate: 50,
   dropletsSize:[2,4],
   dropletsCleaningRadiusMultiplier: 0.43,
@@ -58,7 +58,7 @@ function Raindrops(
   this.init();
 }
 
-Raindrops.prototype={
+Raindrops.prototype = {
   dropColor:null,
   dropAlpha:null,
   canvas:null,
@@ -89,7 +89,7 @@ Raindrops.prototype={
     this.drops=[];
     this.dropsGfx=[];
 
-    this.renderDropsGfx();
+    this.renderDropsGfx();  
 
     this.update();
   },
@@ -178,6 +178,7 @@ Raindrops.prototype={
       ctx.globalCompositeOperation="source-over";
 
       d=Math.floor(d*(this.dropsGfx.length-1));
+      
       ctx.drawImage(
         this.dropsGfx[d],
         (x-(r*scaleX*(spreadX+1)))*this.scale,
@@ -281,9 +282,18 @@ Raindrops.prototype={
         )
       });
     }
+    
     this.ctx.drawImage(this.droplets,0,0,this.width,this.height);
+    
+    this.dropletsCtx.fillStyle = '#696969';
+    if (window.drawing) {
+
+      this.dropletsCtx.beginPath();
+      this.dropletsCtx.arc(window.brushx, window.brushy, window.brushsize, 0, Math.PI * 2);
+      this.dropletsCtx.fill();
+    }
   },
-  updateDrops(timeScale){
+  updateDrops(timeScale){ 
 
     let newDrops=[];
 
@@ -393,13 +403,11 @@ Raindrops.prototype={
         if(drop.momentum<0) drop.momentum=0;
         drop.momentumX*=Math.pow(0.7,timeScale);
 
-
         if(!drop.killed){
           newDrops.push(drop);
           if(moved && this.options.dropletsRate>0) this.clearDroplets(drop.x,drop.y,drop.r*this.options.dropletsCleaningRadiusMultiplier);
           this.drawDrop(this.ctx, drop);
         }
-
       }
     },this);
 

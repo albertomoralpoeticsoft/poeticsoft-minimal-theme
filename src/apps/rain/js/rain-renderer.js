@@ -54,7 +54,9 @@ RainRenderer.prototype={
   parallaxY:0,
   renderShadow:false,
   options:null,
+
   init(){
+
     this.width=this.canvas.width;
     this.height=this.canvas.height;
     this.gl=new GL(this.canvas, {alpha:false},vertShader,fragShader);

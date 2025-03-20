@@ -1,12 +1,13 @@
 import React, {
   useEffect,
+  useState,
   useRef
 } from 'react'
 import init from './init'
 import videojpg from 'assets/images/video.jpg'
 import videomp4 from 'assets/images/video.mp4'
 
-export default props => { 
+const Rain = props => {
 
   const videoRef = useRef()
   const containerRef = useRef()
@@ -42,4 +43,48 @@ export default props => {
       ref={ containerRef }
     />
   </div>
+}
+
+export default props => { 
+
+  const [ refresh, setRefresh ] = useState()
+
+  const resize = () => {
+
+    setRefresh(null)
+
+    setTimeout(() => {
+      
+      setRefresh(Math.random())
+
+    }, 1)
+  }
+
+  useEffect(() => {
+
+    window.addEventListener(
+      'resize',
+      resize
+    )
+
+    resize()
+
+    return () => {
+
+      window.removeEventListener(
+        'resize',
+        resize
+      )
+    }
+
+  }, [])
+
+  return <>
+    {
+      refresh ?
+      <Rain />
+      :
+      <></>
+    }
+  </>
 }

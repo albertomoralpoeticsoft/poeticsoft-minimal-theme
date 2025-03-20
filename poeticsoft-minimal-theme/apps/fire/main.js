@@ -1,223 +1,10 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/apps/fire/js/app.js":
-/*!*********************************!*\
-  !*** ./src/apps/fire/js/app.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _fire__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fire */ "./src/apps/fire/js/fire.js");
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (props) {
-  var canvasRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (canvasRef.current) {
-      (0,_fire__WEBPACK_IMPORTED_MODULE_1__["default"])(canvasRef.current);
-    }
-  }, [canvasRef.current]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "Fire"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("canvas", {
-    id: "container",
-    ref: canvasRef
-  }));
-});
-
-/***/ }),
-
-/***/ "./src/apps/fire/js/fire.js":
-/*!**********************************!*\
-  !*** ./src/apps/fire/js/fire.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _pixi_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pixi.js */ "./src/apps/fire/js/pixi.js");
-/* harmony import */ var _pixi_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_pixi_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _flame_frag_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./flame-frag.js */ "./src/apps/fire/js/flame-frag.js");
-/* harmony import */ var assets_images_noise_texture_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! assets/images/noise-texture.png */ "./poeticsoft-minimal-theme/assets/images/noise-texture.png");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-var manifest = [{
-  name: "noise",
-  url: assets_images_noise_texture_png__WEBPACK_IMPORTED_MODULE_2__
-}]; //
-// FLAME FILTER
-// ===========================================================================
-
-var FlameFilter = /*#__PURE__*/function (_PIXI$Filter) {
-  _inherits(FlameFilter, _PIXI$Filter);
-
-  var _super = _createSuper(FlameFilter);
-
-  function FlameFilter(texture) {
-    var _this;
-
-    var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.0;
-
-    _classCallCheck(this, FlameFilter);
-
-    _this = _super.call(this, null, _flame_frag_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
-    _this.uniforms.dimensions = new Float32Array(2);
-    _this.texture = texture;
-    _this.time = time;
-    return _this;
-  }
-
-  _createClass(FlameFilter, [{
-    key: "texture",
-    get: function get() {
-      return this.uniforms.mapSampler;
-    },
-    set: function set(texture) {
-      texture.baseTexture.wrapMode = _pixi_js__WEBPACK_IMPORTED_MODULE_0__.WRAP_MODES.REPEAT;
-      this.uniforms.mapSampler = texture;
-    }
-  }, {
-    key: "apply",
-    value: function apply(filterManager, input, output, clear) {
-      this.uniforms.dimensions[0] = input.sourceFrame.width;
-      this.uniforms.dimensions[1] = input.sourceFrame.height;
-      this.uniforms.time = this.time;
-      filterManager.applyFilter(this, input, output, clear);
-    }
-  }]);
-
-  return FlameFilter;
-}(_pixi_js__WEBPACK_IMPORTED_MODULE_0__.Filter); //
-// APPLICATION
-// ===========================================================================
-
-
-var Application = /*#__PURE__*/function (_PIXI$Application) {
-  _inherits(Application, _PIXI$Application);
-
-  var _super2 = _createSuper(Application);
-
-  function Application() {
-    var _this2;
-
-    _classCallCheck(this, Application);
-
-    if (window.devicePixelRatio > 1) {
-      _pixi_js__WEBPACK_IMPORTED_MODULE_0__.settings.RESOLUTION = 2;
-    }
-
-    _pixi_js__WEBPACK_IMPORTED_MODULE_0__.settings.PRECISION_FRAGMENT = "highp";
-    var container = document.querySelector("#container");
-    console.log(container);
-    _this2 = _super2.call(this, {
-      view: container,
-      width: window.innerWidth,
-      height: window.innerHeight,
-      backgroundColor: 0x000000,
-      autoResize: true
-    });
-    _this2.isResized = true;
-    _this2.x = 0;
-    _this2.y = 0;
-    return _this2;
-  }
-
-  _createClass(Application, [{
-    key: "load",
-    value: function load(manifest) {
-      var _this3 = this;
-
-      this.loader.add(manifest).load(function (l, r) {
-        return _this3.init(r);
-      });
-    }
-  }, {
-    key: "init",
-    value: function init(resources) {
-      var _this4 = this;
-
-      this.flame = new FlameFilter(resources.noise.texture);
-      this.stage.filterArea = this.screen;
-      this.stage.filters = [this.flame];
-      this.ticker.add(this.update, this);
-      window.addEventListener("resize", function () {
-        return _this4.isResized = true;
-      });
-    }
-  }, {
-    key: "update",
-    value: function update(delta) {
-      if (this.isResized) {
-        this.renderer.resize(window.innerWidth, window.innerHeight);
-        this.isResized = false;
-      }
-
-      this.flame.time += 0.1 * delta;
-    }
-  }]);
-
-  return Application;
-}(_pixi_js__WEBPACK_IMPORTED_MODULE_0__.Application);
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (container) {
-  var app = new Application();
-  app.load(manifest);
-});
-
-/***/ }),
-
-/***/ "./src/apps/fire/js/flame-frag.js":
-/*!****************************************!*\
-  !*** ./src/apps/fire/js/flame-frag.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n\n  varying vec2 vTextureCoord;  \n  \n  uniform sampler2D uSampler;\n  uniform sampler2D mapSampler;  \n  uniform vec4 filterArea;  \n  uniform vec2 dimensions;\n  uniform float time;\n  \n  float rand(vec2 co) {\n    return fract(sin(dot(co.xy ,vec2(12.9898, 78.233))) * 43758.5453);\n  }\n  \n  mat2 rotz(float angle) {\n    mat2 m;\n    m[0][0] = cos(angle); m[0][1] = -sin(angle);\n    m[1][0] = sin(angle); m[1][1] = cos(angle);\n    return m;\n  }  \n  \n  // Fractal Brownian Motion\n  float fbm(vec2 uv) {        \n    \n    float n = (texture2D(mapSampler, uv).r - 0.5) * 0.5;\n    n += (texture2D(mapSampler, uv * 2.0).r - 0.5) * 0.5 * 0.5;\n    n += (texture2D(mapSampler, uv * 3.0).r - 0.5) * 0.5 * 0.5 * 0.5;    \n    return n + 0.5;    \n  }\n  \n  void main() {\n    \n    vec2 uv = (vTextureCoord * filterArea.xy) / dimensions;\n    uv.y = 1.0 - uv.y;\n    \n    vec2 _uv = uv;\n    uv -= vec2(0.2);\n    uv.y /= dimensions.x / dimensions.y;      \n    \n    vec2 centerUV = uv;\n    \n    // height variation from fbm\n    float variationH = fbm(vec2(time * 0.3)) * 1.1;\n    \n    // flame \"speed\"\n    vec2 offset = vec2(0.0, -time * 0.05);\n        \n    // flame turbulence\n    float f = fbm(uv * 0.1 + offset); // rotation from fbm        \n    float l = max(0.1, length(uv)); // rotation amount normalized over distance\n    uv += rotz(((f - 0.5) / l) * smoothstep(-0.2, 0.4, _uv.y) * 0.45) * uv;    \n    \n    // flame thickness\n    float flame = 1.3 - length(uv.x) * 3.0;\n    \n    // bottom of flame \n    float blueflame = pow(flame * 0.9, 15.0);\n    blueflame *= smoothstep(0.2, -1.0, _uv.y);\n    blueflame /= abs(uv.x * 2.0);\n    blueflame = clamp(blueflame, 0.0, 1.0);\n    \n    // flame\n    flame *= smoothstep(1.0, variationH * 0.5, _uv.y);\n    flame = clamp(flame, 0.0, 1.0);\n    flame = pow(flame, 3.0);\n    flame /= smoothstep(1.1, -0.1, _uv.y);    \n  \n    // colors\n    vec4 col = mix(vec4(1.0, 1.0, 0.0, 0.0), vec4(1.0, 1.0, 0.6, 0.0), flame);\n    col = mix(vec4(1.0, 0.0, 0.0, 0.0), col, smoothstep(0.0, 1.6, flame));\n    gl_FragColor = col;\n    \n    // a bit blueness on the bottom\n    vec4 bluecolor = mix(vec4(0.0, 0.0, 1.0, 0.0), gl_FragColor, 0.95);\n    gl_FragColor = mix(gl_FragColor, bluecolor, blueflame);\n    \n    // clear bg outside of the flame\n    gl_FragColor *= flame;\n    gl_FragColor.a = flame;\n    \n    // bg halo\n    float haloSize = 0.8;\n    float centerL = 1.0 - (length(centerUV + vec2(0.0, 0.1)) / haloSize);\n    vec4 halo = vec4(0.8, 0.3, 0.3, 0.0) * 1.0 * fbm(vec2(time * 0.035)) * centerL + 0.02;\n    vec4 finalCol = mix(halo, gl_FragColor, gl_FragColor.a);\n    gl_FragColor = finalCol;\n\n    // just a hint of noise\n    gl_FragColor *= mix(rand(uv) + rand(uv * 0.45), 1.0, 0.9);\n    gl_FragColor = clamp(gl_FragColor, 0.0, 1.0);\n  }\n");
-
-/***/ }),
-
-/***/ "./src/apps/fire/js/pixi.js":
-/*!**********************************!*\
-  !*** ./src/apps/fire/js/pixi.js ***!
-  \**********************************/
+/***/ "./src/apps/common/js/pixi.js":
+/*!************************************!*\
+  !*** ./src/apps/common/js/pixi.js ***!
+  \************************************/
 /***/ ((module, exports, __webpack_require__) => {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -15475,6 +15262,234 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }]
   }, {}, [189])(189);
 });
+
+/***/ }),
+
+/***/ "./src/apps/fire/js/app.js":
+/*!*********************************!*\
+  !*** ./src/apps/fire/js/app.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fire__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fire */ "./src/apps/fire/js/fire.js");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (props) {
+  var canvasRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (canvasRef.current) {
+      (0,_fire__WEBPACK_IMPORTED_MODULE_1__["default"])(canvasRef.current);
+    }
+  }, [canvasRef.current]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    id: "Fire"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("canvas", {
+    id: "container",
+    ref: canvasRef
+  }));
+});
+
+/***/ }),
+
+/***/ "./src/apps/fire/js/fire.js":
+/*!**********************************!*\
+  !*** ./src/apps/fire/js/fire.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var jscommon_pixi_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jscommon/pixi.js */ "./src/apps/common/js/pixi.js");
+/* harmony import */ var jscommon_pixi_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jscommon_pixi_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _flame_frag_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./flame-frag.js */ "./src/apps/fire/js/flame-frag.js");
+/* harmony import */ var assets_images_noise_texture_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! assets/images/noise-texture.png */ "./poeticsoft-minimal-theme/assets/images/noise-texture.png");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var manifest = [{
+  name: "noise",
+  url: assets_images_noise_texture_png__WEBPACK_IMPORTED_MODULE_2__
+}]; //
+// FLAME FILTER
+// ===========================================================================
+
+var FlameFilter = /*#__PURE__*/function (_PIXI$Filter) {
+  _inherits(FlameFilter, _PIXI$Filter);
+
+  var _super = _createSuper(FlameFilter);
+
+  function FlameFilter(texture) {
+    var _this;
+
+    var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.0;
+    var horpos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.0;
+    var verpos = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.0;
+
+    _classCallCheck(this, FlameFilter);
+
+    _this = _super.call(this, null, _flame_frag_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+    _this.uniforms.dimensions = new Float32Array(2);
+    _this.texture = texture;
+    _this.time = time;
+    _this.horpos = horpos;
+    _this.verpos = verpos;
+    return _this;
+  }
+
+  _createClass(FlameFilter, [{
+    key: "texture",
+    get: function get() {
+      return this.uniforms.mapSampler;
+    },
+    set: function set(texture) {
+      texture.baseTexture.wrapMode = jscommon_pixi_js__WEBPACK_IMPORTED_MODULE_0__.WRAP_MODES.REPEAT;
+      this.uniforms.mapSampler = texture;
+    }
+  }, {
+    key: "apply",
+    value: function apply(filterManager, input, output, clear) {
+      this.uniforms.dimensions[0] = input.sourceFrame.width;
+      this.uniforms.dimensions[1] = input.sourceFrame.height;
+      this.uniforms.time = this.time;
+      this.uniforms.horpos = this.horpos;
+      this.uniforms.verpos = this.verpos;
+      filterManager.applyFilter(this, input, output, clear);
+    }
+  }]);
+
+  return FlameFilter;
+}(jscommon_pixi_js__WEBPACK_IMPORTED_MODULE_0__.Filter); //
+// APPLICATION
+// ===========================================================================
+
+
+var Application = /*#__PURE__*/function (_PIXI$Application) {
+  _inherits(Application, _PIXI$Application);
+
+  var _super2 = _createSuper(Application);
+
+  function Application() {
+    var _this2;
+
+    _classCallCheck(this, Application);
+
+    if (window.devicePixelRatio > 1) {
+      jscommon_pixi_js__WEBPACK_IMPORTED_MODULE_0__.settings.RESOLUTION = 2;
+    }
+
+    jscommon_pixi_js__WEBPACK_IMPORTED_MODULE_0__.settings.PRECISION_FRAGMENT = "highp";
+    var container = document.querySelector("#container");
+    _this2 = _super2.call(this, {
+      view: container,
+      width: window.innerWidth,
+      height: window.innerHeight,
+      backgroundColor: 0x000000,
+      autoResize: true
+    });
+    _this2.isResized = true;
+    _this2.x = 0;
+    _this2.y = 0;
+    return _this2;
+  }
+
+  _createClass(Application, [{
+    key: "load",
+    value: function load(manifest) {
+      var _this3 = this;
+
+      this.loader.add(manifest).load(function (l, r) {
+        return _this3.init(r);
+      });
+    }
+  }, {
+    key: "init",
+    value: function init(resources) {
+      var _this4 = this;
+
+      this.flame = new FlameFilter(resources.noise.texture);
+      this.stage.filterArea = this.screen;
+      this.stage.filters = [this.flame];
+      this.ticker.add(this.update, this);
+      window.addEventListener("resize", function () {
+        return _this4.isResized = true;
+      });
+
+      var move = function move(e) {
+        _this4.x = e.clientX || e.changedTouches[0].clientX;
+        _this4.y = e.clientY || e.changedTouches[0].clientY;
+      };
+
+      document.addEventListener('mousemove', move);
+      document.addEventListener('touchmove', move);
+    }
+  }, {
+    key: "update",
+    value: function update(delta) {
+      if (this.isResized) {
+        this.renderer.resize(window.innerWidth, window.innerHeight);
+        this.isResized = false;
+      }
+
+      this.flame.time += 0.1 * delta;
+      this.flame.horpos = this.x / window.innerWidth;
+      this.flame.verpos = this.y / window.innerHeight;
+    }
+  }]);
+
+  return Application;
+}(jscommon_pixi_js__WEBPACK_IMPORTED_MODULE_0__.Application);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (container) {
+  var app = new Application();
+  app.load(manifest);
+});
+
+/***/ }),
+
+/***/ "./src/apps/fire/js/flame-frag.js":
+/*!****************************************!*\
+  !*** ./src/apps/fire/js/flame-frag.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n\n  varying vec2 vTextureCoord;  \n  \n  uniform sampler2D uSampler;\n  uniform sampler2D mapSampler;  \n  uniform vec4 filterArea;  \n  uniform vec2 dimensions;\n  uniform float time;\n  uniform float horpos;\n  uniform float verpos;\n  \n  float rand(vec2 co) {\n    return fract(sin(dot(co.xy ,vec2(12.9898, 78.233))) * 43758.5453);\n  }\n  \n  mat2 rotz(float angle) {\n    mat2 m;\n    m[0][0] = cos(angle); m[0][1] = -sin(angle);\n    m[1][0] = sin(angle); m[1][1] = cos(angle);\n    return m;\n  }  \n  \n  // Fractal Brownian Motion\n  float fbm(vec2 uv) {        \n    \n    float n = (texture2D(mapSampler, uv).r - 0.5) * 0.5;\n    n += (texture2D(mapSampler, uv * 2.0).r - 0.5) * 0.5 * 0.5;\n    n += (texture2D(mapSampler, uv * 3.0).r - 0.5) * 0.5 * 0.5 * 0.5;    \n    return n + 0.5;    \n  }\n  \n  void main() {\n    \n    vec2 uv = (vTextureCoord * filterArea.xy) / dimensions;\n    uv.y = 1.0 - uv.y;\n    \n    vec2 _uv = uv;\n    uv -= vec2(horpos, 0.5);\n    uv.y /= dimensions.x / dimensions.y;      \n    \n    vec2 centerUV = uv;\n    \n    // height variation from fbm\n    float variationH = fbm(vec2(time * 0.3)) * 1.1;\n    \n    // flame \"speed\"\n    vec2 offset = vec2(0.0, -time * 0.05);\n        \n    // flame turbulence\n    float f = fbm(uv * 0.1 + offset); // rotation from fbm        \n    float l = max(0.1, length(uv)); // rotation amount normalized over distance\n    uv += rotz(((f - 0.5) / l) * smoothstep(-0.2, 0.4, _uv.y) * 0.45) * uv;    \n    \n    // flame thickness\n    float flame = 1.3 - clamp(length(uv.x), 0.0, 1.0) * 3.0;\n    // float flame = 1.3 - length(uv.x) * 3.0;\n    \n    // bottom of flame \n    float blueflame = pow(flame * 0.9, 15.0);\n    blueflame *= smoothstep(0.2, -1.0, _uv.y);\n    blueflame /= abs(uv.x * 2.0);\n    blueflame = clamp(blueflame, 0.0, 1.0);\n    \n    // flame\n    flame *= smoothstep(1.0, variationH * 0.5, _uv.y);\n    flame = clamp(flame, 0.0, 1.0);\n    flame = pow(flame, 3.0);\n    flame /= smoothstep(1.1, -0.1, _uv.y);    \n  \n    // colors\n    vec4 col = mix(vec4(1.0, 1.0, 0.0, 0.0), vec4(1.0, 1.0, 0.6, 0.0), flame);\n    col = mix(vec4(1.0, 0.0, 0.0, 0.0), col, smoothstep(0.0, 1.6, flame));\n    gl_FragColor = col;\n    \n    // a bit blueness on the bottom\n    vec4 bluecolor = mix(vec4(0.0, 0.0, 1.0, 0.0), gl_FragColor, 0.95);\n    gl_FragColor = mix(gl_FragColor, bluecolor, blueflame);\n    \n    // clear bg outside of the flame\n    gl_FragColor *= flame;\n    gl_FragColor.a = flame;\n    \n    // bg halo\n    float haloSize = 0.9;\n    float centerL = 1.0 - (length(centerUV + vec2(0.0, 0.1)) / haloSize);\n    vec4 halo = vec4(0.8, 0.3, 0.3, 0.0) * 1.0 * fbm(vec2(time * 0.035)) * centerL + 0.02;\n    vec4 finalCol = mix(halo, gl_FragColor, gl_FragColor.a);\n    gl_FragColor = finalCol;\n\n    // just a hint of noise\n    gl_FragColor *= mix(rand(uv) + rand(uv * 0.45), 1.0, 0.9);\n    gl_FragColor = clamp(gl_FragColor, 0.0, 1.0);\n  }\n");
 
 /***/ }),
 

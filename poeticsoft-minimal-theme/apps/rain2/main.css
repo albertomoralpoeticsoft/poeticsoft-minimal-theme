@@ -1,0 +1,69 @@
+/*!*******************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/apps/rain2/main.scss ***!
+  \*******************************************************************************************************************/
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#APP,
+#page,
+#content,
+.ast-container,
+#primary,
+#main,
+article,
+.entry-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 921px) {
+  .ast-builder-menu-mobile .main-navigation .main-header-menu {
+    background-color: transparent;
+  }
+  .ast-builder-menu-mobile .main-navigation .main-header-menu .menu-link,
+.ast-builder-menu-mobile .main-navigation .main-header-menu .sub-menu {
+    background-color: var(--ast-global-color-7);
+    background-image: none;
+  }
+  .ast-builder-menu-mobile .main-navigation .main-header-menu .current-menu-item .menu-link {
+    background-color: var(--ast-global-color-6);
+  }
+}
+#ast-mobile-header {
+  width: 200px;
+  margin-left: auto;
+}
+#Rain {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#Rain canvas#container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/*# sourceMappingURL=main.css.map*/

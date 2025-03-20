@@ -142,9 +142,12 @@ function onWindowResize(event) {
 function animate() {
   requestAnimationFrame(animate);
   var position = (Date.now() - start_time) * 0.03 % 8000;
-  camera.position.x += (mouseX - camera.position.x) * 0.01;
-  camera.position.y += (-mouseY - camera.position.y) * 0.1;
-  camera.position.z = -position + 8000;
+  var cameraposition = {
+    x: camera.position.x + (mouseX - camera.position.x) * 0.01,
+    y: Math.max(-25, camera.position.y + (-mouseY - camera.position.y) * 0.1),
+    z: camera.position.z = -position + 8000
+  };
+  camera.position = cameraposition;
   renderer.render(scene, camera);
 }
 

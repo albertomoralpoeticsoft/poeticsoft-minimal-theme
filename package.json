@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "GPL-2.0-or-later",
   "scripts": {
+    
     "dialogdev": "webpack --env=apps-dialog-dev",
     "dialogprod": "webpack --env=apps-dialog-prod",
     "cloudsdev": "webpack --env=apps-clouds-dev",
@@ -12,7 +13,19 @@
     "firedev": "webpack --env=apps-fire-dev",
     "fireprod": "webpack --env=apps-fire-prod",
     "blurdev": "webpack --env=apps-blur-dev",
-    "blurprod": "webpack --env=apps-blur-prod"
+    "blurprod": "webpack --env=apps-blur-prod",
+    "clouds2dev": "webpack --env=apps-clouds2-dev",
+    "clouds2prod": "webpack --env=apps-clouds2-prod",
+    "rain2dev": "webpack --env=apps-rain2-dev",
+    "rain2prod": "webpack --env=apps-rain2-prod",
+    "halodev": "webpack --env=apps-halo-dev",
+    "haloprod": "webpack --env=apps-halo-prod",
+
+    "portfoliodev": "webpack --env=apps-portfolio-dev",
+    "portfolioprod": "webpack --env=apps-portfolio-prod",
+    
+    "editorformatsdev": "webpack --env=editor-formats-dev",
+    "editorformatsprod": "webpack --env=editor-formats-prod"
   },
   "dependencies": {
     "@babel/core": "^7.18.10",
@@ -41,7 +54,8 @@
     "sass": "^1.54.2",
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
-    "three": "^0.172.0"
+    "three": "^0.172.0",
+    "viewerjs": "^1.11.7"
   },
   "babel": {
     "presets": [

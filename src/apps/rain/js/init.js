@@ -34,6 +34,11 @@ let parallax = {
   y:0
 };
 
+window.drawing = false;
+window.brushsize = 30;
+window.brushx = 0;
+window.brushy = 0;
+
 export default function (
   videoelement,
   containerelement
@@ -87,8 +92,9 @@ function init(){
   textureFg = createCanvas(
     textureFgSize.width,
     textureFgSize.height
-  );
+  );  
   textureFgCtx = textureFg.getContext('2d');
+
   textureBg = createCanvas(
     textureBgSize.width,
     textureBgSize.height
@@ -114,15 +120,7 @@ function init(){
     }
   );
 
-  setupEvents();
-}
-
-function setupEvents(){
-
   updateTextures();
-  setupParallax();
-}
-function setupParallax(){
 
   const moveparalax = event  => {
 
@@ -138,6 +136,22 @@ function setupParallax(){
       x = event.changedTouches[0].clientX
       y = event.changedTouches[0].clientY
     }
+  }
+
+  const move = e => {
+
+    let x, y
+
+    if(e.clientX) {
+      
+      x = e.clientX;
+      y = e.clientY;
+
+    } else {
+
+      x = e.changedTouches[0].clientX
+      y = e.changedTouches[0].clientY
+    }
 
     TweenLite.to(
       parallax,
@@ -150,37 +164,61 @@ function setupParallax(){
         renderer.parallaxX = parallax.x;
         renderer.parallaxY = parallax.y;
       }
-    })
+    }) 
+    
+    window.brushx = x;
+    window.brushy = y;
   }
 
-  document.addEventListener(
-    'mousemove',
-    moveparalax
-  );
+  const start = e => {
 
-  document.addEventListener(
-    'touchmove',
-    moveparalax
-  );
+    window.drawing = true
+  }
+
+  const end = e => {
+    
+    window.drawing = false
+  }
+
+  document.addEventListener('mousemove', move);
+  //document.addEventListener('mousedown', start);
+  //document.addEventListener('mouseup', end);
+  //document.addEventListener('touchstart', start); 
+  document.addEventListener('touchmove', move); 
+  //document.addEventListener('touchend', end);
 }
-
-/*
-window.addEventListener(
-  'resize',
-  init
-)
-*/
 
 function updateTextures(){
 
   generateTextures();
-  renderer.updateTextures();
+  renderer.updateTextures();  
 
   requestAnimationFrame(updateTextures);
 }
 
 function generateTextures(){
 
-  textureFgCtx.drawImage(videoBg,0,textureBgSize.height,textureFgSize.width,textureFgSize.height,0,0,textureFgSize.width,textureFgSize.height);
-  textureBgCtx.drawImage(videoBg,0,0,textureBgSize.width,textureBgSize.height,0,0,textureBgSize.width,textureBgSize.height);
+  textureFgCtx.drawImage(
+    videoBg,
+    0,
+    textureBgSize.height,
+    textureFgSize.width,
+    textureFgSize.height,
+    0,
+    0,
+    textureFgSize.width,
+    textureFgSize.height
+  );
+
+  textureBgCtx.drawImage(
+    videoBg,
+    0,
+    0,
+    textureBgSize.width,
+    textureBgSize.height,
+    0,
+    0,
+    textureBgSize.width,
+    textureBgSize.height
+  );
 }

@@ -16,14 +16,17 @@
   .Slide {
 
     position: absolute;
-    bottom: 100%;
     box-sizing: border-box;
-    transition-property: bottom;
+    bottom: 100%;
+    opacity: 0;
+
+    transition-property: opacity, bottom;
     transition-duration: 0.5s;
 
     &.Current {
 
-      bottom: 0;
+      opacity: 1;
+      bottom: 0; 
     }
 
     h2 {
@@ -39,6 +42,28 @@
         text-shadow: 0 0 1px #000;
       }
     }
+
+    h3 {
+
+      text-shadow: 0 0 1px #000;
+      margin-bottom: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    // p {
+
+    //   position: relative;
+
+    //   &:before {
+
+    //     content: "";
+    //     @include absolutebox();
+    //     background-color: #000;
+    //     mix-blend-mode: difference;
+    //     z-index: 0;
+    //   }
+    // }
   }
 
   .wp-block-button.common {
@@ -68,7 +93,7 @@
 
       .wp-block-button__link {
 
-        @include bgimage("~assets/images/arrow-circle-up.svg");
+        @include bgimage("~assets/images/arrow-circle.svg");
         background-size: 60%;
       }
     }

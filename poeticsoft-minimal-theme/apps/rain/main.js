@@ -17,11 +17,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _init__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./init */ "./src/apps/rain/js/init.js");
 /* harmony import */ var assets_images_video_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! assets/images/video.jpg */ "./poeticsoft-minimal-theme/assets/images/video.jpg");
 /* harmony import */ var assets_images_video_mp4__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! assets/images/video.mp4 */ "./poeticsoft-minimal-theme/assets/images/video.mp4");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (props) {
+
+
+var Rain = function Rain(props) {
   var videoRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
   var containerRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -46,6 +59,29 @@ __webpack_require__.r(__webpack_exports__);
     id: "container",
     ref: containerRef
   }));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+      _useState2 = _slicedToArray(_useState, 2),
+      refresh = _useState2[0],
+      setRefresh = _useState2[1];
+
+  var resize = function resize() {
+    setRefresh(null);
+    setTimeout(function () {
+      setRefresh(Math.random());
+    }, 1);
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    window.addEventListener('resize', resize);
+    resize();
+    return function () {
+      window.removeEventListener('resize', resize);
+    };
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, refresh ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Rain, null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null));
 });
 
 /***/ }),
@@ -230,6 +266,10 @@ var parallax = {
   x: 0,
   y: 0
 };
+window.drawing = false;
+window.brushsize = 30;
+window.brushx = 0;
+window.brushy = 0;
 /* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__(videoelement, containerelement) {
   videoBg = videoelement;
   canvas = containerelement;
@@ -278,15 +318,8 @@ function init() {
     alphaMultiply: 6,
     alphaSubtract: 3
   });
-  setupEvents();
-}
-
-function setupEvents() {
   updateTextures();
-  setupParallax();
-}
 
-function setupParallax() {
   var moveparalax = function moveparalax(event) {
     var x, y;
 
@@ -296,6 +329,18 @@ function setupParallax() {
     } else {
       x = event.changedTouches[0].clientX;
       y = event.changedTouches[0].clientY;
+    }
+  };
+
+  var move = function move(e) {
+    var x, y;
+
+    if (e.clientX) {
+      x = e.clientX;
+      y = e.clientY;
+    } else {
+      x = e.changedTouches[0].clientX;
+      y = e.changedTouches[0].clientY;
     }
 
     gsap__WEBPACK_IMPORTED_MODULE_6__["default"].to(parallax, 1, {
@@ -307,18 +352,24 @@ function setupParallax() {
         renderer.parallaxY = parallax.y;
       }
     });
+    window.brushx = x;
+    window.brushy = y;
   };
 
-  document.addEventListener('mousemove', moveparalax);
-  document.addEventListener('touchmove', moveparalax);
-}
-/*
-window.addEventListener(
-  'resize',
-  init
-)
-*/
+  var start = function start(e) {
+    window.drawing = true;
+  };
 
+  var end = function end(e) {
+    window.drawing = false;
+  };
+
+  document.addEventListener('mousemove', move); //document.addEventListener('mousedown', start);
+  //document.addEventListener('mouseup', end);
+  //document.addEventListener('touchstart', start); 
+
+  document.addEventListener('touchmove', move); //document.addEventListener('touchend', end);
+}
 
 function updateTextures() {
   generateTextures();
@@ -516,7 +567,7 @@ var defaultOptions = {
   maxR: 40,
   maxDrops: 900,
   rainChance: 0.3,
-  rainLimit: 3,
+  rainLimit: 1,
   dropletsRate: 50,
   dropletsSize: [2, 4],
   dropletsCleaningRadiusMultiplier: 0.43,
@@ -720,6 +771,13 @@ Raindrops.prototype = {
     }
 
     this.ctx.drawImage(this.droplets, 0, 0, this.width, this.height);
+    this.dropletsCtx.fillStyle = '#696969';
+
+    if (window.drawing) {
+      this.dropletsCtx.beginPath();
+      this.dropletsCtx.arc(window.brushx, window.brushy, window.brushsize, 0, Math.PI * 2);
+      this.dropletsCtx.fill();
+    }
   },
   updateDrops: function updateDrops(timeScale) {
     var _this3 = this;
@@ -999,7 +1057,6 @@ function createProgram(gl, vertexScript, fragScript) {
 
   var positionLocation = gl.getAttribLocation(program, "a_position");
   var texCoordLocation = gl.getAttribLocation(program, "a_texCoord");
-  console.log(texCoordLocation);
   var texCoordBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0]), gl.STATIC_DRAW);
@@ -40840,7 +40897,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var init = function init() {
-  console.log('rain');
   var app = document.createElement("div");
   app.setAttribute('id', 'APP');
   document.body.prepend(app);

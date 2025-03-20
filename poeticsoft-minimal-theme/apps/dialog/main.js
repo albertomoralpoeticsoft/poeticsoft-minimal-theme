@@ -22,17 +22,20 @@
   });
   /* Slides height */
 
-  var calculateHeight = function calculateHeight() {
+  var calculateSize = function calculateSize() {
+    var width = 0;
     var height = 0;
     $slides.each(function () {
       var $this = $(this);
+      width = Math.max(height, $this.outerWidth());
       height = Math.max(height, $this.outerHeight());
     });
+    $dialog.height(width);
     $dialog.height(height);
   };
 
-  window.addEventListener('resize', calculateHeight);
-  calculateHeight();
+  window.addEventListener('resize', calculateSize);
+  calculateSize();
   /* Hash changes */
 
   var hashchanged = function hashchanged() {
