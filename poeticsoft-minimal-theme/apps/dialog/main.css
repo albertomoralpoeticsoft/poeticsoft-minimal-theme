@@ -53,43 +53,108 @@ article,
 }
 #Dialog {
   position: absolute;
-  left: 0;
+  left: -100%;
   bottom: 50%;
   transform: translateY(50%);
   width: 90%;
   max-width: 500px;
-  overflow: hidden;
+  border: solid var(--ast-global-color-0);
+  border-width: 4px 0 0 0;
+  border-radius: 0 16px 0 0 !important;
+  transition-property: left;
+  transition-duration: 0.5s;
+  transition-delay: 0.5s;
+  visibility: hidden;
 }
-#Dialog .fitcontent {
-  width: fit-content;
+#Dialog > h2 {
+  position: absolute;
+  font-size: 2.5rem;
+  line-height: 1em;
+  text-shadow: 0 0 1px #000;
+  top: -0.86em;
+  z-index: 1;
 }
 #Dialog .Slide {
-  position: absolute;
-  box-sizing: border-box;
-  bottom: 100%;
-  opacity: 0;
-  transition-property: opacity, bottom;
-  transition-duration: 0.5s;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
 }
-#Dialog .Slide.Current {
-  opacity: 1;
-  bottom: 0;
+#Dialog .Slide .wp-block-cover__background {
+  display: none;
+}
+#Dialog .Slide .wp-block-cover__inner-container {
+  height: 100%;
+}
+#Dialog .Slide h2, #Dialog .Slide h3 {
+  top: -1.4em;
+  opacity: 0;
+  text-shadow: 0 0 1px #000;
+  position: relative;
+  transition-property: opacity, top;
+  transition-duration: 0.5s;
+  transition-delay: 0.3s;
+}
+#Dialog .Slide h2 a, #Dialog .Slide h3 a {
+  text-shadow: 0 0 1px #000;
 }
 #Dialog .Slide h2 {
   line-height: 0.55em;
   margin-block-end: 0.05em;
-  text-shadow: 0 0 1px #000;
-  position: relative;
   z-index: 1;
 }
-#Dialog .Slide h2 a {
-  text-shadow: 0 0 1px #000;
-}
 #Dialog .Slide h3 {
-  text-shadow: 0 0 1px #000;
   margin-bottom: 0;
-  position: relative;
   z-index: 2;
+}
+#Dialog .Slide p {
+  transition-property: opacity, filter;
+  transition-duration: 0.8s;
+  transition-delay: 0.5s;
+  z-index: 2;
+  opacity: 0;
+  filter: blur(12px);
+}
+#Dialog .Slide .wp-block-buttons {
+  min-height: 48px;
+  width: 100%;
+  z-index: 2;
+  cursor: pointer;
+  visibility: hidden;
+  transition-property: left;
+  transition-duration: 0.8s;
+  transition-delay: 1.5s;
+}
+#Dialog.Calculated {
+  left: 0;
+  visibility: visible;
+}
+#Dialog.Calculated .Slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+#Dialog.Calculated .Slide .wp-block-buttons {
+  position: absolute;
+  bottom: 0;
+  left: -100%;
+  visibility: visible;
+}
+#Dialog.Calculated .Slide.Current {
+  opacity: 1;
+  left: 0;
+  display: block;
+}
+#Dialog.Calculated .Slide.Current h2, #Dialog.Calculated .Slide.Current h3 {
+  top: 0;
+  opacity: 1;
+}
+#Dialog.Calculated .Slide.Current p {
+  opacity: 1;
+  filter: blur(0px);
+}
+#Dialog.Calculated .Slide.Current .wp-block-buttons {
+  left: 0;
 }
 #Dialog .wp-block-button.common {
   display: flex;

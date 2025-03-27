@@ -18,14 +18,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (props) {
+  var cloudsRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
   var containerRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (containerRef.current) {
       (0,_clouds__WEBPACK_IMPORTED_MODULE_1__["default"])(containerRef.current);
+      cloudsRef.current.className = 'Visible';
     }
   }, [containerRef.current]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "Clouds"
+    id: "Clouds",
+    ref: cloudsRef
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "container",
     ref: containerRef

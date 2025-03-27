@@ -16,22 +16,32 @@
     }
 
     if ($this.hasClass('First')) {
-      $this.addClass('Current');
       $this.find('.wp-block-button.common.root').remove();
     }
   });
   /* Slides height */
 
+  var delay;
+
   var calculateSize = function calculateSize() {
+    $dialog.removeClass('Calculated');
+
+    if (delay) {
+      clearTimeout(delay);
+    }
+
     var width = 0;
     var height = 0;
     $slides.each(function () {
       var $this = $(this);
-      width = Math.max(height, $this.outerWidth());
-      height = Math.max(height, $this.outerHeight());
+      width = Math.ceil(Math.max(height, $this.outerWidth()));
+      height = Math.ceil(Math.max(height, $this.outerHeight()));
     });
     $dialog.height(width);
     $dialog.height(height);
+    delay = setTimeout(function () {
+      $dialog.addClass('Calculated');
+    }, 200);
   };
 
   window.addEventListener('resize', calculateSize);
@@ -40,7 +50,7 @@
 
   var hashchanged = function hashchanged() {
     var hash = location.hash;
-    var $targetSlide = $dialog.find(hash);
+    var $targetSlide = hash ? $dialog.find(hash) : $dialog.find('.Slide.First');
 
     if ($targetSlide.length) {
       $slides.each(function () {
@@ -51,7 +61,9 @@
   };
 
   window.addEventListener('hashchange', hashchanged);
-  hashchanged();
+  setTimeout(function () {
+    hashchanged();
+  }, 600);
 })(jQuery);
 /******/ })()
 ;

@@ -102,6 +102,7 @@ function animate() {
   requestAnimationFrame(animate);
 
   const position = ((Date.now() - start_time) * 0.03) % 8000;
+  
   const cameraposition = {
     x: camera.position.x + (mouseX - camera.position.x) * 0.01,
     y: Math.max(-25, camera.position.y + (- mouseY - camera.position.y) * 0.1),

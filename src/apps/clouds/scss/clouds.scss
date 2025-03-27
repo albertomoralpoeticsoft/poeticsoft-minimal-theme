@@ -7,4 +7,14 @@
     #000763 0%, 
     #326696 100%
   );
+
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 2.5s;
+  transition-delay: 0.5s;
+
+  &.Visible {
+
+    opacity: 1;
+  }
 }
