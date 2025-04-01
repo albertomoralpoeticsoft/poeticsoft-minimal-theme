@@ -39,29 +39,40 @@ article,
     background-color: transparent;
   }
   .ast-builder-menu-mobile .main-navigation .main-header-menu .menu-link,
-.ast-builder-menu-mobile .main-navigation .main-header-menu .sub-menu {
+  .ast-builder-menu-mobile .main-navigation .main-header-menu .sub-menu {
     background-color: var(--ast-global-color-7);
     background-image: none;
   }
   .ast-builder-menu-mobile .main-navigation .main-header-menu .current-menu-item .menu-link {
     background-color: var(--ast-global-color-6);
   }
+  .ast-builder-menu-mobile .main-navigation .main-header-menu .menu-item + .menu-item {
+    border: solid var(--ast-global-color-1);
+    border-width: 1px 0 0 0;
+  }
 }
 #ast-mobile-header {
   width: 200px;
   margin-left: auto;
 }
-#Fire {
+#Blur {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  background-color: #000000;
 }
-#Fire canvas#container {
+#Blur canvas {
   position: absolute;
   top: 0;
   left: 0;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 0.8s;
+}
+#Blur.Visible canvas {
+  opacity: 1;
 }
 
 /*# sourceMappingURL=main.css.map*/

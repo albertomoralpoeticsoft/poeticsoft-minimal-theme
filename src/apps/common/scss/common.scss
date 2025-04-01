@@ -1,5 +1,6 @@
 // https://coolors.co/eaeaea-cbc5ea
-
+@use '~scsscommon/mixin';
+@use '~scsscommon/presets';
 
 html,
 body {
@@ -27,7 +28,7 @@ body {
 article,
 .entry-content {
 
-  @include absolutebox();
+  @include mixin.absolutebox();
   padding: 0;
   margin: 0;
   overflow: hidden;
@@ -42,13 +43,19 @@ article,
     .menu-link,
     .sub-menu {
 
-      background-color: $color-7;
+      background-color: presets.$color-7;
       background-image: none;
     }
 
     .current-menu-item .menu-link {
 
-      background-color: $color-6;
+      background-color: presets.$color-6;
+    }
+
+    .menu-item + .menu-item{
+
+      border: solid presets.$color-1;
+      border-width: 1px 0 0 0;
     }
   }
 }

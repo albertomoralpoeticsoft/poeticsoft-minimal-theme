@@ -7,9 +7,7 @@
 
   $slides.each(function() {
       
-    const $this = $(this)     
-
-    $this.removeClass('Current')
+    const $this = $(this) 
 
     if(location.pathname == '/') {
 
@@ -24,34 +22,28 @@
 
   /* Slides height */
 
-  let delay
-
   const calculateSize = () => {
 
     $dialog.removeClass('Calculated')
 
-    if(delay) {
-
-      clearTimeout(delay)
-    }
-
     let width = 0;
     let height = 0;
 
-    $slides.each(function() {
+    setTimeout(() => {
 
-      const $this = $(this)
-      width = Math.ceil(Math.max(height, $this.outerWidth()))
-      height = Math.ceil(Math.max(height, $this.outerHeight()))
-    })
-    $dialog.height(width)
-    $dialog.height(height)
-    
-    delay = setTimeout(() => {
+      $slides.each(function() {
 
+        const $this = $(this)
+        width = Math.ceil(Math.max(height, $this.outerWidth()))
+        height = Math.ceil(Math.max(height, $this.outerHeight()))
+      })
+      $dialog.height(width)
+      $dialog.height(height)
+
+      console.log(height)
+      
       $dialog.addClass('Calculated')
-
-    }, 200)
+    }, 100)
   }
 
   window.addEventListener(
@@ -59,11 +51,19 @@
     calculateSize
   )
 
-  calculateSize()
+  setTimeout(() => {
+    
+    calculateSize()
+  }, 800)
   
   /* Hash changes */
 
-  const hashchanged = () => {
+  const hashchanged = () => {     
+
+    $slides.each(function() {
+      
+      $(this).removeClass('Current')
+    })
 
     const hash = location.hash
     const $targetSlide = hash ?
@@ -71,15 +71,13 @@
       :
       $dialog.find('.Slide.First')
 
-    if($targetSlide.length) {      
+    setTimeout(() => {
+      
+      if($targetSlide.length) { 
 
-      $slides.each(function() {
-        
-        $(this).removeClass('Current')
-      })
-
-      $targetSlide.addClass('Current')
-    }
+        $targetSlide.addClass('Current')
+      }
+    }, 600)
   }
 
   window.addEventListener(
@@ -87,10 +85,6 @@
     hashchanged
   )
 
-  setTimeout(() => {
-    
-    hashchanged()
-
-  }, 600)
+  hashchanged()
 
 })(jQuery);

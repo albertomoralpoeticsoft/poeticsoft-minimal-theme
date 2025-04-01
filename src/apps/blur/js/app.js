@@ -13,12 +13,18 @@ export default props => {
     if(blurRef.current) {
 
       blur(blurRef.current)
+
+      setTimeout(() => {
+
+        blurRef.current.className = 'Visible'
+
+      }, 500)
     }
 
   }, [blurRef.current])
 
   return <div 
-    className="Blur" 
+    id="Blur" 
     ref={ blurRef }
   />
 }

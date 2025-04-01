@@ -12,9 +12,18 @@ $pageapps = [
   'interaccion' => 'halo'
 ];
 
+if(isset($_GET['app'])) { // ?app=local
+
+  $url = 'http://localhost:8090'; 
+
+} else {
+
+  $url = get_stylesheet_directory_uri();
+}
+
 add_action( 
 	'wp_enqueue_scripts', 
-	function () use ($pageapps) {
+	function () use ($pageapps, $url) {
 
     global $post;
 
@@ -30,7 +39,7 @@ add_action(
 
         wp_enqueue_script(
           'poeticsoft-theme-app-' . $appname, 
-          get_stylesheet_directory_uri() . '/apps/' . $appname . '/main.js',
+          $url . '/apps/' . $appname . '/main.js',
           [], 
           filemtime(get_stylesheet_directory() . '/apps/' . $appname . '/main.js'),
           true
@@ -38,7 +47,7 @@ add_action(
     
         wp_enqueue_style( 
           'poeticsoft-theme-app-' . $appname,
-          get_stylesheet_directory_uri() . '/apps/' . $appname . '/main.css', 
+          $url . '/apps/' . $appname . '/main.css', 
           array(
             'astra-theme-css'
           ), 
@@ -50,7 +59,7 @@ add_action(
 
         wp_enqueue_script(
           'poeticsoft-theme-dialog', 
-          get_stylesheet_directory_uri() . '/apps/dialog/main.js',
+          $url . '/apps/dialog/main.js',
           ['jquery'], 
           filemtime(get_stylesheet_directory() . '/apps/dialog/main.js'),
           true
@@ -58,7 +67,7 @@ add_action(
     
         wp_enqueue_style( 
           'poeticsoft-theme-dialog',
-          get_stylesheet_directory_uri() . '/apps/dialog/main.css', 
+          $url . '/apps/dialog/main.css', 
           array(
             'astra-theme-css'
           ), 
@@ -72,7 +81,7 @@ add_action(
 
     wp_enqueue_script(
       'poeticsoft-theme-portfolio', 
-      get_stylesheet_directory_uri() . '/apps/portfolio/main.js',
+      $url . '/apps/portfolio/main.js',
       [
         'jquery',
         'jquery-ui-core',
@@ -85,7 +94,7 @@ add_action(
 
     wp_enqueue_style( 
       'poeticsoft-theme-portfolio',
-      get_stylesheet_directory_uri() . '/apps/portfolio/main.css', 
+      $url . '/apps/portfolio/main.css', 
       array(
         'astra-theme-css'
       ), 

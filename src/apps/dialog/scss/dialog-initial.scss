@@ -1,0 +1,133 @@
+
+@use '~scsscommon/presets';
+@use '~scsscommon/mixin';
+@use '~scsscommon/common';
+
+#Dialog {
+
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
+  width: 90%;
+  max-width: 500px;
+  border: solid var(--ast-global-color-0);
+  border-width: presets.$space * 0.5 0 0 0;
+  border-radius: 0 presets.$space * 2 0 0 !important;
+
+  > h2 {
+
+    position: absolute;
+    font-size: 2.5rem;
+    line-height: 1em;
+    text-shadow: 0 0 1px #000;
+    top: -0.86em;
+    z-index: 1;
+  }
+
+  .Slide {
+
+    z-index: 0;
+    width: 100%;
+    padding-bottom: presets.$space  * 7 !important;
+    visibility: hidden;
+    
+    .wp-block-cover__background {
+
+      display: none;
+    }
+
+    .wp-block-cover__inner-container {
+
+      height: 100%;
+    }
+
+    h2, h3 {
+
+      text-shadow: 0 0 1px #000;
+      position: relative;
+
+      top: -1.4em;
+      opacity: 0;
+      transition-property: opacity, top;
+      transition-duration: 0.5s;
+      transition-delay: 0.8s;
+
+      a {
+
+        text-shadow: 0 0 1px #000;
+      }    
+    }
+
+    h2 {
+
+      line-height: 0.55em;
+      margin-block-end: 0.05em;
+      z-index: 2;  
+    }
+
+    h3 {
+
+      margin-bottom: 0;
+      z-index: 3;
+    }
+
+    p {
+
+      position: relative;
+      z-index: 1;  
+
+      opacity: 0;
+      filter: blur(12px);
+      transition-property: opacity, filter;
+      transition-duration: 0.8s;
+      transition-delay: 1.5s;
+    }
+
+    .wp-block-buttons {   
+
+      position: relative;
+      min-height: presets.$space * 6;
+      width: 100%; 
+      z-index: 4;
+      cursor: pointer;
+  
+      left: -100%;
+      transition-property: left;
+      transition-duration: 0.8s;
+      transition-delay: 2s;
+    }
+  }  
+
+  .wp-block-button.common {
+
+    @include mixin.flexcenter();
+    overflow: hidden;
+    border-radius: 50%;
+
+    .wp-block-button__link {
+      
+      text-indent: 2000px;
+      width: presets.$space * 6;
+      height: presets.$space * 6;
+      padding: 0;
+    }
+
+    &.home {
+
+      .wp-block-button__link {
+
+        @include mixin.bgimage("~assets/images/home-alt.svg");
+        background-size: 60%;
+      }
+    }
+
+    &.root {
+
+      .wp-block-button__link {
+
+        @include mixin.bgimage("~assets/images/arrow-circle.svg");
+        background-size: 60%;
+      }
+    }
+  }
+}

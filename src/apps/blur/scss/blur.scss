@@ -1,11 +1,26 @@
-#Fire {
+@use '~scsscommon/presets';
+
+#Blur {
 
   @include absolutebox();
+  background-color: #000000; 
 
-  canvas#container {      
+  canvas {      
       
     position: absolute;
     top: 0; 
     left: 0;
+  
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.8s;
+  }
+
+  &.Visible {
+
+    canvas {
+      
+      opacity: 1;
+    }
   }
 }

@@ -1,0 +1,35 @@
+
+@use '~scsscommon/presets';
+@use '~scsscommon/mixin';
+@use '~scsscommon/common';
+
+#Dialog {
+
+  &.Calculated { 
+
+    .Slide {
+
+      &.Current {        
+        
+        visibility: visible;    
+
+        h2, h3 {
+
+          top: 0;
+          opacity: 1; 
+        }
+
+        p {
+
+          opacity: 1;
+          filter: blur(0px);
+        }
+      
+        .wp-block-buttons { 
+
+          left: 0;
+        }
+      }
+    }
+  }
+}
