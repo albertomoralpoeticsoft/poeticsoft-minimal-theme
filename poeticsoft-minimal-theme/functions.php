@@ -1,16 +1,5 @@
 <?php
 
-/*
-Google console
-
-Client ID
-744422931948-tlb1jo76h0vf6kpeoljqovh79pe7o5fe.apps.googleusercontent.com
-
-Client Secret
-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
-
-*/
-
 add_filter('xmlrpc_enabled', '__return_false');
 add_filter('login_display_language_dropdown', '__return_false');
 
@@ -38,7 +27,6 @@ add_action(
   },
   2
 );
-
   
 require_once(dirname(__FILE__) . '/admin/main.php'); 
 require_once(dirname(__FILE__) . '/api/main.php'); 

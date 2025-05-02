@@ -1,9 +1,5 @@
 <?php
 
-// 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
-// https://openai.com/api/
-// https://chatgpt.com/c/6814ce53-5cc4-8012-b722-aec26ec8186c
-
 function poeticsoft_openai_test(WP_REST_Request $req) {
   
   require_once(ABSPATH . "wp-admin" . '/includes/image.php');
