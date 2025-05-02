@@ -32,7 +32,6 @@
       });
       $dialog.height(width);
       $dialog.height(height);
-      console.log(height);
       $dialog.addClass('Calculated');
     }, 100);
   };
@@ -56,7 +55,9 @@
     }, 600);
   };
   window.addEventListener('hashchange', hashchanged);
-  hashchanged();
+  setTimeout(function () {
+    hashchanged();
+  }, 1000);
 })(jQuery);
 /******/ })()
 ;

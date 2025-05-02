@@ -39,8 +39,6 @@
       })
       $dialog.height(width)
       $dialog.height(height)
-
-      console.log(height)
       
       $dialog.addClass('Calculated')
     }, 100)
@@ -85,6 +83,9 @@
     hashchanged
   )
 
-  hashchanged()
+  setTimeout(() => {
+    
+    hashchanged()
+  }, 1000)  
 
 })(jQuery);

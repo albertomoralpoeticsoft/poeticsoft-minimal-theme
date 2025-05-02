@@ -9,26 +9,15 @@
 
     .Slide {
 
-      &.Current {        
-        
-        visibility: visible;    
+      left: -110%;
+      opacity: 0;
+      transition-property: left, opacity;
+      transition-duration: 0.8s;
 
-        h2, h3 {
-
-          top: 0;
-          opacity: 1; 
-        }
-
-        p {
-
-          opacity: 1;
-          filter: blur(0px);
-        }
-      
-        .wp-block-buttons { 
-
-          left: 0;
-        }
+      &.Current {  
+           
+        left: 0;
+        opacity: 1;
       }
     }
   }
