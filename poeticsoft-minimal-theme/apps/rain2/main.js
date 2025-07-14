@@ -2,1147 +2,6 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/apps/rain2/js/app.js":
-/*!**********************************!*\
-  !*** ./src/apps/rain2/js/app.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _vaho__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./vaho */ "./src/apps/rain2/js/vaho.js");
-/* harmony import */ var assets_images_vaho_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! assets/images/vaho.jpg */ "./poeticsoft-minimal-theme/assets/images/vaho.jpg");
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (props) {
-  var imgRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-  var canvasRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (imgRef.current, canvasRef.current) {
-      (0,_vaho__WEBPACK_IMPORTED_MODULE_1__["default"])(canvasRef.current, imgRef.current);
-    }
-  }, [imgRef.current, canvasRef.current]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "Rain"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-    id: "Texture",
-    src: assets_images_vaho_jpg__WEBPACK_IMPORTED_MODULE_2__,
-    ref: imgRef
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("canvas", {
-    id: "container",
-    ref: canvasRef
-  }));
-});
-
-/*#__PURE__*/
-react__WEBPACK_IMPORTED_MODULE_0___default().createElement("canvas", {
-  id: "Container"
-});
-
-/***/ }),
-
-/***/ "./src/apps/rain2/js/createcanvas.js":
-/*!*******************************************!*\
-  !*** ./src/apps/rain2/js/createcanvas.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ createCanvas)
-/* harmony export */ });
-function createCanvas(width, height) {
-  var canvas = document.createElement("canvas");
-  canvas.width = width;
-  canvas.height = height;
-  return canvas;
-}
-
-/***/ }),
-
-/***/ "./src/apps/rain2/js/globj.js":
-/*!************************************!*\
-  !*** ./src/apps/rain2/js/globj.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _webgl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./webgl */ "./src/apps/rain2/js/webgl.js");
-
-
-function GL(canvas, options, vert, frag) {
-  this.init(canvas, options, vert, frag);
-}
-
-GL.prototype = {
-  canvas: null,
-  gl: null,
-  program: null,
-  width: 0,
-  height: 0,
-  init: function init(canvas, options, vert, frag) {
-    this.canvas = canvas;
-    this.width = canvas.width;
-    this.height = canvas.height;
-    this.gl = _webgl__WEBPACK_IMPORTED_MODULE_0__.getContext(canvas, options);
-    this.program = this.createProgram(vert, frag);
-    this.useProgram(this.program);
-  },
-  createProgram: function createProgram(vert, frag) {
-    var program = _webgl__WEBPACK_IMPORTED_MODULE_0__.createProgram(this.gl, vert, frag);
-    return program;
-  },
-  useProgram: function useProgram(program) {
-    this.program = program;
-    this.gl.useProgram(program);
-  },
-  createTexture: function createTexture(source, i) {
-    return _webgl__WEBPACK_IMPORTED_MODULE_0__.createTexture(this.gl, source, i);
-  },
-  createUniform: function createUniform(type, name) {
-    for (var _len = arguments.length, v = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-      v[_key - 2] = arguments[_key];
-    }
-
-    _webgl__WEBPACK_IMPORTED_MODULE_0__.createUniform.apply(_webgl__WEBPACK_IMPORTED_MODULE_0__, [this.gl, this.program, type, name].concat(v));
-  },
-  activeTexture: function activeTexture(i) {
-    _webgl__WEBPACK_IMPORTED_MODULE_0__.activeTexture(this.gl, i);
-  },
-  updateTexture: function updateTexture(source) {
-    _webgl__WEBPACK_IMPORTED_MODULE_0__.updateTexture(this.gl, source);
-  },
-  draw: function draw() {
-    _webgl__WEBPACK_IMPORTED_MODULE_0__.setRectangle(this.gl, -1, -1, 2, 2);
-    this.gl.drawArrays(this.gl.TRIANGLES, 0, 6);
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GL);
-
-/***/ }),
-
-/***/ "./src/apps/rain2/js/imageloader.js":
-/*!******************************************!*\
-  !*** ./src/apps/rain2/js/imageloader.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ ImageLoader)
-/* harmony export */ });
-function loadImage(src, i, onLoad) {
-  return new Promise(function (resolve, reject) {
-    if (typeof src == "string") {
-      src = {
-        name: "image" + i,
-        src: src
-      };
-    }
-
-    var img = new Image();
-    src.img = img;
-    img.addEventListener("load", function (event) {
-      if (typeof onLoad == "function") {
-        onLoad.call(null, img, i);
-      }
-
-      resolve(src);
-    });
-    img.src = src.src;
-  });
-}
-
-function loadImages(images, onLoad) {
-  return Promise.all(images.map(function (src, i) {
-    return loadImage(src, i, onLoad);
-  }));
-}
-
-function ImageLoader(images, onLoad) {
-  return new Promise(function (resolve, reject) {
-    loadImages(images, onLoad).then(function (loadedImages) {
-      var r = {};
-      loadedImages.forEach(function (curImage) {
-        r[curImage.name] = {
-          img: curImage.img,
-          src: curImage.src
-        };
-      });
-      resolve(r);
-    });
-  });
-}
-
-/***/ }),
-
-/***/ "./src/apps/rain2/js/raindrops.js":
-/*!****************************************!*\
-  !*** ./src/apps/rain2/js/raindrops.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _times_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./times.js */ "./src/apps/rain2/js/times.js");
-/* harmony import */ var _createcanvas_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createcanvas.js */ "./src/apps/rain2/js/createcanvas.js");
-/* harmony import */ var _random__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./random */ "./src/apps/rain2/js/random.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-
-
-
-var dropSize = 64;
-var Drop = {
-  x: 0,
-  y: 0,
-  r: 0,
-  spreadX: 0,
-  spreadY: 0,
-  momentum: 0,
-  momentumX: 0,
-  lastSpawn: 0,
-  nextSpawn: 0,
-  parent: null,
-  isNew: true,
-  killed: false,
-  shrink: 0
-};
-var defaultOptions = {
-  minR: 10,
-  maxR: 40,
-  maxDrops: 900,
-  rainChance: 0.3,
-  rainLimit: 3,
-  dropletsRate: 50,
-  dropletsSize: [2, 4],
-  dropletsCleaningRadiusMultiplier: 0.43,
-  raining: true,
-  globalTimeScale: 1,
-  trailRate: 1,
-  autoShrink: true,
-  spawnArea: [-0.1, 0.95],
-  trailScaleRange: [0.2, 0.5],
-  collisionRadius: 0.65,
-  collisionRadiusIncrease: 0.01,
-  dropFallMultiplier: 1,
-  collisionBoostMultiplier: 0.05,
-  collisionBoost: 1
-};
-
-function Raindrops(width, height, scale, dropAlpha, dropColor) {
-  var options = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
-  this.width = width;
-  this.height = height;
-  this.scale = scale;
-  this.dropAlpha = dropAlpha;
-  this.dropColor = dropColor;
-  this.options = Object.assign({}, defaultOptions, options);
-  this.init();
-}
-
-Raindrops.prototype = {
-  dropColor: null,
-  dropAlpha: null,
-  canvas: null,
-  ctx: null,
-  width: 0,
-  height: 0,
-  scale: 0,
-  dropletsPixelDensity: 1,
-  droplets: null,
-  dropletsCtx: null,
-  dropletsCounter: 0,
-  drops: null,
-  dropsGfx: null,
-  clearDropletsGfx: null,
-  textureCleaningIterations: 0,
-  lastRender: null,
-  options: null,
-  init: function init() {
-    this.canvas = (0,_createcanvas_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.width, this.height);
-    this.ctx = this.canvas.getContext('2d');
-    this.droplets = (0,_createcanvas_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.width * this.dropletsPixelDensity, this.height * this.dropletsPixelDensity);
-    this.dropletsCtx = this.droplets.getContext('2d');
-    var DRAWCTX = this.dropletsCtx;
-    DRAWCTX.beginPath();
-    DRAWCTX.moveTo(0, 0);
-    DRAWCTX.lineWidth = window.BrushSize * 2;
-    DRAWCTX.strokeStyle = '#696969';
-    DRAWCTX.lineCap = "round";
-    DRAWCTX.lineJoin = "round";
-
-    window.startDrawing = function () {
-      DRAWCTX.moveTo(window.BrushX, window.BrushY);
-    };
-
-    window.stopDrawing = function () {
-      DRAWCTX.beginPath();
-    };
-
-    this.drops = [];
-    this.dropsGfx = [];
-    this.renderDropsGfx();
-    this.update();
-  },
-
-  get deltaR() {
-    return this.options.maxR - this.options.minR;
-  },
-
-  get area() {
-    return this.width * this.height / this.scale;
-  },
-
-  get areaMultiplier() {
-    return Math.sqrt(this.area / (1024 * 768));
-  },
-
-  drawDroplet: function drawDroplet(x, y, r) {
-    this.drawDrop(this.dropletsCtx, Object.assign(Object.create(Drop), {
-      x: x * this.dropletsPixelDensity,
-      y: y * this.dropletsPixelDensity,
-      r: r * this.dropletsPixelDensity
-    }));
-  },
-  renderDropsGfx: function renderDropsGfx() {
-    var _this = this;
-
-    var dropBuffer = (0,_createcanvas_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dropSize, dropSize);
-    var dropBufferCtx = dropBuffer.getContext('2d');
-    this.dropsGfx = Array.apply(null, Array(255)).map(function (cur, i) {
-      var drop = (0,_createcanvas_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dropSize, dropSize);
-      var dropCtx = drop.getContext('2d');
-      dropBufferCtx.clearRect(0, 0, dropSize, dropSize); // color
-
-      dropBufferCtx.globalCompositeOperation = "source-over";
-      dropBufferCtx.drawImage(_this.dropColor, 0, 0, dropSize, dropSize); // blue overlay, for depth
-
-      dropBufferCtx.globalCompositeOperation = "screen";
-      dropBufferCtx.fillStyle = "rgba(0,0," + i + ",1)";
-      dropBufferCtx.fillRect(0, 0, dropSize, dropSize); // alpha
-
-      dropCtx.globalCompositeOperation = "source-over";
-      dropCtx.drawImage(_this.dropAlpha, 0, 0, dropSize, dropSize);
-      dropCtx.globalCompositeOperation = "source-in";
-      dropCtx.drawImage(dropBuffer, 0, 0, dropSize, dropSize);
-      return drop;
-    }); // create circle that will be used as a brush to remove droplets
-
-    this.clearDropletsGfx = (0,_createcanvas_js__WEBPACK_IMPORTED_MODULE_1__["default"])(128, 128);
-    var clearDropletsCtx = this.clearDropletsGfx.getContext("2d");
-    clearDropletsCtx.fillStyle = "#000";
-    clearDropletsCtx.beginPath();
-    clearDropletsCtx.arc(64, 64, 64, 0, Math.PI * 2);
-    clearDropletsCtx.fill();
-  },
-  drawDrop: function drawDrop(ctx, drop) {
-    if (this.dropsGfx.length > 0) {
-      var x = drop.x;
-      var y = drop.y;
-      var r = drop.r;
-      var spreadX = drop.spreadX;
-      var spreadY = drop.spreadY;
-      var scaleX = 1;
-      var scaleY = 1.5;
-      var d = Math.max(0, Math.min(1, (r - this.options.minR) / this.deltaR * 0.9));
-      d *= 1 / ((drop.spreadX + drop.spreadY) * 0.5 + 1);
-      ctx.globalAlpha = 1;
-      ctx.globalCompositeOperation = "source-over";
-      d = Math.floor(d * (this.dropsGfx.length - 1));
-      ctx.drawImage(this.dropsGfx[d], (x - r * scaleX * (spreadX + 1)) * this.scale, (y - r * scaleY * (spreadY + 1)) * this.scale, r * 2 * scaleX * (spreadX + 1) * this.scale, r * 2 * scaleY * (spreadY + 1) * this.scale);
-    }
-  },
-  clearDroplets: function clearDroplets(x, y) {
-    var r = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 30;
-    var ctx = this.dropletsCtx;
-    ctx.globalCompositeOperation = "destination-out";
-    ctx.drawImage(this.clearDropletsGfx, (x - r) * this.dropletsPixelDensity * this.scale, (y - r) * this.dropletsPixelDensity * this.scale, r * 2 * this.dropletsPixelDensity * this.scale, r * 2 * this.dropletsPixelDensity * this.scale * 1.5);
-  },
-  clearCanvas: function clearCanvas() {
-    this.ctx.clearRect(0, 0, this.width, this.height);
-  },
-  createDrop: function createDrop(options) {
-    if (this.drops.length >= this.options.maxDrops * this.areaMultiplier) return null;
-    return Object.assign(Object.create(Drop), options);
-  },
-  addDrop: function addDrop(drop) {
-    if (this.drops.length >= this.options.maxDrops * this.areaMultiplier || drop == null) return false;
-    this.drops.push(drop);
-    return true;
-  },
-  updateRain: function updateRain(timeScale) {
-    var rainDrops = [];
-
-    if (this.options.raining) {
-      var limit = this.options.rainLimit * timeScale * this.areaMultiplier;
-      var count = 0;
-
-      while ((0,_random__WEBPACK_IMPORTED_MODULE_2__.chance)(this.options.rainChance * timeScale * this.areaMultiplier) && count < limit) {
-        count++;
-        var r = (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(this.options.minR, this.options.maxR, function (n) {
-          return Math.pow(n, 3);
-        });
-        var rainDrop = this.createDrop({
-          x: (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(this.width / this.scale),
-          y: (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(this.height / this.scale * this.options.spawnArea[0], this.height / this.scale * this.options.spawnArea[1]),
-          r: r,
-          momentum: 1 + (r - this.options.minR) * 0.1 + (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(2),
-          spreadX: 1.5,
-          spreadY: 1.5
-        });
-
-        if (rainDrop != null) {
-          rainDrops.push(rainDrop);
-        }
-      }
-    }
-
-    return rainDrops;
-  },
-  clearDrops: function clearDrops() {
-    this.drops.forEach(function (drop) {
-      setTimeout(function () {
-        drop.shrink = 0.1 + (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(0.5);
-      }, (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(1200));
-    });
-    this.clearTexture();
-  },
-  clearTexture: function clearTexture() {
-    this.textureCleaningIterations = 50;
-  },
-  updateDroplets: function updateDroplets(timeScale) {
-    var _this2 = this;
-
-    if (this.textureCleaningIterations > 0) {
-      this.textureCleaningIterations -= 1 * timeScale;
-      this.dropletsCtx.globalCompositeOperation = "destination-out";
-      this.dropletsCtx.fillStyle = "rgba(0,0,0," + 0.05 * timeScale + ")";
-      this.dropletsCtx.fillRect(0, 0, this.width * this.dropletsPixelDensity, this.height * this.dropletsPixelDensity);
-    }
-
-    if (this.options.raining) {
-      this.dropletsCounter += this.options.dropletsRate * timeScale * this.areaMultiplier;
-      (0,_times_js__WEBPACK_IMPORTED_MODULE_0__["default"])(this.dropletsCounter, function (i) {
-        _this2.dropletsCounter--;
-
-        _this2.drawDroplet((0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(_this2.width / _this2.scale), (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(_this2.height / _this2.scale), _random__WEBPACK_IMPORTED_MODULE_2__.random.apply(void 0, _toConsumableArray(_this2.options.dropletsSize).concat([function (n) {
-          return n * n;
-        }])));
-      });
-    }
-
-    this.ctx.globalCompositeOperation = "source-over";
-    this.ctx.drawImage(this.droplets, 0, 0, this.width, this.height); // this.ctx.globalCompositeOperation = "destination-out";
-    // this.ctx.drawImage(window.textureTITLE,
-    //                     window.Texture2015Left,
-    //                     window.Texture2015Top,
-    //                     window.Texture2015Width,
-    //                     window.Texture2015Heigth);
-    // this.ctx.globalCompositeOperation = "soft-light";
-    // this.ctx.drawImage(window.textureTITLELight,
-    //                     window.Texture2015Left,
-    //                     window.Texture2015Top,
-    //                     window.Texture2015Width,
-    //                     window.Texture2015Heigth);   
-    //this.dropletsCtx.fillStyle = '#696969';
-
-    if (window.Drawing) {
-      this.dropletsCtx.fillStyle = '#00000009';
-      this.dropletsCtx.globalCompositeOperation = "source-over";
-      this.dropletsCtx.beginPath();
-      this.dropletsCtx.arc(window.BrushX, window.BrushY, window.BrushSize, 0, Math.PI * 2);
-      this.dropletsCtx.stroke();
-    }
-  },
-  updateDrops: function updateDrops(timeScale) {
-    var _this3 = this;
-
-    var newDrops = [];
-    this.updateDroplets(timeScale);
-    var rainDrops = this.updateRain(timeScale);
-    newDrops = newDrops.concat(rainDrops);
-    this.drops.sort(function (a, b) {
-      var va = a.y * (_this3.width / _this3.scale) + a.x;
-      var vb = b.y * (_this3.width / _this3.scale) + b.x;
-      return va > vb ? 1 : va == vb ? 0 : -1;
-    });
-    this.drops.forEach(function (drop, i) {
-      var _this4 = this;
-
-      if (!drop.killed) {
-        // update gravity
-        // (chance of drops "creeping down")
-        if ((0,_random__WEBPACK_IMPORTED_MODULE_2__.chance)((drop.r - this.options.minR * this.options.dropFallMultiplier) * (0.1 / this.deltaR) * timeScale)) {
-          drop.momentum += (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(drop.r / this.options.maxR * 4);
-        } // clean small drops
-
-
-        if (this.options.autoShrink && drop.r <= this.options.minR && (0,_random__WEBPACK_IMPORTED_MODULE_2__.chance)(0.05 * timeScale)) {
-          drop.shrink += 0.01;
-        } //update shrinkage
-
-
-        drop.r -= drop.shrink * timeScale;
-        if (drop.r <= 0) drop.killed = true; // update trails
-
-        if (this.options.raining) {
-          drop.lastSpawn += drop.momentum * timeScale * this.options.trailRate;
-
-          if (drop.lastSpawn > drop.nextSpawn) {
-            var trailDrop = this.createDrop({
-              x: drop.x + (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(-drop.r, drop.r) * 0.1,
-              y: drop.y - drop.r * 0.01,
-              r: drop.r * _random__WEBPACK_IMPORTED_MODULE_2__.random.apply(void 0, _toConsumableArray(this.options.trailScaleRange)),
-              spreadY: drop.momentum * 0.1,
-              parent: drop
-            });
-
-            if (trailDrop != null) {
-              newDrops.push(trailDrop);
-              drop.r *= Math.pow(0.97, timeScale);
-              drop.lastSpawn = 0;
-              drop.nextSpawn = (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(this.options.minR, this.options.maxR) - drop.momentum * 2 * this.options.trailRate + (this.options.maxR - drop.r);
-            }
-          }
-        } //normalize spread
-
-
-        drop.spreadX *= Math.pow(0.4, timeScale);
-        drop.spreadY *= Math.pow(0.7, timeScale); //update position
-
-        var moved = drop.momentum > 0;
-
-        if (moved && !drop.killed) {
-          drop.y += drop.momentum * this.options.globalTimeScale;
-          drop.x += drop.momentumX * this.options.globalTimeScale;
-
-          if (drop.y > this.height / this.scale + drop.r) {
-            drop.killed = true;
-          }
-        } // collision
-
-
-        var checkCollision = (moved || drop.isNew) && !drop.killed;
-        drop.isNew = false;
-
-        if (checkCollision) {
-          this.drops.slice(i + 1, i + 70).forEach(function (drop2) {
-            //basic check
-            if (drop != drop2 && drop.r > drop2.r && drop.parent != drop2 && drop2.parent != drop && !drop2.killed) {
-              var dx = drop2.x - drop.x;
-              var dy = drop2.y - drop.y;
-              var d = Math.sqrt(dx * dx + dy * dy); //if it's within acceptable distance
-
-              if (d < (drop.r + drop2.r) * (_this4.options.collisionRadius + drop.momentum * _this4.options.collisionRadiusIncrease * timeScale)) {
-                var pi = Math.PI;
-                var r1 = drop.r;
-                var r2 = drop2.r;
-                var a1 = pi * (r1 * r1);
-                var a2 = pi * (r2 * r2);
-                var targetR = Math.sqrt((a1 + a2 * 0.8) / pi);
-
-                if (targetR > _this4.maxR) {
-                  targetR = _this4.maxR;
-                }
-
-                drop.r = targetR;
-                drop.momentumX += dx * 0.1;
-                drop.spreadX = 0;
-                drop.spreadY = 0;
-                drop2.killed = true;
-                drop.momentum = Math.max(drop2.momentum, Math.min(40, drop.momentum + targetR * _this4.options.collisionBoostMultiplier + _this4.options.collisionBoost));
-              }
-            }
-          });
-        } //slowdown momentum
-
-
-        drop.momentum -= Math.max(1, this.options.minR * 0.5 - drop.momentum) * 0.1 * timeScale;
-        if (drop.momentum < 0) drop.momentum = 0;
-        drop.momentumX *= Math.pow(0.7, timeScale);
-
-        if (!drop.killed) {
-          newDrops.push(drop);
-          if (moved && this.options.dropletsRate > 0) this.clearDroplets(drop.x, drop.y, drop.r * this.options.dropletsCleaningRadiusMultiplier);
-          this.drawDrop(this.ctx, drop);
-        }
-      }
-    }, this);
-    this.drops = newDrops;
-  },
-  update: function update() {
-    if (window.VahoActivo) {
-      this.clearCanvas();
-      var now = Date.now();
-      if (this.lastRender == null) this.lastRender = now;
-      var deltaT = now - this.lastRender;
-      var timeScale = deltaT / (1 / 60 * 1000);
-      if (timeScale > 1.1) timeScale = 1.1;
-      timeScale *= this.options.globalTimeScale;
-      this.lastRender = now;
-      this.updateDrops(timeScale);
-    }
-
-    requestAnimationFrame(this.update.bind(this));
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Raindrops);
-
-/***/ }),
-
-/***/ "./src/apps/rain2/js/rainrenderer.js":
-/*!*******************************************!*\
-  !*** ./src/apps/rain2/js/rainrenderer.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _globj__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./globj */ "./src/apps/rain2/js/globj.js");
-/* harmony import */ var _createcanvas_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createcanvas.js */ "./src/apps/rain2/js/createcanvas.js");
-/* harmony import */ var _shaders_simple_vert_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shaders/simple.vert.js */ "./src/apps/rain2/js/shaders/simple.vert.js");
-/* harmony import */ var _shaders_water_frag_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./shaders/water.frag.js */ "./src/apps/rain2/js/shaders/water.frag.js");
-
-
-
-
-var defaultOptions = {
-  renderShadow: false,
-  minRefraction: 256,
-  maxRefraction: 512,
-  brightness: 1,
-  alphaMultiply: 20,
-  alphaSubtract: 5,
-  parallaxBg: 5,
-  parallaxFg: 20
-};
-
-function RainRenderer(canvas, canvasLiquid, imageFg, imageBg) {
-  var imageShine = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-  var options = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
-  this.canvas = canvas;
-  this.canvasLiquid = canvasLiquid;
-  this.imageShine = imageShine;
-  this.imageFg = imageFg;
-  this.imageBg = imageBg;
-  this.options = Object.assign({}, defaultOptions, options);
-  this.init();
-}
-
-RainRenderer.prototype = {
-  canvas: null,
-  gl: null,
-  canvasLiquid: null,
-  width: 0,
-  height: 0,
-  imageShine: '',
-  imageFg: '',
-  imageBg: '',
-  textures: null,
-  programWater: null,
-  programBlurX: null,
-  programBlurY: null,
-  parallaxX: 0,
-  parallaxY: 0,
-  renderShadow: false,
-  options: null,
-  init: function init() {
-    this.width = this.canvas.width;
-    this.height = this.canvas.height;
-    this.gl = new _globj__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvas, {
-      alpha: false
-    }, _shaders_simple_vert_js__WEBPACK_IMPORTED_MODULE_2__["default"], _shaders_water_frag_js__WEBPACK_IMPORTED_MODULE_3__["default"]);
-    var gl = this.gl;
-    this.programWater = gl.program;
-    gl.createUniform('2f', 'resolution', this.width, this.height);
-    gl.createUniform('1f', 'textureRatio', this.imageBg.width / this.imageBg.height);
-    gl.createUniform('1i', 'renderShine', this.imageShine == null ? false : true);
-    gl.createUniform('1i', 'renderShadow', this.options.renderShadow);
-    gl.createUniform('1f', 'minRefraction', this.options.minRefraction);
-    gl.createUniform('1f', 'refractionDelta', this.options.maxRefraction - this.options.minRefraction);
-    gl.createUniform('1f', 'brightness', this.options.brightness);
-    gl.createUniform('1f', 'alphaMultiply', this.options.alphaMultiply);
-    gl.createUniform('1f', 'alphaSubtract', this.options.alphaSubtract);
-    gl.createUniform('1f', 'parallaxBg', this.options.parallaxBg);
-    gl.createUniform('1f', 'parallaxFg', this.options.parallaxFg);
-    gl.createTexture(null, 0);
-    this.textures = [{
-      name: 'textureShine',
-      img: this.imageShine == null ? (0,_createcanvas_js__WEBPACK_IMPORTED_MODULE_1__["default"])(2, 2) : this.imageShine
-    }, {
-      name: 'textureFg',
-      img: this.imageFg
-    }, {
-      name: 'textureBg',
-      img: this.imageBg
-    }];
-    this.textures.forEach(function (texture, i) {
-      gl.createTexture(texture.img, i + 1);
-      gl.createUniform('1i', texture.name, i + 1);
-    });
-    this.draw();
-  },
-  draw: function draw() {
-    if (window.VahoActivo) {
-      this.gl.useProgram(this.programWater);
-      this.gl.createUniform('2f', 'parallax', this.parallaxX, this.parallaxY);
-      this.updateTexture();
-      this.gl.draw();
-    }
-
-    requestAnimationFrame(this.draw.bind(this));
-  },
-  updateTextures: function updateTextures() {
-    var _this = this;
-
-    this.textures.forEach(function (texture, i) {
-      _this.gl.activeTexture(i + 1);
-
-      _this.gl.updateTexture(texture.img);
-    });
-  },
-  updateTexture: function updateTexture() {
-    this.gl.activeTexture(0);
-    this.gl.updateTexture(this.canvasLiquid);
-  },
-  resize: function resize() {},
-
-  get overlayTexture() {},
-
-  set overlayTexture(v) {}
-
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RainRenderer);
-
-/***/ }),
-
-/***/ "./src/apps/rain2/js/random.js":
-/*!*************************************!*\
-  !*** ./src/apps/rain2/js/random.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   chance: () => (/* binding */ chance),
-/* harmony export */   random: () => (/* binding */ random)
-/* harmony export */ });
-function random() {
-  var from = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-  var to = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var interpolation = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
-  if (from == null) {
-    from = 0;
-    to = 1;
-  } else if (from != null && to == null) {
-    to = from;
-    from = 0;
-  }
-
-  var delta = to - from;
-
-  if (interpolation == null) {
-    interpolation = function interpolation(n) {
-      return n;
-    };
-  }
-
-  return from + interpolation(Math.random()) * delta;
-}
-function chance(c) {
-  return random() <= c;
-}
-
-/***/ }),
-
-/***/ "./src/apps/rain2/js/shaders/simple.vert.js":
-/*!**************************************************!*\
-  !*** ./src/apps/rain2/js/shaders/simple.vert.js ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\nprecision mediump float;\n\nattribute vec2 a_position;\n\nvoid main() {\n   gl_Position = vec4(a_position,0.0,1.0);\n}\n");
-
-/***/ }),
-
-/***/ "./src/apps/rain2/js/shaders/water.frag.js":
-/*!*************************************************!*\
-  !*** ./src/apps/rain2/js/shaders/water.frag.js ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\nprecision mediump float;\n\n// textures\nuniform sampler2D u_waterMap;\nuniform sampler2D u_textureShine;\nuniform sampler2D u_textureFg;\nuniform sampler2D u_textureBg;\n\n// the texCoords passed in from the vertex shader.\nvarying vec2 v_texCoord;\nuniform vec2 u_resolution;\nuniform vec2 u_parallax;\nuniform float u_parallaxFg;\nuniform float u_parallaxBg;\nuniform float u_textureRatio;\nuniform bool u_renderShine;\nuniform bool u_renderShadow;\nuniform float u_minRefraction;\nuniform float u_refractionDelta;\nuniform float u_brightness;\nuniform float u_alphaMultiply;\nuniform float u_alphaSubtract;\n\n// alpha-blends two colors\nvec4 blend(vec4 bg,vec4 fg){\n  vec3 bgm=bg.rgb*bg.a;\n  vec3 fgm=fg.rgb*fg.a;\n  float ia=1.0-fg.a;\n  float a=(fg.a + bg.a * ia);\n  vec3 rgb;\n  if(a!=0.0){\n    rgb=(fgm + bgm * ia) / a;\n  }else{\n    rgb=vec3(0.0,0.0,0.0);\n  }\n  return vec4(rgb,a);\n}\n\nvec2 pixel(){\n  return vec2(1.0,1.0)/u_resolution;\n}\n\nvec2 parallax(float v){\n  return u_parallax*pixel()*v;\n}\n\nvec2 texCoord(){\n  return vec2(gl_FragCoord.x, u_resolution.y-gl_FragCoord.y)/u_resolution;\n}\n\n// scales the bg up and proportionally to fill the container\nvec2 scaledTexCoord(){\n  float ratio=u_resolution.x/u_resolution.y;\n  vec2 scale=vec2(1.0,1.0);\n  vec2 offset=vec2(0.0,0.0);\n  float ratioDelta=ratio-u_textureRatio;\n  if(ratioDelta>=0.0){\n    scale.y=(1.0+ratioDelta);\n    offset.y=ratioDelta/2.0;\n  }else{\n    scale.x=(1.0-ratioDelta);\n    offset.x=-ratioDelta/2.0;\n  }\n  return (texCoord()+offset)/scale;\n}\n\n// get color from fg\nvec4 fgColor(float x, float y){\n  float p2=u_parallaxFg*2.0;\n  vec2 scale=vec2(\n    (u_resolution.x+p2)/u_resolution.x,\n    (u_resolution.y+p2)/u_resolution.y\n  );\n\n  vec2 scaledTexCoord=texCoord()/scale;\n  vec2 offset=vec2(\n    (1.0-(1.0/scale.x))/2.0,\n    (1.0-(1.0/scale.y))/2.0\n  );\n\n  return texture2D(u_waterMap,\n    (scaledTexCoord+offset)+(pixel()*vec2(x,y))+parallax(u_parallaxFg)\n  );\n}\n\nvoid main() {\n  vec4 bg=texture2D(u_textureBg,scaledTexCoord()+parallax(u_parallaxBg));\n\n  vec4 cur = fgColor(0.0,0.0);\n\n  float d=cur.b; // \"thickness\"\n  float x=cur.g;\n  float y=cur.r;\n\n  float a=clamp(cur.a*u_alphaMultiply-u_alphaSubtract, 0.0,1.0);\n\n  vec2 refraction = (vec2(x,y)-0.5)*2.0;\n  vec2 refractionParallax=parallax(u_parallaxBg-u_parallaxFg);\n  vec2 refractionPos = scaledTexCoord()\n    + (pixel()*refraction*(u_minRefraction+(d*u_refractionDelta)))\n    + refractionParallax;\n\n  vec4 tex=texture2D(u_textureFg,refractionPos);\n\n  if(u_renderShine){\n    float maxShine=490.0;\n    float minShine=maxShine*0.18;\n    vec2 shinePos=vec2(0.5,0.5) + ((1.0/512.0)*refraction)* -(minShine+((maxShine-minShine)*d));\n    vec4 shine=texture2D(u_textureShine,shinePos);\n    tex=blend(tex,shine);\n  }\n\n  vec4 fg=vec4(tex.rgb*u_brightness,a);\n\n  if(u_renderShadow){\n    float borderAlpha = fgColor(0.,0.-(d*6.0)).a;\n    borderAlpha=borderAlpha*u_alphaMultiply-(u_alphaSubtract+0.5);\n    borderAlpha=clamp(borderAlpha,0.,1.);\n    borderAlpha*=0.2;\n    vec4 border=vec4(0.,0.,0.,borderAlpha);\n    fg=blend(border,fg);\n  }\n\n  gl_FragColor = blend(bg,fg);\n}\n");
-
-/***/ }),
-
-/***/ "./src/apps/rain2/js/times.js":
-/*!************************************!*\
-  !*** ./src/apps/rain2/js/times.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ times)
-/* harmony export */ });
-function times(n, f) {
-  for (var i = 0; i < n; i++) {
-    f.call(this, i);
-  }
-}
-
-/***/ }),
-
-/***/ "./src/apps/rain2/js/vaho.js":
-/*!***********************************!*\
-  !*** ./src/apps/rain2/js/vaho.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _rainrenderer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./rainrenderer */ "./src/apps/rain2/js/rainrenderer.js");
-/* harmony import */ var _raindrops__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./raindrops */ "./src/apps/rain2/js/raindrops.js");
-/* harmony import */ var _imageloader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./imageloader */ "./src/apps/rain2/js/imageloader.js");
-/* harmony import */ var _createcanvas__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./createcanvas */ "./src/apps/rain2/js/createcanvas.js");
-/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
-/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/gsap-core.js");
-/* harmony import */ var assets_images_drop_alpha_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! assets/images/drop-alpha.png */ "./poeticsoft-minimal-theme/assets/images/drop-alpha.png");
-/* harmony import */ var assets_images_drop_color_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! assets/images/drop-color.png */ "./poeticsoft-minimal-theme/assets/images/drop-color.png");
-/* harmony import */ var assets_images_2015_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! assets/images/2015.png */ "./poeticsoft-minimal-theme/assets/images/2015.png");
-/* harmony import */ var assets_images_2015light_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! assets/images/2015light.png */ "./poeticsoft-minimal-theme/assets/images/2015light.png");
-
-
-
-
-
-
-
-
-
-var TextureImg,
-    dropColor,
-    dropAlpha,
-    dpi,
-    textureFg,
-    textureFgCtx,
-    textureBg,
-    textureBgCtx,
-    textureBgSize = {
-  width: 456,
-  height: 256
-},
-    textureFgSize = {
-  width: 114,
-  height: 64
-},
-    raindrops,
-    renderer,
-    canvas;
-var parallax = {
-  x: 0,
-  y: 0
-};
-var BrushSizeStart = {
-  x: 320,
-  y: 10
-};
-var BrushSizeTarget = {
-  x: 1400,
-  y: 20
-};
-var BrushSizeSlope = (BrushSizeTarget.y - BrushSizeStart.y) / (BrushSizeTarget.x - BrushSizeStart.x);
-var Texture2015WidthStart = {
-  x: 320,
-  y: 250
-};
-var Texture2015WidthTarget = {
-  x: 1400,
-  y: 700
-};
-var Texture2015WidthSlope = (Texture2015WidthTarget.y - Texture2015WidthStart.y) / (Texture2015WidthTarget.x - Texture2015WidthStart.x);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (CanvasElement, Texture) {
-  canvas = CanvasElement;
-  TextureImg = Texture;
-  (0,_imageloader__WEBPACK_IMPORTED_MODULE_2__["default"])([{
-    name: 'dropAlpha',
-    src: assets_images_drop_alpha_png__WEBPACK_IMPORTED_MODULE_4__
-  }, {
-    name: 'dropColor',
-    src: assets_images_drop_color_png__WEBPACK_IMPORTED_MODULE_5__
-  }, {
-    name: 'img2015',
-    src: assets_images_2015_png__WEBPACK_IMPORTED_MODULE_6__
-  }, {
-    name: 'img2015light',
-    src: assets_images_2015light_png__WEBPACK_IMPORTED_MODULE_7__
-  }]).then(function (images) {
-    dropColor = images.dropColor.img;
-    dropAlpha = images.dropAlpha.img;
-    window.textureTITLE = images.img2015.img;
-    window.textureTITLELight = images.img2015light.img;
-    window.VahoReady = true;
-    init(CanvasElement);
-  });
-});
-
-var init = function init(CanvasElement) {
-  dpi = window.devicePixelRatio;
-  CanvasElement.width = window.innerWidth;
-  CanvasElement.height = window.innerHeight;
-  CanvasElement.style.width = window.innerWidth + 'px';
-  CanvasElement.style.height = window.innerHeight + 'px';
-  window.BrushSize = BrushSizeSlope * window.innerWidth - BrushSizeSlope * BrushSizeStart.x + BrushSizeStart.y;
-  window.Texture2015Width = Texture2015WidthSlope * window.innerWidth - Texture2015WidthSlope * Texture2015WidthStart.x + Texture2015WidthStart.y;
-  window.Texture2015Heigth = window.Texture2015Width * textureBgSize.height / textureBgSize.width;
-  window.Texture2015Top = window.innerHeight / 2 - window.Texture2015Heigth / 2;
-  window.Texture2015Left = window.innerWidth / 2 - window.Texture2015Width / 2;
-  raindrops = new _raindrops__WEBPACK_IMPORTED_MODULE_1__["default"](CanvasElement.width, CanvasElement.height, dpi, dropAlpha, dropColor, {
-    minR: 10,
-    maxR: 20,
-    collisionRadiusIncrease: 0.002,
-    dropletsRate: 50,
-    dropletsSize: [3, 7.5],
-    dropletsCleaningRadiusMultiplier: 0.30
-  });
-  textureFg = (0,_createcanvas__WEBPACK_IMPORTED_MODULE_3__["default"])(textureFgSize.width, textureFgSize.height);
-  textureFgCtx = textureFg.getContext('2d');
-  textureBg = (0,_createcanvas__WEBPACK_IMPORTED_MODULE_3__["default"])(textureBgSize.width, textureBgSize.height);
-  textureBgCtx = textureBg.getContext('2d');
-  generateTextures();
-  renderer = new _rainrenderer__WEBPACK_IMPORTED_MODULE_0__["default"](CanvasElement, raindrops.canvas, textureFg, textureBg, null, {
-    brightness: 1.1,
-    alphaMultiply: 6,
-    alphaSubtract: 3,
-    parallaxFg: 40
-  });
-  setupParallax();
-
-  var handDraw = function handDraw(e) {
-    var x, y;
-
-    if (e.clientX) {
-      x = e.clientX;
-      y = e.clientY;
-    } else {
-      x = e.changedTouches[0].clientX;
-      y = e.changedTouches[0].clientY;
-    }
-
-    window.BrushX = x;
-    window.BrushY = y;
-  };
-
-  var startDrawing = function startDrawing(e) {
-    console.log('start');
-    window.Drawing = true;
-  };
-
-  var endDrawing = function endDrawing(e) {
-    console.log('end');
-    window.Drawing = false;
-  };
-
-  document.addEventListener('mousemove', handDraw);
-  document.addEventListener('mousedown', startDrawing);
-  document.addEventListener('mouseup', endDrawing);
-  document.addEventListener('touchstart', startDrawing);
-  document.addEventListener('touchmove', handDraw);
-  document.addEventListener('touchend', endDrawing);
-  window.VahoActivo = true;
-};
-
-function setupParallax() {
-  document.addEventListener('mousemove', function (event) {
-    if (!window.VahoActivo) {
-      return;
-    }
-
-    var x = event.pageX;
-    var y = event.pageY;
-    gsap__WEBPACK_IMPORTED_MODULE_8__["default"].to(parallax, 1, {
-      x: x / canvas.width * 2 - 1,
-      y: y / canvas.height * 2 - 1,
-      ease: gsap__WEBPACK_IMPORTED_MODULE_9__.Quint.easeOut,
-      onUpdate: function onUpdate() {
-        renderer.parallaxX = parallax.x;
-        renderer.parallaxY = parallax.y;
-      }
-    });
-  });
-}
-
-function generateTextures() {
-  textureFgCtx.drawImage(TextureImg, 0, textureBgSize.height, textureFgSize.width, textureFgSize.height, 0, 0, textureFgSize.width, textureFgSize.height);
-  textureBgCtx.drawImage(TextureImg, 0, 0, textureBgSize.width, textureBgSize.height, 0, 0, textureBgSize.width, textureBgSize.height);
-}
-
-/***/ }),
-
-/***/ "./src/apps/rain2/js/webgl.js":
-/*!************************************!*\
-  !*** ./src/apps/rain2/js/webgl.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   activeTexture: () => (/* binding */ activeTexture),
-/* harmony export */   createProgram: () => (/* binding */ createProgram),
-/* harmony export */   createShader: () => (/* binding */ createShader),
-/* harmony export */   createTexture: () => (/* binding */ createTexture),
-/* harmony export */   createUniform: () => (/* binding */ createUniform),
-/* harmony export */   getContext: () => (/* binding */ getContext),
-/* harmony export */   setRectangle: () => (/* binding */ setRectangle),
-/* harmony export */   updateTexture: () => (/* binding */ updateTexture)
-/* harmony export */ });
-function getContext(canvas) {
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var contexts = ['webgl', 'experimental-webgl'];
-  var context = null;
-  contexts.some(function (name) {
-    try {
-      context = canvas.getContext(name, options);
-    } catch (e) {}
-
-    ;
-    return context != null;
-  });
-
-  if (context == null) {
-    document.body.classList.add('no-webgl');
-  }
-
-  return context;
-}
-function createProgram(gl, vertexScript, fragScript) {
-  var vertexShader = createShader(gl, vertexScript, gl.VERTEX_SHADER);
-  var fragShader = createShader(gl, fragScript, gl.FRAGMENT_SHADER);
-  var program = gl.createProgram();
-  gl.attachShader(program, vertexShader);
-  gl.attachShader(program, fragShader);
-  gl.linkProgram(program);
-  var linked = gl.getProgramParameter(program, gl.LINK_STATUS);
-
-  if (!linked) {
-    var lastError = gl.getProgramInfoLog(program);
-    error('Error in program linking: ' + lastError);
-    gl.deleteProgram(program);
-    return null;
-  } // var positionLocation = gl.getAttribLocation(program, 'a_position') || 0;
-  // var texCoordLocation = gl.getAttribLocation(program, 'a_texCoord') || 0;
-
-
-  var positionLocation = 0;
-  var texCoordLocation = 0;
-  var texCoordBuffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0]), gl.STATIC_DRAW);
-  gl.enableVertexAttribArray(texCoordLocation);
-  gl.vertexAttribPointer(texCoordLocation, 2, gl.FLOAT, false, 0, 0); // Create a buffer for the position of the rectangle corners.
-
-  var buffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-  gl.enableVertexAttribArray(positionLocation);
-  gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-  return program;
-}
-function createShader(gl, script, type) {
-  var shader = gl.createShader(type);
-  gl.shaderSource(shader, script);
-  gl.compileShader(shader);
-  var compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
-
-  if (!compiled) {
-    var lastError = gl.getShaderInfoLog(shader);
-    error('Error compiling shader  ' + shader + ':' + lastError);
-    gl.deleteShader(shader);
-    return null;
-  }
-
-  return shader;
-}
-function createTexture(gl, source, i) {
-  var texture = gl.createTexture();
-  activeTexture(gl, i);
-  gl.bindTexture(gl.TEXTURE_2D, texture); // Set the parameters so we can render any size image.
-
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-
-  if (source == null) {
-    return texture;
-  } else {
-    updateTexture(gl, source);
-  }
-
-  return texture;
-}
-function createUniform(gl, program, type, name) {
-  var location = gl.getUniformLocation(program, 'u_' + name);
-
-  for (var _len = arguments.length, args = new Array(_len > 4 ? _len - 4 : 0), _key = 4; _key < _len; _key++) {
-    args[_key - 4] = arguments[_key];
-  }
-
-  gl['uniform' + type].apply(gl, [location].concat(args));
-}
-function activeTexture(gl, i) {
-  gl.activeTexture(gl['TEXTURE' + i]);
-}
-function updateTexture(gl, source) {
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, source);
-}
-function setRectangle(gl, x, y, width, height) {
-  var x1 = x;
-  var x2 = x + width;
-  var y1 = y;
-  var y2 = y + height;
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([x1, y1, x2, y1, x1, y2, x1, y2, x2, y1, x2, y2]), gl.STATIC_DRAW);
-}
-
-function error(msg) {
-  console.error(msg);
-}
-
-/***/ }),
-
 /***/ "./node_modules/gsap/CSSPlugin.js":
 /*!****************************************!*\
   !*** ./node_modules/gsap/CSSPlugin.js ***!
@@ -7511,7 +6370,7 @@ var disableCommentsAsDOMContainers = true; // Disable javascript: URL strings in
 // https://github.com/facebook/react/issues/11347
 
 var enableCustomElementPropertySupport = false; // Disables children for <textarea> elements
-var warnAboutStringRefs = false; // -----------------------------------------------------------------------------
+var warnAboutStringRefs = true; // -----------------------------------------------------------------------------
 // Debugging and DevTools
 // -----------------------------------------------------------------------------
 // Adds user timing marks for e.g. state updates, suspense, and work loop stuff,
@@ -20353,1772 +19212,6 @@ var ReactStrictModeWarnings = {
   };
 }
 
-function resolveDefaultProps(Component, baseProps) {
-  if (Component && Component.defaultProps) {
-    // Resolve default props. Taken from ReactElement
-    var props = assign({}, baseProps);
-    var defaultProps = Component.defaultProps;
-
-    for (var propName in defaultProps) {
-      if (props[propName] === undefined) {
-        props[propName] = defaultProps[propName];
-      }
-    }
-
-    return props;
-  }
-
-  return baseProps;
-}
-
-var valueCursor = createCursor(null);
-var rendererSigil;
-
-{
-  // Use this to detect multiple renderers using the same context
-  rendererSigil = {};
-}
-
-var currentlyRenderingFiber = null;
-var lastContextDependency = null;
-var lastFullyObservedContext = null;
-var isDisallowedContextReadInDEV = false;
-function resetContextDependencies() {
-  // This is called right before React yields execution, to ensure `readContext`
-  // cannot be called outside the render phase.
-  currentlyRenderingFiber = null;
-  lastContextDependency = null;
-  lastFullyObservedContext = null;
-
-  {
-    isDisallowedContextReadInDEV = false;
-  }
-}
-function enterDisallowedContextReadInDEV() {
-  {
-    isDisallowedContextReadInDEV = true;
-  }
-}
-function exitDisallowedContextReadInDEV() {
-  {
-    isDisallowedContextReadInDEV = false;
-  }
-}
-function pushProvider(providerFiber, context, nextValue) {
-  {
-    push(valueCursor, context._currentValue, providerFiber);
-    context._currentValue = nextValue;
-
-    {
-      if (context._currentRenderer !== undefined && context._currentRenderer !== null && context._currentRenderer !== rendererSigil) {
-        error('Detected multiple renderers concurrently rendering the ' + 'same context provider. This is currently unsupported.');
-      }
-
-      context._currentRenderer = rendererSigil;
-    }
-  }
-}
-function popProvider(context, providerFiber) {
-  var currentValue = valueCursor.current;
-  pop(valueCursor, providerFiber);
-
-  {
-    {
-      context._currentValue = currentValue;
-    }
-  }
-}
-function scheduleContextWorkOnParentPath(parent, renderLanes, propagationRoot) {
-  // Update the child lanes of all the ancestors, including the alternates.
-  var node = parent;
-
-  while (node !== null) {
-    var alternate = node.alternate;
-
-    if (!isSubsetOfLanes(node.childLanes, renderLanes)) {
-      node.childLanes = mergeLanes(node.childLanes, renderLanes);
-
-      if (alternate !== null) {
-        alternate.childLanes = mergeLanes(alternate.childLanes, renderLanes);
-      }
-    } else if (alternate !== null && !isSubsetOfLanes(alternate.childLanes, renderLanes)) {
-      alternate.childLanes = mergeLanes(alternate.childLanes, renderLanes);
-    }
-
-    if (node === propagationRoot) {
-      break;
-    }
-
-    node = node.return;
-  }
-
-  {
-    if (node !== propagationRoot) {
-      error('Expected to find the propagation root when scheduling context work. ' + 'This error is likely caused by a bug in React. Please file an issue.');
-    }
-  }
-}
-function propagateContextChange(workInProgress, context, renderLanes) {
-  {
-    propagateContextChange_eager(workInProgress, context, renderLanes);
-  }
-}
-
-function propagateContextChange_eager(workInProgress, context, renderLanes) {
-
-  var fiber = workInProgress.child;
-
-  if (fiber !== null) {
-    // Set the return pointer of the child to the work-in-progress fiber.
-    fiber.return = workInProgress;
-  }
-
-  while (fiber !== null) {
-    var nextFiber = void 0; // Visit this fiber.
-
-    var list = fiber.dependencies;
-
-    if (list !== null) {
-      nextFiber = fiber.child;
-      var dependency = list.firstContext;
-
-      while (dependency !== null) {
-        // Check if the context matches.
-        if (dependency.context === context) {
-          // Match! Schedule an update on this fiber.
-          if (fiber.tag === ClassComponent) {
-            // Schedule a force update on the work-in-progress.
-            var lane = pickArbitraryLane(renderLanes);
-            var update = createUpdate(NoTimestamp, lane);
-            update.tag = ForceUpdate; // TODO: Because we don't have a work-in-progress, this will add the
-            // update to the current fiber, too, which means it will persist even if
-            // this render is thrown away. Since it's a race condition, not sure it's
-            // worth fixing.
-            // Inlined `enqueueUpdate` to remove interleaved update check
-
-            var updateQueue = fiber.updateQueue;
-
-            if (updateQueue === null) ; else {
-              var sharedQueue = updateQueue.shared;
-              var pending = sharedQueue.pending;
-
-              if (pending === null) {
-                // This is the first update. Create a circular list.
-                update.next = update;
-              } else {
-                update.next = pending.next;
-                pending.next = update;
-              }
-
-              sharedQueue.pending = update;
-            }
-          }
-
-          fiber.lanes = mergeLanes(fiber.lanes, renderLanes);
-          var alternate = fiber.alternate;
-
-          if (alternate !== null) {
-            alternate.lanes = mergeLanes(alternate.lanes, renderLanes);
-          }
-
-          scheduleContextWorkOnParentPath(fiber.return, renderLanes, workInProgress); // Mark the updated lanes on the list, too.
-
-          list.lanes = mergeLanes(list.lanes, renderLanes); // Since we already found a match, we can stop traversing the
-          // dependency list.
-
-          break;
-        }
-
-        dependency = dependency.next;
-      }
-    } else if (fiber.tag === ContextProvider) {
-      // Don't scan deeper if this is a matching provider
-      nextFiber = fiber.type === workInProgress.type ? null : fiber.child;
-    } else if (fiber.tag === DehydratedFragment) {
-      // If a dehydrated suspense boundary is in this subtree, we don't know
-      // if it will have any context consumers in it. The best we can do is
-      // mark it as having updates.
-      var parentSuspense = fiber.return;
-
-      if (parentSuspense === null) {
-        throw new Error('We just came from a parent so we must have had a parent. This is a bug in React.');
-      }
-
-      parentSuspense.lanes = mergeLanes(parentSuspense.lanes, renderLanes);
-      var _alternate = parentSuspense.alternate;
-
-      if (_alternate !== null) {
-        _alternate.lanes = mergeLanes(_alternate.lanes, renderLanes);
-      } // This is intentionally passing this fiber as the parent
-      // because we want to schedule this fiber as having work
-      // on its children. We'll use the childLanes on
-      // this fiber to indicate that a context has changed.
-
-
-      scheduleContextWorkOnParentPath(parentSuspense, renderLanes, workInProgress);
-      nextFiber = fiber.sibling;
-    } else {
-      // Traverse down.
-      nextFiber = fiber.child;
-    }
-
-    if (nextFiber !== null) {
-      // Set the return pointer of the child to the work-in-progress fiber.
-      nextFiber.return = fiber;
-    } else {
-      // No child. Traverse to next sibling.
-      nextFiber = fiber;
-
-      while (nextFiber !== null) {
-        if (nextFiber === workInProgress) {
-          // We're back to the root of this subtree. Exit.
-          nextFiber = null;
-          break;
-        }
-
-        var sibling = nextFiber.sibling;
-
-        if (sibling !== null) {
-          // Set the return pointer of the sibling to the work-in-progress fiber.
-          sibling.return = nextFiber.return;
-          nextFiber = sibling;
-          break;
-        } // No more siblings. Traverse up.
-
-
-        nextFiber = nextFiber.return;
-      }
-    }
-
-    fiber = nextFiber;
-  }
-}
-function prepareToReadContext(workInProgress, renderLanes) {
-  currentlyRenderingFiber = workInProgress;
-  lastContextDependency = null;
-  lastFullyObservedContext = null;
-  var dependencies = workInProgress.dependencies;
-
-  if (dependencies !== null) {
-    {
-      var firstContext = dependencies.firstContext;
-
-      if (firstContext !== null) {
-        if (includesSomeLane(dependencies.lanes, renderLanes)) {
-          // Context list has a pending update. Mark that this fiber performed work.
-          markWorkInProgressReceivedUpdate();
-        } // Reset the work-in-progress list
-
-
-        dependencies.firstContext = null;
-      }
-    }
-  }
-}
-function readContext(context) {
-  {
-    // This warning would fire if you read context inside a Hook like useMemo.
-    // Unlike the class check below, it's not enforced in production for perf.
-    if (isDisallowedContextReadInDEV) {
-      error('Context can only be read while React is rendering. ' + 'In classes, you can read it in the render method or getDerivedStateFromProps. ' + 'In function components, you can read it directly in the function body, but not ' + 'inside Hooks like useReducer() or useMemo().');
-    }
-  }
-
-  var value =  context._currentValue ;
-
-  if (lastFullyObservedContext === context) ; else {
-    var contextItem = {
-      context: context,
-      memoizedValue: value,
-      next: null
-    };
-
-    if (lastContextDependency === null) {
-      if (currentlyRenderingFiber === null) {
-        throw new Error('Context can only be read while React is rendering. ' + 'In classes, you can read it in the render method or getDerivedStateFromProps. ' + 'In function components, you can read it directly in the function body, but not ' + 'inside Hooks like useReducer() or useMemo().');
-      } // This is the first dependency for this component. Create a new list.
-
-
-      lastContextDependency = contextItem;
-      currentlyRenderingFiber.dependencies = {
-        lanes: NoLanes,
-        firstContext: contextItem
-      };
-    } else {
-      // Append a new context item.
-      lastContextDependency = lastContextDependency.next = contextItem;
-    }
-  }
-
-  return value;
-}
-
-// render. When this render exits, either because it finishes or because it is
-// interrupted, the interleaved updates will be transferred onto the main part
-// of the queue.
-
-var concurrentQueues = null;
-function pushConcurrentUpdateQueue(queue) {
-  if (concurrentQueues === null) {
-    concurrentQueues = [queue];
-  } else {
-    concurrentQueues.push(queue);
-  }
-}
-function finishQueueingConcurrentUpdates() {
-  // Transfer the interleaved updates onto the main queue. Each queue has a
-  // `pending` field and an `interleaved` field. When they are not null, they
-  // point to the last node in a circular linked list. We need to append the
-  // interleaved list to the end of the pending list by joining them into a
-  // single, circular list.
-  if (concurrentQueues !== null) {
-    for (var i = 0; i < concurrentQueues.length; i++) {
-      var queue = concurrentQueues[i];
-      var lastInterleavedUpdate = queue.interleaved;
-
-      if (lastInterleavedUpdate !== null) {
-        queue.interleaved = null;
-        var firstInterleavedUpdate = lastInterleavedUpdate.next;
-        var lastPendingUpdate = queue.pending;
-
-        if (lastPendingUpdate !== null) {
-          var firstPendingUpdate = lastPendingUpdate.next;
-          lastPendingUpdate.next = firstInterleavedUpdate;
-          lastInterleavedUpdate.next = firstPendingUpdate;
-        }
-
-        queue.pending = lastInterleavedUpdate;
-      }
-    }
-
-    concurrentQueues = null;
-  }
-}
-function enqueueConcurrentHookUpdate(fiber, queue, update, lane) {
-  var interleaved = queue.interleaved;
-
-  if (interleaved === null) {
-    // This is the first update. Create a circular list.
-    update.next = update; // At the end of the current render, this queue's interleaved updates will
-    // be transferred to the pending queue.
-
-    pushConcurrentUpdateQueue(queue);
-  } else {
-    update.next = interleaved.next;
-    interleaved.next = update;
-  }
-
-  queue.interleaved = update;
-  return markUpdateLaneFromFiberToRoot(fiber, lane);
-}
-function enqueueConcurrentHookUpdateAndEagerlyBailout(fiber, queue, update, lane) {
-  var interleaved = queue.interleaved;
-
-  if (interleaved === null) {
-    // This is the first update. Create a circular list.
-    update.next = update; // At the end of the current render, this queue's interleaved updates will
-    // be transferred to the pending queue.
-
-    pushConcurrentUpdateQueue(queue);
-  } else {
-    update.next = interleaved.next;
-    interleaved.next = update;
-  }
-
-  queue.interleaved = update;
-}
-function enqueueConcurrentClassUpdate(fiber, queue, update, lane) {
-  var interleaved = queue.interleaved;
-
-  if (interleaved === null) {
-    // This is the first update. Create a circular list.
-    update.next = update; // At the end of the current render, this queue's interleaved updates will
-    // be transferred to the pending queue.
-
-    pushConcurrentUpdateQueue(queue);
-  } else {
-    update.next = interleaved.next;
-    interleaved.next = update;
-  }
-
-  queue.interleaved = update;
-  return markUpdateLaneFromFiberToRoot(fiber, lane);
-}
-function enqueueConcurrentRenderForLane(fiber, lane) {
-  return markUpdateLaneFromFiberToRoot(fiber, lane);
-} // Calling this function outside this module should only be done for backwards
-// compatibility and should always be accompanied by a warning.
-
-var unsafe_markUpdateLaneFromFiberToRoot = markUpdateLaneFromFiberToRoot;
-
-function markUpdateLaneFromFiberToRoot(sourceFiber, lane) {
-  // Update the source fiber's lanes
-  sourceFiber.lanes = mergeLanes(sourceFiber.lanes, lane);
-  var alternate = sourceFiber.alternate;
-
-  if (alternate !== null) {
-    alternate.lanes = mergeLanes(alternate.lanes, lane);
-  }
-
-  {
-    if (alternate === null && (sourceFiber.flags & (Placement | Hydrating)) !== NoFlags) {
-      warnAboutUpdateOnNotYetMountedFiberInDEV(sourceFiber);
-    }
-  } // Walk the parent path to the root and update the child lanes.
-
-
-  var node = sourceFiber;
-  var parent = sourceFiber.return;
-
-  while (parent !== null) {
-    parent.childLanes = mergeLanes(parent.childLanes, lane);
-    alternate = parent.alternate;
-
-    if (alternate !== null) {
-      alternate.childLanes = mergeLanes(alternate.childLanes, lane);
-    } else {
-      {
-        if ((parent.flags & (Placement | Hydrating)) !== NoFlags) {
-          warnAboutUpdateOnNotYetMountedFiberInDEV(sourceFiber);
-        }
-      }
-    }
-
-    node = parent;
-    parent = parent.return;
-  }
-
-  if (node.tag === HostRoot) {
-    var root = node.stateNode;
-    return root;
-  } else {
-    return null;
-  }
-}
-
-var UpdateState = 0;
-var ReplaceState = 1;
-var ForceUpdate = 2;
-var CaptureUpdate = 3; // Global state that is reset at the beginning of calling `processUpdateQueue`.
-// It should only be read right after calling `processUpdateQueue`, via
-// `checkHasForceUpdateAfterProcessing`.
-
-var hasForceUpdate = false;
-var didWarnUpdateInsideUpdate;
-var currentlyProcessingQueue;
-
-{
-  didWarnUpdateInsideUpdate = false;
-  currentlyProcessingQueue = null;
-}
-
-function initializeUpdateQueue(fiber) {
-  var queue = {
-    baseState: fiber.memoizedState,
-    firstBaseUpdate: null,
-    lastBaseUpdate: null,
-    shared: {
-      pending: null,
-      interleaved: null,
-      lanes: NoLanes
-    },
-    effects: null
-  };
-  fiber.updateQueue = queue;
-}
-function cloneUpdateQueue(current, workInProgress) {
-  // Clone the update queue from current. Unless it's already a clone.
-  var queue = workInProgress.updateQueue;
-  var currentQueue = current.updateQueue;
-
-  if (queue === currentQueue) {
-    var clone = {
-      baseState: currentQueue.baseState,
-      firstBaseUpdate: currentQueue.firstBaseUpdate,
-      lastBaseUpdate: currentQueue.lastBaseUpdate,
-      shared: currentQueue.shared,
-      effects: currentQueue.effects
-    };
-    workInProgress.updateQueue = clone;
-  }
-}
-function createUpdate(eventTime, lane) {
-  var update = {
-    eventTime: eventTime,
-    lane: lane,
-    tag: UpdateState,
-    payload: null,
-    callback: null,
-    next: null
-  };
-  return update;
-}
-function enqueueUpdate(fiber, update, lane) {
-  var updateQueue = fiber.updateQueue;
-
-  if (updateQueue === null) {
-    // Only occurs if the fiber has been unmounted.
-    return null;
-  }
-
-  var sharedQueue = updateQueue.shared;
-
-  {
-    if (currentlyProcessingQueue === sharedQueue && !didWarnUpdateInsideUpdate) {
-      error('An update (setState, replaceState, or forceUpdate) was scheduled ' + 'from inside an update function. Update functions should be pure, ' + 'with zero side-effects. Consider using componentDidUpdate or a ' + 'callback.');
-
-      didWarnUpdateInsideUpdate = true;
-    }
-  }
-
-  if (isUnsafeClassRenderPhaseUpdate()) {
-    // This is an unsafe render phase update. Add directly to the update
-    // queue so we can process it immediately during the current render.
-    var pending = sharedQueue.pending;
-
-    if (pending === null) {
-      // This is the first update. Create a circular list.
-      update.next = update;
-    } else {
-      update.next = pending.next;
-      pending.next = update;
-    }
-
-    sharedQueue.pending = update; // Update the childLanes even though we're most likely already rendering
-    // this fiber. This is for backwards compatibility in the case where you
-    // update a different component during render phase than the one that is
-    // currently renderings (a pattern that is accompanied by a warning).
-
-    return unsafe_markUpdateLaneFromFiberToRoot(fiber, lane);
-  } else {
-    return enqueueConcurrentClassUpdate(fiber, sharedQueue, update, lane);
-  }
-}
-function entangleTransitions(root, fiber, lane) {
-  var updateQueue = fiber.updateQueue;
-
-  if (updateQueue === null) {
-    // Only occurs if the fiber has been unmounted.
-    return;
-  }
-
-  var sharedQueue = updateQueue.shared;
-
-  if (isTransitionLane(lane)) {
-    var queueLanes = sharedQueue.lanes; // If any entangled lanes are no longer pending on the root, then they must
-    // have finished. We can remove them from the shared queue, which represents
-    // a superset of the actually pending lanes. In some cases we may entangle
-    // more than we need to, but that's OK. In fact it's worse if we *don't*
-    // entangle when we should.
-
-    queueLanes = intersectLanes(queueLanes, root.pendingLanes); // Entangle the new transition lane with the other transition lanes.
-
-    var newQueueLanes = mergeLanes(queueLanes, lane);
-    sharedQueue.lanes = newQueueLanes; // Even if queue.lanes already include lane, we don't know for certain if
-    // the lane finished since the last time we entangled it. So we need to
-    // entangle it again, just to be sure.
-
-    markRootEntangled(root, newQueueLanes);
-  }
-}
-function enqueueCapturedUpdate(workInProgress, capturedUpdate) {
-  // Captured updates are updates that are thrown by a child during the render
-  // phase. They should be discarded if the render is aborted. Therefore,
-  // we should only put them on the work-in-progress queue, not the current one.
-  var queue = workInProgress.updateQueue; // Check if the work-in-progress queue is a clone.
-
-  var current = workInProgress.alternate;
-
-  if (current !== null) {
-    var currentQueue = current.updateQueue;
-
-    if (queue === currentQueue) {
-      // The work-in-progress queue is the same as current. This happens when
-      // we bail out on a parent fiber that then captures an error thrown by
-      // a child. Since we want to append the update only to the work-in
-      // -progress queue, we need to clone the updates. We usually clone during
-      // processUpdateQueue, but that didn't happen in this case because we
-      // skipped over the parent when we bailed out.
-      var newFirst = null;
-      var newLast = null;
-      var firstBaseUpdate = queue.firstBaseUpdate;
-
-      if (firstBaseUpdate !== null) {
-        // Loop through the updates and clone them.
-        var update = firstBaseUpdate;
-
-        do {
-          var clone = {
-            eventTime: update.eventTime,
-            lane: update.lane,
-            tag: update.tag,
-            payload: update.payload,
-            callback: update.callback,
-            next: null
-          };
-
-          if (newLast === null) {
-            newFirst = newLast = clone;
-          } else {
-            newLast.next = clone;
-            newLast = clone;
-          }
-
-          update = update.next;
-        } while (update !== null); // Append the captured update the end of the cloned list.
-
-
-        if (newLast === null) {
-          newFirst = newLast = capturedUpdate;
-        } else {
-          newLast.next = capturedUpdate;
-          newLast = capturedUpdate;
-        }
-      } else {
-        // There are no base updates.
-        newFirst = newLast = capturedUpdate;
-      }
-
-      queue = {
-        baseState: currentQueue.baseState,
-        firstBaseUpdate: newFirst,
-        lastBaseUpdate: newLast,
-        shared: currentQueue.shared,
-        effects: currentQueue.effects
-      };
-      workInProgress.updateQueue = queue;
-      return;
-    }
-  } // Append the update to the end of the list.
-
-
-  var lastBaseUpdate = queue.lastBaseUpdate;
-
-  if (lastBaseUpdate === null) {
-    queue.firstBaseUpdate = capturedUpdate;
-  } else {
-    lastBaseUpdate.next = capturedUpdate;
-  }
-
-  queue.lastBaseUpdate = capturedUpdate;
-}
-
-function getStateFromUpdate(workInProgress, queue, update, prevState, nextProps, instance) {
-  switch (update.tag) {
-    case ReplaceState:
-      {
-        var payload = update.payload;
-
-        if (typeof payload === 'function') {
-          // Updater function
-          {
-            enterDisallowedContextReadInDEV();
-          }
-
-          var nextState = payload.call(instance, prevState, nextProps);
-
-          {
-            if ( workInProgress.mode & StrictLegacyMode) {
-              setIsStrictModeForDevtools(true);
-
-              try {
-                payload.call(instance, prevState, nextProps);
-              } finally {
-                setIsStrictModeForDevtools(false);
-              }
-            }
-
-            exitDisallowedContextReadInDEV();
-          }
-
-          return nextState;
-        } // State object
-
-
-        return payload;
-      }
-
-    case CaptureUpdate:
-      {
-        workInProgress.flags = workInProgress.flags & ~ShouldCapture | DidCapture;
-      }
-    // Intentional fallthrough
-
-    case UpdateState:
-      {
-        var _payload = update.payload;
-        var partialState;
-
-        if (typeof _payload === 'function') {
-          // Updater function
-          {
-            enterDisallowedContextReadInDEV();
-          }
-
-          partialState = _payload.call(instance, prevState, nextProps);
-
-          {
-            if ( workInProgress.mode & StrictLegacyMode) {
-              setIsStrictModeForDevtools(true);
-
-              try {
-                _payload.call(instance, prevState, nextProps);
-              } finally {
-                setIsStrictModeForDevtools(false);
-              }
-            }
-
-            exitDisallowedContextReadInDEV();
-          }
-        } else {
-          // Partial state object
-          partialState = _payload;
-        }
-
-        if (partialState === null || partialState === undefined) {
-          // Null and undefined are treated as no-ops.
-          return prevState;
-        } // Merge the partial state and the previous state.
-
-
-        return assign({}, prevState, partialState);
-      }
-
-    case ForceUpdate:
-      {
-        hasForceUpdate = true;
-        return prevState;
-      }
-  }
-
-  return prevState;
-}
-
-function processUpdateQueue(workInProgress, props, instance, renderLanes) {
-  // This is always non-null on a ClassComponent or HostRoot
-  var queue = workInProgress.updateQueue;
-  hasForceUpdate = false;
-
-  {
-    currentlyProcessingQueue = queue.shared;
-  }
-
-  var firstBaseUpdate = queue.firstBaseUpdate;
-  var lastBaseUpdate = queue.lastBaseUpdate; // Check if there are pending updates. If so, transfer them to the base queue.
-
-  var pendingQueue = queue.shared.pending;
-
-  if (pendingQueue !== null) {
-    queue.shared.pending = null; // The pending queue is circular. Disconnect the pointer between first
-    // and last so that it's non-circular.
-
-    var lastPendingUpdate = pendingQueue;
-    var firstPendingUpdate = lastPendingUpdate.next;
-    lastPendingUpdate.next = null; // Append pending updates to base queue
-
-    if (lastBaseUpdate === null) {
-      firstBaseUpdate = firstPendingUpdate;
-    } else {
-      lastBaseUpdate.next = firstPendingUpdate;
-    }
-
-    lastBaseUpdate = lastPendingUpdate; // If there's a current queue, and it's different from the base queue, then
-    // we need to transfer the updates to that queue, too. Because the base
-    // queue is a singly-linked list with no cycles, we can append to both
-    // lists and take advantage of structural sharing.
-    // TODO: Pass `current` as argument
-
-    var current = workInProgress.alternate;
-
-    if (current !== null) {
-      // This is always non-null on a ClassComponent or HostRoot
-      var currentQueue = current.updateQueue;
-      var currentLastBaseUpdate = currentQueue.lastBaseUpdate;
-
-      if (currentLastBaseUpdate !== lastBaseUpdate) {
-        if (currentLastBaseUpdate === null) {
-          currentQueue.firstBaseUpdate = firstPendingUpdate;
-        } else {
-          currentLastBaseUpdate.next = firstPendingUpdate;
-        }
-
-        currentQueue.lastBaseUpdate = lastPendingUpdate;
-      }
-    }
-  } // These values may change as we process the queue.
-
-
-  if (firstBaseUpdate !== null) {
-    // Iterate through the list of updates to compute the result.
-    var newState = queue.baseState; // TODO: Don't need to accumulate this. Instead, we can remove renderLanes
-    // from the original lanes.
-
-    var newLanes = NoLanes;
-    var newBaseState = null;
-    var newFirstBaseUpdate = null;
-    var newLastBaseUpdate = null;
-    var update = firstBaseUpdate;
-
-    do {
-      var updateLane = update.lane;
-      var updateEventTime = update.eventTime;
-
-      if (!isSubsetOfLanes(renderLanes, updateLane)) {
-        // Priority is insufficient. Skip this update. If this is the first
-        // skipped update, the previous update/state is the new base
-        // update/state.
-        var clone = {
-          eventTime: updateEventTime,
-          lane: updateLane,
-          tag: update.tag,
-          payload: update.payload,
-          callback: update.callback,
-          next: null
-        };
-
-        if (newLastBaseUpdate === null) {
-          newFirstBaseUpdate = newLastBaseUpdate = clone;
-          newBaseState = newState;
-        } else {
-          newLastBaseUpdate = newLastBaseUpdate.next = clone;
-        } // Update the remaining priority in the queue.
-
-
-        newLanes = mergeLanes(newLanes, updateLane);
-      } else {
-        // This update does have sufficient priority.
-        if (newLastBaseUpdate !== null) {
-          var _clone = {
-            eventTime: updateEventTime,
-            // This update is going to be committed so we never want uncommit
-            // it. Using NoLane works because 0 is a subset of all bitmasks, so
-            // this will never be skipped by the check above.
-            lane: NoLane,
-            tag: update.tag,
-            payload: update.payload,
-            callback: update.callback,
-            next: null
-          };
-          newLastBaseUpdate = newLastBaseUpdate.next = _clone;
-        } // Process this update.
-
-
-        newState = getStateFromUpdate(workInProgress, queue, update, newState, props, instance);
-        var callback = update.callback;
-
-        if (callback !== null && // If the update was already committed, we should not queue its
-        // callback again.
-        update.lane !== NoLane) {
-          workInProgress.flags |= Callback;
-          var effects = queue.effects;
-
-          if (effects === null) {
-            queue.effects = [update];
-          } else {
-            effects.push(update);
-          }
-        }
-      }
-
-      update = update.next;
-
-      if (update === null) {
-        pendingQueue = queue.shared.pending;
-
-        if (pendingQueue === null) {
-          break;
-        } else {
-          // An update was scheduled from inside a reducer. Add the new
-          // pending updates to the end of the list and keep processing.
-          var _lastPendingUpdate = pendingQueue; // Intentionally unsound. Pending updates form a circular list, but we
-          // unravel them when transferring them to the base queue.
-
-          var _firstPendingUpdate = _lastPendingUpdate.next;
-          _lastPendingUpdate.next = null;
-          update = _firstPendingUpdate;
-          queue.lastBaseUpdate = _lastPendingUpdate;
-          queue.shared.pending = null;
-        }
-      }
-    } while (true);
-
-    if (newLastBaseUpdate === null) {
-      newBaseState = newState;
-    }
-
-    queue.baseState = newBaseState;
-    queue.firstBaseUpdate = newFirstBaseUpdate;
-    queue.lastBaseUpdate = newLastBaseUpdate; // Interleaved updates are stored on a separate queue. We aren't going to
-    // process them during this render, but we do need to track which lanes
-    // are remaining.
-
-    var lastInterleaved = queue.shared.interleaved;
-
-    if (lastInterleaved !== null) {
-      var interleaved = lastInterleaved;
-
-      do {
-        newLanes = mergeLanes(newLanes, interleaved.lane);
-        interleaved = interleaved.next;
-      } while (interleaved !== lastInterleaved);
-    } else if (firstBaseUpdate === null) {
-      // `queue.lanes` is used for entangling transitions. We can set it back to
-      // zero once the queue is empty.
-      queue.shared.lanes = NoLanes;
-    } // Set the remaining expiration time to be whatever is remaining in the queue.
-    // This should be fine because the only two other things that contribute to
-    // expiration time are props and context. We're already in the middle of the
-    // begin phase by the time we start processing the queue, so we've already
-    // dealt with the props. Context in components that specify
-    // shouldComponentUpdate is tricky; but we'll have to account for
-    // that regardless.
-
-
-    markSkippedUpdateLanes(newLanes);
-    workInProgress.lanes = newLanes;
-    workInProgress.memoizedState = newState;
-  }
-
-  {
-    currentlyProcessingQueue = null;
-  }
-}
-
-function callCallback(callback, context) {
-  if (typeof callback !== 'function') {
-    throw new Error('Invalid argument passed as callback. Expected a function. Instead ' + ("received: " + callback));
-  }
-
-  callback.call(context);
-}
-
-function resetHasForceUpdateBeforeProcessing() {
-  hasForceUpdate = false;
-}
-function checkHasForceUpdateAfterProcessing() {
-  return hasForceUpdate;
-}
-function commitUpdateQueue(finishedWork, finishedQueue, instance) {
-  // Commit the effects
-  var effects = finishedQueue.effects;
-  finishedQueue.effects = null;
-
-  if (effects !== null) {
-    for (var i = 0; i < effects.length; i++) {
-      var effect = effects[i];
-      var callback = effect.callback;
-
-      if (callback !== null) {
-        effect.callback = null;
-        callCallback(callback, instance);
-      }
-    }
-  }
-}
-
-var fakeInternalInstance = {}; // React.Component uses a shared frozen object by default.
-// We'll use it to determine whether we need to initialize legacy refs.
-
-var emptyRefsObject = new React.Component().refs;
-var didWarnAboutStateAssignmentForComponent;
-var didWarnAboutUninitializedState;
-var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
-var didWarnAboutLegacyLifecyclesAndDerivedState;
-var didWarnAboutUndefinedDerivedState;
-var warnOnUndefinedDerivedState;
-var warnOnInvalidCallback;
-var didWarnAboutDirectlyAssigningPropsToState;
-var didWarnAboutContextTypeAndContextTypes;
-var didWarnAboutInvalidateContextType;
-
-{
-  didWarnAboutStateAssignmentForComponent = new Set();
-  didWarnAboutUninitializedState = new Set();
-  didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate = new Set();
-  didWarnAboutLegacyLifecyclesAndDerivedState = new Set();
-  didWarnAboutDirectlyAssigningPropsToState = new Set();
-  didWarnAboutUndefinedDerivedState = new Set();
-  didWarnAboutContextTypeAndContextTypes = new Set();
-  didWarnAboutInvalidateContextType = new Set();
-  var didWarnOnInvalidCallback = new Set();
-
-  warnOnInvalidCallback = function (callback, callerName) {
-    if (callback === null || typeof callback === 'function') {
-      return;
-    }
-
-    var key = callerName + '_' + callback;
-
-    if (!didWarnOnInvalidCallback.has(key)) {
-      didWarnOnInvalidCallback.add(key);
-
-      error('%s(...): Expected the last optional `callback` argument to be a ' + 'function. Instead received: %s.', callerName, callback);
-    }
-  };
-
-  warnOnUndefinedDerivedState = function (type, partialState) {
-    if (partialState === undefined) {
-      var componentName = getComponentNameFromType(type) || 'Component';
-
-      if (!didWarnAboutUndefinedDerivedState.has(componentName)) {
-        didWarnAboutUndefinedDerivedState.add(componentName);
-
-        error('%s.getDerivedStateFromProps(): A valid state object (or null) must be returned. ' + 'You have returned undefined.', componentName);
-      }
-    }
-  }; // This is so gross but it's at least non-critical and can be removed if
-  // it causes problems. This is meant to give a nicer error message for
-  // ReactDOM15.unstable_renderSubtreeIntoContainer(reactDOM16Component,
-  // ...)) which otherwise throws a "_processChildContext is not a function"
-  // exception.
-
-
-  Object.defineProperty(fakeInternalInstance, '_processChildContext', {
-    enumerable: false,
-    value: function () {
-      throw new Error('_processChildContext is not available in React 16+. This likely ' + 'means you have multiple copies of React and are attempting to nest ' + 'a React 15 tree inside a React 16 tree using ' + "unstable_renderSubtreeIntoContainer, which isn't supported. Try " + 'to make sure you have only one copy of React (and ideally, switch ' + 'to ReactDOM.createPortal).');
-    }
-  });
-  Object.freeze(fakeInternalInstance);
-}
-
-function applyDerivedStateFromProps(workInProgress, ctor, getDerivedStateFromProps, nextProps) {
-  var prevState = workInProgress.memoizedState;
-  var partialState = getDerivedStateFromProps(nextProps, prevState);
-
-  {
-    if ( workInProgress.mode & StrictLegacyMode) {
-      setIsStrictModeForDevtools(true);
-
-      try {
-        // Invoke the function an extra time to help detect side-effects.
-        partialState = getDerivedStateFromProps(nextProps, prevState);
-      } finally {
-        setIsStrictModeForDevtools(false);
-      }
-    }
-
-    warnOnUndefinedDerivedState(ctor, partialState);
-  } // Merge the partial state and the previous state.
-
-
-  var memoizedState = partialState === null || partialState === undefined ? prevState : assign({}, prevState, partialState);
-  workInProgress.memoizedState = memoizedState; // Once the update queue is empty, persist the derived state onto the
-  // base state.
-
-  if (workInProgress.lanes === NoLanes) {
-    // Queue is always non-null for classes
-    var updateQueue = workInProgress.updateQueue;
-    updateQueue.baseState = memoizedState;
-  }
-}
-
-var classComponentUpdater = {
-  isMounted: isMounted,
-  enqueueSetState: function (inst, payload, callback) {
-    var fiber = get(inst);
-    var eventTime = requestEventTime();
-    var lane = requestUpdateLane(fiber);
-    var update = createUpdate(eventTime, lane);
-    update.payload = payload;
-
-    if (callback !== undefined && callback !== null) {
-      {
-        warnOnInvalidCallback(callback, 'setState');
-      }
-
-      update.callback = callback;
-    }
-
-    var root = enqueueUpdate(fiber, update, lane);
-
-    if (root !== null) {
-      scheduleUpdateOnFiber(root, fiber, lane, eventTime);
-      entangleTransitions(root, fiber, lane);
-    }
-
-    {
-      markStateUpdateScheduled(fiber, lane);
-    }
-  },
-  enqueueReplaceState: function (inst, payload, callback) {
-    var fiber = get(inst);
-    var eventTime = requestEventTime();
-    var lane = requestUpdateLane(fiber);
-    var update = createUpdate(eventTime, lane);
-    update.tag = ReplaceState;
-    update.payload = payload;
-
-    if (callback !== undefined && callback !== null) {
-      {
-        warnOnInvalidCallback(callback, 'replaceState');
-      }
-
-      update.callback = callback;
-    }
-
-    var root = enqueueUpdate(fiber, update, lane);
-
-    if (root !== null) {
-      scheduleUpdateOnFiber(root, fiber, lane, eventTime);
-      entangleTransitions(root, fiber, lane);
-    }
-
-    {
-      markStateUpdateScheduled(fiber, lane);
-    }
-  },
-  enqueueForceUpdate: function (inst, callback) {
-    var fiber = get(inst);
-    var eventTime = requestEventTime();
-    var lane = requestUpdateLane(fiber);
-    var update = createUpdate(eventTime, lane);
-    update.tag = ForceUpdate;
-
-    if (callback !== undefined && callback !== null) {
-      {
-        warnOnInvalidCallback(callback, 'forceUpdate');
-      }
-
-      update.callback = callback;
-    }
-
-    var root = enqueueUpdate(fiber, update, lane);
-
-    if (root !== null) {
-      scheduleUpdateOnFiber(root, fiber, lane, eventTime);
-      entangleTransitions(root, fiber, lane);
-    }
-
-    {
-      markForceUpdateScheduled(fiber, lane);
-    }
-  }
-};
-
-function checkShouldComponentUpdate(workInProgress, ctor, oldProps, newProps, oldState, newState, nextContext) {
-  var instance = workInProgress.stateNode;
-
-  if (typeof instance.shouldComponentUpdate === 'function') {
-    var shouldUpdate = instance.shouldComponentUpdate(newProps, newState, nextContext);
-
-    {
-      if ( workInProgress.mode & StrictLegacyMode) {
-        setIsStrictModeForDevtools(true);
-
-        try {
-          // Invoke the function an extra time to help detect side-effects.
-          shouldUpdate = instance.shouldComponentUpdate(newProps, newState, nextContext);
-        } finally {
-          setIsStrictModeForDevtools(false);
-        }
-      }
-
-      if (shouldUpdate === undefined) {
-        error('%s.shouldComponentUpdate(): Returned undefined instead of a ' + 'boolean value. Make sure to return true or false.', getComponentNameFromType(ctor) || 'Component');
-      }
-    }
-
-    return shouldUpdate;
-  }
-
-  if (ctor.prototype && ctor.prototype.isPureReactComponent) {
-    return !shallowEqual(oldProps, newProps) || !shallowEqual(oldState, newState);
-  }
-
-  return true;
-}
-
-function checkClassInstance(workInProgress, ctor, newProps) {
-  var instance = workInProgress.stateNode;
-
-  {
-    var name = getComponentNameFromType(ctor) || 'Component';
-    var renderPresent = instance.render;
-
-    if (!renderPresent) {
-      if (ctor.prototype && typeof ctor.prototype.render === 'function') {
-        error('%s(...): No `render` method found on the returned component ' + 'instance: did you accidentally return an object from the constructor?', name);
-      } else {
-        error('%s(...): No `render` method found on the returned component ' + 'instance: you may have forgotten to define `render`.', name);
-      }
-    }
-
-    if (instance.getInitialState && !instance.getInitialState.isReactClassApproved && !instance.state) {
-      error('getInitialState was defined on %s, a plain JavaScript class. ' + 'This is only supported for classes created using React.createClass. ' + 'Did you mean to define a state property instead?', name);
-    }
-
-    if (instance.getDefaultProps && !instance.getDefaultProps.isReactClassApproved) {
-      error('getDefaultProps was defined on %s, a plain JavaScript class. ' + 'This is only supported for classes created using React.createClass. ' + 'Use a static property to define defaultProps instead.', name);
-    }
-
-    if (instance.propTypes) {
-      error('propTypes was defined as an instance property on %s. Use a static ' + 'property to define propTypes instead.', name);
-    }
-
-    if (instance.contextType) {
-      error('contextType was defined as an instance property on %s. Use a static ' + 'property to define contextType instead.', name);
-    }
-
-    {
-      if (instance.contextTypes) {
-        error('contextTypes was defined as an instance property on %s. Use a static ' + 'property to define contextTypes instead.', name);
-      }
-
-      if (ctor.contextType && ctor.contextTypes && !didWarnAboutContextTypeAndContextTypes.has(ctor)) {
-        didWarnAboutContextTypeAndContextTypes.add(ctor);
-
-        error('%s declares both contextTypes and contextType static properties. ' + 'The legacy contextTypes property will be ignored.', name);
-      }
-    }
-
-    if (typeof instance.componentShouldUpdate === 'function') {
-      error('%s has a method called ' + 'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' + 'The name is phrased as a question because the function is ' + 'expected to return a value.', name);
-    }
-
-    if (ctor.prototype && ctor.prototype.isPureReactComponent && typeof instance.shouldComponentUpdate !== 'undefined') {
-      error('%s has a method called shouldComponentUpdate(). ' + 'shouldComponentUpdate should not be used when extending React.PureComponent. ' + 'Please extend React.Component if shouldComponentUpdate is used.', getComponentNameFromType(ctor) || 'A pure component');
-    }
-
-    if (typeof instance.componentDidUnmount === 'function') {
-      error('%s has a method called ' + 'componentDidUnmount(). But there is no such lifecycle method. ' + 'Did you mean componentWillUnmount()?', name);
-    }
-
-    if (typeof instance.componentDidReceiveProps === 'function') {
-      error('%s has a method called ' + 'componentDidReceiveProps(). But there is no such lifecycle method. ' + 'If you meant to update the state in response to changing props, ' + 'use componentWillReceiveProps(). If you meant to fetch data or ' + 'run side-effects or mutations after React has updated the UI, use componentDidUpdate().', name);
-    }
-
-    if (typeof instance.componentWillRecieveProps === 'function') {
-      error('%s has a method called ' + 'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?', name);
-    }
-
-    if (typeof instance.UNSAFE_componentWillRecieveProps === 'function') {
-      error('%s has a method called ' + 'UNSAFE_componentWillRecieveProps(). Did you mean UNSAFE_componentWillReceiveProps()?', name);
-    }
-
-    var hasMutatedProps = instance.props !== newProps;
-
-    if (instance.props !== undefined && hasMutatedProps) {
-      error('%s(...): When calling super() in `%s`, make sure to pass ' + "up the same props that your component's constructor was passed.", name, name);
-    }
-
-    if (instance.defaultProps) {
-      error('Setting defaultProps as an instance property on %s is not supported and will be ignored.' + ' Instead, define defaultProps as a static property on %s.', name, name);
-    }
-
-    if (typeof instance.getSnapshotBeforeUpdate === 'function' && typeof instance.componentDidUpdate !== 'function' && !didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate.has(ctor)) {
-      didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate.add(ctor);
-
-      error('%s: getSnapshotBeforeUpdate() should be used with componentDidUpdate(). ' + 'This component defines getSnapshotBeforeUpdate() only.', getComponentNameFromType(ctor));
-    }
-
-    if (typeof instance.getDerivedStateFromProps === 'function') {
-      error('%s: getDerivedStateFromProps() is defined as an instance method ' + 'and will be ignored. Instead, declare it as a static method.', name);
-    }
-
-    if (typeof instance.getDerivedStateFromError === 'function') {
-      error('%s: getDerivedStateFromError() is defined as an instance method ' + 'and will be ignored. Instead, declare it as a static method.', name);
-    }
-
-    if (typeof ctor.getSnapshotBeforeUpdate === 'function') {
-      error('%s: getSnapshotBeforeUpdate() is defined as a static method ' + 'and will be ignored. Instead, declare it as an instance method.', name);
-    }
-
-    var _state = instance.state;
-
-    if (_state && (typeof _state !== 'object' || isArray(_state))) {
-      error('%s.state: must be set to an object or null', name);
-    }
-
-    if (typeof instance.getChildContext === 'function' && typeof ctor.childContextTypes !== 'object') {
-      error('%s.getChildContext(): childContextTypes must be defined in order to ' + 'use getChildContext().', name);
-    }
-  }
-}
-
-function adoptClassInstance(workInProgress, instance) {
-  instance.updater = classComponentUpdater;
-  workInProgress.stateNode = instance; // The instance needs access to the fiber so that it can schedule updates
-
-  set(instance, workInProgress);
-
-  {
-    instance._reactInternalInstance = fakeInternalInstance;
-  }
-}
-
-function constructClassInstance(workInProgress, ctor, props) {
-  var isLegacyContextConsumer = false;
-  var unmaskedContext = emptyContextObject;
-  var context = emptyContextObject;
-  var contextType = ctor.contextType;
-
-  {
-    if ('contextType' in ctor) {
-      var isValid = // Allow null for conditional declaration
-      contextType === null || contextType !== undefined && contextType.$$typeof === REACT_CONTEXT_TYPE && contextType._context === undefined; // Not a <Context.Consumer>
-
-      if (!isValid && !didWarnAboutInvalidateContextType.has(ctor)) {
-        didWarnAboutInvalidateContextType.add(ctor);
-        var addendum = '';
-
-        if (contextType === undefined) {
-          addendum = ' However, it is set to undefined. ' + 'This can be caused by a typo or by mixing up named and default imports. ' + 'This can also happen due to a circular dependency, so ' + 'try moving the createContext() call to a separate file.';
-        } else if (typeof contextType !== 'object') {
-          addendum = ' However, it is set to a ' + typeof contextType + '.';
-        } else if (contextType.$$typeof === REACT_PROVIDER_TYPE) {
-          addendum = ' Did you accidentally pass the Context.Provider instead?';
-        } else if (contextType._context !== undefined) {
-          // <Context.Consumer>
-          addendum = ' Did you accidentally pass the Context.Consumer instead?';
-        } else {
-          addendum = ' However, it is set to an object with keys {' + Object.keys(contextType).join(', ') + '}.';
-        }
-
-        error('%s defines an invalid contextType. ' + 'contextType should point to the Context object returned by React.createContext().%s', getComponentNameFromType(ctor) || 'Component', addendum);
-      }
-    }
-  }
-
-  if (typeof contextType === 'object' && contextType !== null) {
-    context = readContext(contextType);
-  } else {
-    unmaskedContext = getUnmaskedContext(workInProgress, ctor, true);
-    var contextTypes = ctor.contextTypes;
-    isLegacyContextConsumer = contextTypes !== null && contextTypes !== undefined;
-    context = isLegacyContextConsumer ? getMaskedContext(workInProgress, unmaskedContext) : emptyContextObject;
-  }
-
-  var instance = new ctor(props, context); // Instantiate twice to help detect side-effects.
-
-  {
-    if ( workInProgress.mode & StrictLegacyMode) {
-      setIsStrictModeForDevtools(true);
-
-      try {
-        instance = new ctor(props, context); // eslint-disable-line no-new
-      } finally {
-        setIsStrictModeForDevtools(false);
-      }
-    }
-  }
-
-  var state = workInProgress.memoizedState = instance.state !== null && instance.state !== undefined ? instance.state : null;
-  adoptClassInstance(workInProgress, instance);
-
-  {
-    if (typeof ctor.getDerivedStateFromProps === 'function' && state === null) {
-      var componentName = getComponentNameFromType(ctor) || 'Component';
-
-      if (!didWarnAboutUninitializedState.has(componentName)) {
-        didWarnAboutUninitializedState.add(componentName);
-
-        error('`%s` uses `getDerivedStateFromProps` but its initial state is ' + '%s. This is not recommended. Instead, define the initial state by ' + 'assigning an object to `this.state` in the constructor of `%s`. ' + 'This ensures that `getDerivedStateFromProps` arguments have a consistent shape.', componentName, instance.state === null ? 'null' : 'undefined', componentName);
-      }
-    } // If new component APIs are defined, "unsafe" lifecycles won't be called.
-    // Warn about these lifecycles if they are present.
-    // Don't warn about react-lifecycles-compat polyfilled methods though.
-
-
-    if (typeof ctor.getDerivedStateFromProps === 'function' || typeof instance.getSnapshotBeforeUpdate === 'function') {
-      var foundWillMountName = null;
-      var foundWillReceivePropsName = null;
-      var foundWillUpdateName = null;
-
-      if (typeof instance.componentWillMount === 'function' && instance.componentWillMount.__suppressDeprecationWarning !== true) {
-        foundWillMountName = 'componentWillMount';
-      } else if (typeof instance.UNSAFE_componentWillMount === 'function') {
-        foundWillMountName = 'UNSAFE_componentWillMount';
-      }
-
-      if (typeof instance.componentWillReceiveProps === 'function' && instance.componentWillReceiveProps.__suppressDeprecationWarning !== true) {
-        foundWillReceivePropsName = 'componentWillReceiveProps';
-      } else if (typeof instance.UNSAFE_componentWillReceiveProps === 'function') {
-        foundWillReceivePropsName = 'UNSAFE_componentWillReceiveProps';
-      }
-
-      if (typeof instance.componentWillUpdate === 'function' && instance.componentWillUpdate.__suppressDeprecationWarning !== true) {
-        foundWillUpdateName = 'componentWillUpdate';
-      } else if (typeof instance.UNSAFE_componentWillUpdate === 'function') {
-        foundWillUpdateName = 'UNSAFE_componentWillUpdate';
-      }
-
-      if (foundWillMountName !== null || foundWillReceivePropsName !== null || foundWillUpdateName !== null) {
-        var _componentName = getComponentNameFromType(ctor) || 'Component';
-
-        var newApiName = typeof ctor.getDerivedStateFromProps === 'function' ? 'getDerivedStateFromProps()' : 'getSnapshotBeforeUpdate()';
-
-        if (!didWarnAboutLegacyLifecyclesAndDerivedState.has(_componentName)) {
-          didWarnAboutLegacyLifecyclesAndDerivedState.add(_componentName);
-
-          error('Unsafe legacy lifecycles will not be called for components using new component APIs.\n\n' + '%s uses %s but also contains the following legacy lifecycles:%s%s%s\n\n' + 'The above lifecycles should be removed. Learn more about this warning here:\n' + 'https://reactjs.org/link/unsafe-component-lifecycles', _componentName, newApiName, foundWillMountName !== null ? "\n  " + foundWillMountName : '', foundWillReceivePropsName !== null ? "\n  " + foundWillReceivePropsName : '', foundWillUpdateName !== null ? "\n  " + foundWillUpdateName : '');
-        }
-      }
-    }
-  } // Cache unmasked context so we can avoid recreating masked context unless necessary.
-  // ReactFiberContext usually updates this cache but can't for newly-created instances.
-
-
-  if (isLegacyContextConsumer) {
-    cacheContext(workInProgress, unmaskedContext, context);
-  }
-
-  return instance;
-}
-
-function callComponentWillMount(workInProgress, instance) {
-  var oldState = instance.state;
-
-  if (typeof instance.componentWillMount === 'function') {
-    instance.componentWillMount();
-  }
-
-  if (typeof instance.UNSAFE_componentWillMount === 'function') {
-    instance.UNSAFE_componentWillMount();
-  }
-
-  if (oldState !== instance.state) {
-    {
-      error('%s.componentWillMount(): Assigning directly to this.state is ' + "deprecated (except inside a component's " + 'constructor). Use setState instead.', getComponentNameFromFiber(workInProgress) || 'Component');
-    }
-
-    classComponentUpdater.enqueueReplaceState(instance, instance.state, null);
-  }
-}
-
-function callComponentWillReceiveProps(workInProgress, instance, newProps, nextContext) {
-  var oldState = instance.state;
-
-  if (typeof instance.componentWillReceiveProps === 'function') {
-    instance.componentWillReceiveProps(newProps, nextContext);
-  }
-
-  if (typeof instance.UNSAFE_componentWillReceiveProps === 'function') {
-    instance.UNSAFE_componentWillReceiveProps(newProps, nextContext);
-  }
-
-  if (instance.state !== oldState) {
-    {
-      var componentName = getComponentNameFromFiber(workInProgress) || 'Component';
-
-      if (!didWarnAboutStateAssignmentForComponent.has(componentName)) {
-        didWarnAboutStateAssignmentForComponent.add(componentName);
-
-        error('%s.componentWillReceiveProps(): Assigning directly to ' + "this.state is deprecated (except inside a component's " + 'constructor). Use setState instead.', componentName);
-      }
-    }
-
-    classComponentUpdater.enqueueReplaceState(instance, instance.state, null);
-  }
-} // Invokes the mount life-cycles on a previously never rendered instance.
-
-
-function mountClassInstance(workInProgress, ctor, newProps, renderLanes) {
-  {
-    checkClassInstance(workInProgress, ctor, newProps);
-  }
-
-  var instance = workInProgress.stateNode;
-  instance.props = newProps;
-  instance.state = workInProgress.memoizedState;
-  instance.refs = emptyRefsObject;
-  initializeUpdateQueue(workInProgress);
-  var contextType = ctor.contextType;
-
-  if (typeof contextType === 'object' && contextType !== null) {
-    instance.context = readContext(contextType);
-  } else {
-    var unmaskedContext = getUnmaskedContext(workInProgress, ctor, true);
-    instance.context = getMaskedContext(workInProgress, unmaskedContext);
-  }
-
-  {
-    if (instance.state === newProps) {
-      var componentName = getComponentNameFromType(ctor) || 'Component';
-
-      if (!didWarnAboutDirectlyAssigningPropsToState.has(componentName)) {
-        didWarnAboutDirectlyAssigningPropsToState.add(componentName);
-
-        error('%s: It is not recommended to assign props directly to state ' + "because updates to props won't be reflected in state. " + 'In most cases, it is better to use props directly.', componentName);
-      }
-    }
-
-    if (workInProgress.mode & StrictLegacyMode) {
-      ReactStrictModeWarnings.recordLegacyContextWarning(workInProgress, instance);
-    }
-
-    {
-      ReactStrictModeWarnings.recordUnsafeLifecycleWarnings(workInProgress, instance);
-    }
-  }
-
-  instance.state = workInProgress.memoizedState;
-  var getDerivedStateFromProps = ctor.getDerivedStateFromProps;
-
-  if (typeof getDerivedStateFromProps === 'function') {
-    applyDerivedStateFromProps(workInProgress, ctor, getDerivedStateFromProps, newProps);
-    instance.state = workInProgress.memoizedState;
-  } // In order to support react-lifecycles-compat polyfilled components,
-  // Unsafe lifecycles should not be invoked for components using the new APIs.
-
-
-  if (typeof ctor.getDerivedStateFromProps !== 'function' && typeof instance.getSnapshotBeforeUpdate !== 'function' && (typeof instance.UNSAFE_componentWillMount === 'function' || typeof instance.componentWillMount === 'function')) {
-    callComponentWillMount(workInProgress, instance); // If we had additional state updates during this life-cycle, let's
-    // process them now.
-
-    processUpdateQueue(workInProgress, newProps, instance, renderLanes);
-    instance.state = workInProgress.memoizedState;
-  }
-
-  if (typeof instance.componentDidMount === 'function') {
-    var fiberFlags = Update;
-
-    {
-      fiberFlags |= LayoutStatic;
-    }
-
-    if ( (workInProgress.mode & StrictEffectsMode) !== NoMode) {
-      fiberFlags |= MountLayoutDev;
-    }
-
-    workInProgress.flags |= fiberFlags;
-  }
-}
-
-function resumeMountClassInstance(workInProgress, ctor, newProps, renderLanes) {
-  var instance = workInProgress.stateNode;
-  var oldProps = workInProgress.memoizedProps;
-  instance.props = oldProps;
-  var oldContext = instance.context;
-  var contextType = ctor.contextType;
-  var nextContext = emptyContextObject;
-
-  if (typeof contextType === 'object' && contextType !== null) {
-    nextContext = readContext(contextType);
-  } else {
-    var nextLegacyUnmaskedContext = getUnmaskedContext(workInProgress, ctor, true);
-    nextContext = getMaskedContext(workInProgress, nextLegacyUnmaskedContext);
-  }
-
-  var getDerivedStateFromProps = ctor.getDerivedStateFromProps;
-  var hasNewLifecycles = typeof getDerivedStateFromProps === 'function' || typeof instance.getSnapshotBeforeUpdate === 'function'; // Note: During these life-cycles, instance.props/instance.state are what
-  // ever the previously attempted to render - not the "current". However,
-  // during componentDidUpdate we pass the "current" props.
-  // In order to support react-lifecycles-compat polyfilled components,
-  // Unsafe lifecycles should not be invoked for components using the new APIs.
-
-  if (!hasNewLifecycles && (typeof instance.UNSAFE_componentWillReceiveProps === 'function' || typeof instance.componentWillReceiveProps === 'function')) {
-    if (oldProps !== newProps || oldContext !== nextContext) {
-      callComponentWillReceiveProps(workInProgress, instance, newProps, nextContext);
-    }
-  }
-
-  resetHasForceUpdateBeforeProcessing();
-  var oldState = workInProgress.memoizedState;
-  var newState = instance.state = oldState;
-  processUpdateQueue(workInProgress, newProps, instance, renderLanes);
-  newState = workInProgress.memoizedState;
-
-  if (oldProps === newProps && oldState === newState && !hasContextChanged() && !checkHasForceUpdateAfterProcessing()) {
-    // If an update was already in progress, we should schedule an Update
-    // effect even though we're bailing out, so that cWU/cDU are called.
-    if (typeof instance.componentDidMount === 'function') {
-      var fiberFlags = Update;
-
-      {
-        fiberFlags |= LayoutStatic;
-      }
-
-      if ( (workInProgress.mode & StrictEffectsMode) !== NoMode) {
-        fiberFlags |= MountLayoutDev;
-      }
-
-      workInProgress.flags |= fiberFlags;
-    }
-
-    return false;
-  }
-
-  if (typeof getDerivedStateFromProps === 'function') {
-    applyDerivedStateFromProps(workInProgress, ctor, getDerivedStateFromProps, newProps);
-    newState = workInProgress.memoizedState;
-  }
-
-  var shouldUpdate = checkHasForceUpdateAfterProcessing() || checkShouldComponentUpdate(workInProgress, ctor, oldProps, newProps, oldState, newState, nextContext);
-
-  if (shouldUpdate) {
-    // In order to support react-lifecycles-compat polyfilled components,
-    // Unsafe lifecycles should not be invoked for components using the new APIs.
-    if (!hasNewLifecycles && (typeof instance.UNSAFE_componentWillMount === 'function' || typeof instance.componentWillMount === 'function')) {
-      if (typeof instance.componentWillMount === 'function') {
-        instance.componentWillMount();
-      }
-
-      if (typeof instance.UNSAFE_componentWillMount === 'function') {
-        instance.UNSAFE_componentWillMount();
-      }
-    }
-
-    if (typeof instance.componentDidMount === 'function') {
-      var _fiberFlags = Update;
-
-      {
-        _fiberFlags |= LayoutStatic;
-      }
-
-      if ( (workInProgress.mode & StrictEffectsMode) !== NoMode) {
-        _fiberFlags |= MountLayoutDev;
-      }
-
-      workInProgress.flags |= _fiberFlags;
-    }
-  } else {
-    // If an update was already in progress, we should schedule an Update
-    // effect even though we're bailing out, so that cWU/cDU are called.
-    if (typeof instance.componentDidMount === 'function') {
-      var _fiberFlags2 = Update;
-
-      {
-        _fiberFlags2 |= LayoutStatic;
-      }
-
-      if ( (workInProgress.mode & StrictEffectsMode) !== NoMode) {
-        _fiberFlags2 |= MountLayoutDev;
-      }
-
-      workInProgress.flags |= _fiberFlags2;
-    } // If shouldComponentUpdate returned false, we should still update the
-    // memoized state to indicate that this work can be reused.
-
-
-    workInProgress.memoizedProps = newProps;
-    workInProgress.memoizedState = newState;
-  } // Update the existing instance's state, props, and context pointers even
-  // if shouldComponentUpdate returns false.
-
-
-  instance.props = newProps;
-  instance.state = newState;
-  instance.context = nextContext;
-  return shouldUpdate;
-} // Invokes the update life-cycles and returns false if it shouldn't rerender.
-
-
-function updateClassInstance(current, workInProgress, ctor, newProps, renderLanes) {
-  var instance = workInProgress.stateNode;
-  cloneUpdateQueue(current, workInProgress);
-  var unresolvedOldProps = workInProgress.memoizedProps;
-  var oldProps = workInProgress.type === workInProgress.elementType ? unresolvedOldProps : resolveDefaultProps(workInProgress.type, unresolvedOldProps);
-  instance.props = oldProps;
-  var unresolvedNewProps = workInProgress.pendingProps;
-  var oldContext = instance.context;
-  var contextType = ctor.contextType;
-  var nextContext = emptyContextObject;
-
-  if (typeof contextType === 'object' && contextType !== null) {
-    nextContext = readContext(contextType);
-  } else {
-    var nextUnmaskedContext = getUnmaskedContext(workInProgress, ctor, true);
-    nextContext = getMaskedContext(workInProgress, nextUnmaskedContext);
-  }
-
-  var getDerivedStateFromProps = ctor.getDerivedStateFromProps;
-  var hasNewLifecycles = typeof getDerivedStateFromProps === 'function' || typeof instance.getSnapshotBeforeUpdate === 'function'; // Note: During these life-cycles, instance.props/instance.state are what
-  // ever the previously attempted to render - not the "current". However,
-  // during componentDidUpdate we pass the "current" props.
-  // In order to support react-lifecycles-compat polyfilled components,
-  // Unsafe lifecycles should not be invoked for components using the new APIs.
-
-  if (!hasNewLifecycles && (typeof instance.UNSAFE_componentWillReceiveProps === 'function' || typeof instance.componentWillReceiveProps === 'function')) {
-    if (unresolvedOldProps !== unresolvedNewProps || oldContext !== nextContext) {
-      callComponentWillReceiveProps(workInProgress, instance, newProps, nextContext);
-    }
-  }
-
-  resetHasForceUpdateBeforeProcessing();
-  var oldState = workInProgress.memoizedState;
-  var newState = instance.state = oldState;
-  processUpdateQueue(workInProgress, newProps, instance, renderLanes);
-  newState = workInProgress.memoizedState;
-
-  if (unresolvedOldProps === unresolvedNewProps && oldState === newState && !hasContextChanged() && !checkHasForceUpdateAfterProcessing() && !(enableLazyContextPropagation   )) {
-    // If an update was already in progress, we should schedule an Update
-    // effect even though we're bailing out, so that cWU/cDU are called.
-    if (typeof instance.componentDidUpdate === 'function') {
-      if (unresolvedOldProps !== current.memoizedProps || oldState !== current.memoizedState) {
-        workInProgress.flags |= Update;
-      }
-    }
-
-    if (typeof instance.getSnapshotBeforeUpdate === 'function') {
-      if (unresolvedOldProps !== current.memoizedProps || oldState !== current.memoizedState) {
-        workInProgress.flags |= Snapshot;
-      }
-    }
-
-    return false;
-  }
-
-  if (typeof getDerivedStateFromProps === 'function') {
-    applyDerivedStateFromProps(workInProgress, ctor, getDerivedStateFromProps, newProps);
-    newState = workInProgress.memoizedState;
-  }
-
-  var shouldUpdate = checkHasForceUpdateAfterProcessing() || checkShouldComponentUpdate(workInProgress, ctor, oldProps, newProps, oldState, newState, nextContext) || // TODO: In some cases, we'll end up checking if context has changed twice,
-  // both before and after `shouldComponentUpdate` has been called. Not ideal,
-  // but I'm loath to refactor this function. This only happens for memoized
-  // components so it's not that common.
-  enableLazyContextPropagation   ;
-
-  if (shouldUpdate) {
-    // In order to support react-lifecycles-compat polyfilled components,
-    // Unsafe lifecycles should not be invoked for components using the new APIs.
-    if (!hasNewLifecycles && (typeof instance.UNSAFE_componentWillUpdate === 'function' || typeof instance.componentWillUpdate === 'function')) {
-      if (typeof instance.componentWillUpdate === 'function') {
-        instance.componentWillUpdate(newProps, newState, nextContext);
-      }
-
-      if (typeof instance.UNSAFE_componentWillUpdate === 'function') {
-        instance.UNSAFE_componentWillUpdate(newProps, newState, nextContext);
-      }
-    }
-
-    if (typeof instance.componentDidUpdate === 'function') {
-      workInProgress.flags |= Update;
-    }
-
-    if (typeof instance.getSnapshotBeforeUpdate === 'function') {
-      workInProgress.flags |= Snapshot;
-    }
-  } else {
-    // If an update was already in progress, we should schedule an Update
-    // effect even though we're bailing out, so that cWU/cDU are called.
-    if (typeof instance.componentDidUpdate === 'function') {
-      if (unresolvedOldProps !== current.memoizedProps || oldState !== current.memoizedState) {
-        workInProgress.flags |= Update;
-      }
-    }
-
-    if (typeof instance.getSnapshotBeforeUpdate === 'function') {
-      if (unresolvedOldProps !== current.memoizedProps || oldState !== current.memoizedState) {
-        workInProgress.flags |= Snapshot;
-      }
-    } // If shouldComponentUpdate returned false, we should still update the
-    // memoized props/state to indicate that this work can be reused.
-
-
-    workInProgress.memoizedProps = newProps;
-    workInProgress.memoizedState = newState;
-  } // Update the existing instance's state, props, and context pointers even
-  // if shouldComponentUpdate returns false.
-
-
-  instance.props = newProps;
-  instance.state = newState;
-  instance.context = nextContext;
-  return shouldUpdate;
-}
-
 var didWarnAboutMaps;
 var didWarnAboutGenerators;
 var didWarnAboutStringRefs;
@@ -22166,6 +19259,10 @@ var warnForMissingKey = function (child, returnFiber) {};
   };
 }
 
+function isReactClass(type) {
+  return type.prototype && type.prototype.isReactComponent;
+}
+
 function coerceRef(returnFiber, current, element) {
   var mixedRef = element.ref;
 
@@ -22176,12 +19273,15 @@ function coerceRef(returnFiber, current, element) {
       if ((returnFiber.mode & StrictLegacyMode || warnAboutStringRefs) && // We warn in ReactElement.js if owner and self are equal for string refs
       // because these cannot be automatically converted to an arrow function
       // using a codemod. Therefore, we don't have to warn about string refs again.
-      !(element._owner && element._self && element._owner.stateNode !== element._self)) {
+      !(element._owner && element._self && element._owner.stateNode !== element._self) && // Will already throw with "Function components cannot have string refs"
+      !(element._owner && element._owner.tag !== ClassComponent) && // Will already warn with "Function components cannot be given refs"
+      !(typeof element.type === 'function' && !isReactClass(element.type)) && // Will already throw with "Element ref was specified as a string (someStringRef) but no owner was set"
+      element._owner) {
         var componentName = getComponentNameFromFiber(returnFiber) || 'Component';
 
         if (!didWarnAboutStringRefs[componentName]) {
           {
-            error('A string ref, "%s", has been found within a strict mode tree. ' + 'String refs are a source of potential bugs and should be avoided. ' + 'We recommend using useRef() or createRef() instead. ' + 'Learn more about using refs safely here: ' + 'https://reactjs.org/link/strict-mode-string-ref', mixedRef);
+            error('Component "%s" contains the string ref "%s". Support for string refs ' + 'will be removed in a future major release. We recommend using ' + 'useRef() or createRef() instead. ' + 'Learn more about using refs safely here: ' + 'https://reactjs.org/link/strict-mode-string-ref', componentName, mixedRef);
           }
 
           didWarnAboutStringRefs[componentName] = true;
@@ -22222,11 +19322,6 @@ function coerceRef(returnFiber, current, element) {
 
       var ref = function (value) {
         var refs = resolvedInst.refs;
-
-        if (refs === emptyRefsObject) {
-          // This is a lazy pooled frozen object, so we need to initialize.
-          refs = resolvedInst.refs = {};
-        }
 
         if (value === null) {
           delete refs[stringRef];
@@ -23245,6 +20340,951 @@ function resetChildFibers(workInProgress, lanes) {
   while (child !== null) {
     resetWorkInProgress(child, lanes);
     child = child.sibling;
+  }
+}
+
+var valueCursor = createCursor(null);
+var rendererSigil;
+
+{
+  // Use this to detect multiple renderers using the same context
+  rendererSigil = {};
+}
+
+var currentlyRenderingFiber = null;
+var lastContextDependency = null;
+var lastFullyObservedContext = null;
+var isDisallowedContextReadInDEV = false;
+function resetContextDependencies() {
+  // This is called right before React yields execution, to ensure `readContext`
+  // cannot be called outside the render phase.
+  currentlyRenderingFiber = null;
+  lastContextDependency = null;
+  lastFullyObservedContext = null;
+
+  {
+    isDisallowedContextReadInDEV = false;
+  }
+}
+function enterDisallowedContextReadInDEV() {
+  {
+    isDisallowedContextReadInDEV = true;
+  }
+}
+function exitDisallowedContextReadInDEV() {
+  {
+    isDisallowedContextReadInDEV = false;
+  }
+}
+function pushProvider(providerFiber, context, nextValue) {
+  {
+    push(valueCursor, context._currentValue, providerFiber);
+    context._currentValue = nextValue;
+
+    {
+      if (context._currentRenderer !== undefined && context._currentRenderer !== null && context._currentRenderer !== rendererSigil) {
+        error('Detected multiple renderers concurrently rendering the ' + 'same context provider. This is currently unsupported.');
+      }
+
+      context._currentRenderer = rendererSigil;
+    }
+  }
+}
+function popProvider(context, providerFiber) {
+  var currentValue = valueCursor.current;
+  pop(valueCursor, providerFiber);
+
+  {
+    {
+      context._currentValue = currentValue;
+    }
+  }
+}
+function scheduleContextWorkOnParentPath(parent, renderLanes, propagationRoot) {
+  // Update the child lanes of all the ancestors, including the alternates.
+  var node = parent;
+
+  while (node !== null) {
+    var alternate = node.alternate;
+
+    if (!isSubsetOfLanes(node.childLanes, renderLanes)) {
+      node.childLanes = mergeLanes(node.childLanes, renderLanes);
+
+      if (alternate !== null) {
+        alternate.childLanes = mergeLanes(alternate.childLanes, renderLanes);
+      }
+    } else if (alternate !== null && !isSubsetOfLanes(alternate.childLanes, renderLanes)) {
+      alternate.childLanes = mergeLanes(alternate.childLanes, renderLanes);
+    }
+
+    if (node === propagationRoot) {
+      break;
+    }
+
+    node = node.return;
+  }
+
+  {
+    if (node !== propagationRoot) {
+      error('Expected to find the propagation root when scheduling context work. ' + 'This error is likely caused by a bug in React. Please file an issue.');
+    }
+  }
+}
+function propagateContextChange(workInProgress, context, renderLanes) {
+  {
+    propagateContextChange_eager(workInProgress, context, renderLanes);
+  }
+}
+
+function propagateContextChange_eager(workInProgress, context, renderLanes) {
+
+  var fiber = workInProgress.child;
+
+  if (fiber !== null) {
+    // Set the return pointer of the child to the work-in-progress fiber.
+    fiber.return = workInProgress;
+  }
+
+  while (fiber !== null) {
+    var nextFiber = void 0; // Visit this fiber.
+
+    var list = fiber.dependencies;
+
+    if (list !== null) {
+      nextFiber = fiber.child;
+      var dependency = list.firstContext;
+
+      while (dependency !== null) {
+        // Check if the context matches.
+        if (dependency.context === context) {
+          // Match! Schedule an update on this fiber.
+          if (fiber.tag === ClassComponent) {
+            // Schedule a force update on the work-in-progress.
+            var lane = pickArbitraryLane(renderLanes);
+            var update = createUpdate(NoTimestamp, lane);
+            update.tag = ForceUpdate; // TODO: Because we don't have a work-in-progress, this will add the
+            // update to the current fiber, too, which means it will persist even if
+            // this render is thrown away. Since it's a race condition, not sure it's
+            // worth fixing.
+            // Inlined `enqueueUpdate` to remove interleaved update check
+
+            var updateQueue = fiber.updateQueue;
+
+            if (updateQueue === null) ; else {
+              var sharedQueue = updateQueue.shared;
+              var pending = sharedQueue.pending;
+
+              if (pending === null) {
+                // This is the first update. Create a circular list.
+                update.next = update;
+              } else {
+                update.next = pending.next;
+                pending.next = update;
+              }
+
+              sharedQueue.pending = update;
+            }
+          }
+
+          fiber.lanes = mergeLanes(fiber.lanes, renderLanes);
+          var alternate = fiber.alternate;
+
+          if (alternate !== null) {
+            alternate.lanes = mergeLanes(alternate.lanes, renderLanes);
+          }
+
+          scheduleContextWorkOnParentPath(fiber.return, renderLanes, workInProgress); // Mark the updated lanes on the list, too.
+
+          list.lanes = mergeLanes(list.lanes, renderLanes); // Since we already found a match, we can stop traversing the
+          // dependency list.
+
+          break;
+        }
+
+        dependency = dependency.next;
+      }
+    } else if (fiber.tag === ContextProvider) {
+      // Don't scan deeper if this is a matching provider
+      nextFiber = fiber.type === workInProgress.type ? null : fiber.child;
+    } else if (fiber.tag === DehydratedFragment) {
+      // If a dehydrated suspense boundary is in this subtree, we don't know
+      // if it will have any context consumers in it. The best we can do is
+      // mark it as having updates.
+      var parentSuspense = fiber.return;
+
+      if (parentSuspense === null) {
+        throw new Error('We just came from a parent so we must have had a parent. This is a bug in React.');
+      }
+
+      parentSuspense.lanes = mergeLanes(parentSuspense.lanes, renderLanes);
+      var _alternate = parentSuspense.alternate;
+
+      if (_alternate !== null) {
+        _alternate.lanes = mergeLanes(_alternate.lanes, renderLanes);
+      } // This is intentionally passing this fiber as the parent
+      // because we want to schedule this fiber as having work
+      // on its children. We'll use the childLanes on
+      // this fiber to indicate that a context has changed.
+
+
+      scheduleContextWorkOnParentPath(parentSuspense, renderLanes, workInProgress);
+      nextFiber = fiber.sibling;
+    } else {
+      // Traverse down.
+      nextFiber = fiber.child;
+    }
+
+    if (nextFiber !== null) {
+      // Set the return pointer of the child to the work-in-progress fiber.
+      nextFiber.return = fiber;
+    } else {
+      // No child. Traverse to next sibling.
+      nextFiber = fiber;
+
+      while (nextFiber !== null) {
+        if (nextFiber === workInProgress) {
+          // We're back to the root of this subtree. Exit.
+          nextFiber = null;
+          break;
+        }
+
+        var sibling = nextFiber.sibling;
+
+        if (sibling !== null) {
+          // Set the return pointer of the sibling to the work-in-progress fiber.
+          sibling.return = nextFiber.return;
+          nextFiber = sibling;
+          break;
+        } // No more siblings. Traverse up.
+
+
+        nextFiber = nextFiber.return;
+      }
+    }
+
+    fiber = nextFiber;
+  }
+}
+function prepareToReadContext(workInProgress, renderLanes) {
+  currentlyRenderingFiber = workInProgress;
+  lastContextDependency = null;
+  lastFullyObservedContext = null;
+  var dependencies = workInProgress.dependencies;
+
+  if (dependencies !== null) {
+    {
+      var firstContext = dependencies.firstContext;
+
+      if (firstContext !== null) {
+        if (includesSomeLane(dependencies.lanes, renderLanes)) {
+          // Context list has a pending update. Mark that this fiber performed work.
+          markWorkInProgressReceivedUpdate();
+        } // Reset the work-in-progress list
+
+
+        dependencies.firstContext = null;
+      }
+    }
+  }
+}
+function readContext(context) {
+  {
+    // This warning would fire if you read context inside a Hook like useMemo.
+    // Unlike the class check below, it's not enforced in production for perf.
+    if (isDisallowedContextReadInDEV) {
+      error('Context can only be read while React is rendering. ' + 'In classes, you can read it in the render method or getDerivedStateFromProps. ' + 'In function components, you can read it directly in the function body, but not ' + 'inside Hooks like useReducer() or useMemo().');
+    }
+  }
+
+  var value =  context._currentValue ;
+
+  if (lastFullyObservedContext === context) ; else {
+    var contextItem = {
+      context: context,
+      memoizedValue: value,
+      next: null
+    };
+
+    if (lastContextDependency === null) {
+      if (currentlyRenderingFiber === null) {
+        throw new Error('Context can only be read while React is rendering. ' + 'In classes, you can read it in the render method or getDerivedStateFromProps. ' + 'In function components, you can read it directly in the function body, but not ' + 'inside Hooks like useReducer() or useMemo().');
+      } // This is the first dependency for this component. Create a new list.
+
+
+      lastContextDependency = contextItem;
+      currentlyRenderingFiber.dependencies = {
+        lanes: NoLanes,
+        firstContext: contextItem
+      };
+    } else {
+      // Append a new context item.
+      lastContextDependency = lastContextDependency.next = contextItem;
+    }
+  }
+
+  return value;
+}
+
+// render. When this render exits, either because it finishes or because it is
+// interrupted, the interleaved updates will be transferred onto the main part
+// of the queue.
+
+var concurrentQueues = null;
+function pushConcurrentUpdateQueue(queue) {
+  if (concurrentQueues === null) {
+    concurrentQueues = [queue];
+  } else {
+    concurrentQueues.push(queue);
+  }
+}
+function finishQueueingConcurrentUpdates() {
+  // Transfer the interleaved updates onto the main queue. Each queue has a
+  // `pending` field and an `interleaved` field. When they are not null, they
+  // point to the last node in a circular linked list. We need to append the
+  // interleaved list to the end of the pending list by joining them into a
+  // single, circular list.
+  if (concurrentQueues !== null) {
+    for (var i = 0; i < concurrentQueues.length; i++) {
+      var queue = concurrentQueues[i];
+      var lastInterleavedUpdate = queue.interleaved;
+
+      if (lastInterleavedUpdate !== null) {
+        queue.interleaved = null;
+        var firstInterleavedUpdate = lastInterleavedUpdate.next;
+        var lastPendingUpdate = queue.pending;
+
+        if (lastPendingUpdate !== null) {
+          var firstPendingUpdate = lastPendingUpdate.next;
+          lastPendingUpdate.next = firstInterleavedUpdate;
+          lastInterleavedUpdate.next = firstPendingUpdate;
+        }
+
+        queue.pending = lastInterleavedUpdate;
+      }
+    }
+
+    concurrentQueues = null;
+  }
+}
+function enqueueConcurrentHookUpdate(fiber, queue, update, lane) {
+  var interleaved = queue.interleaved;
+
+  if (interleaved === null) {
+    // This is the first update. Create a circular list.
+    update.next = update; // At the end of the current render, this queue's interleaved updates will
+    // be transferred to the pending queue.
+
+    pushConcurrentUpdateQueue(queue);
+  } else {
+    update.next = interleaved.next;
+    interleaved.next = update;
+  }
+
+  queue.interleaved = update;
+  return markUpdateLaneFromFiberToRoot(fiber, lane);
+}
+function enqueueConcurrentHookUpdateAndEagerlyBailout(fiber, queue, update, lane) {
+  var interleaved = queue.interleaved;
+
+  if (interleaved === null) {
+    // This is the first update. Create a circular list.
+    update.next = update; // At the end of the current render, this queue's interleaved updates will
+    // be transferred to the pending queue.
+
+    pushConcurrentUpdateQueue(queue);
+  } else {
+    update.next = interleaved.next;
+    interleaved.next = update;
+  }
+
+  queue.interleaved = update;
+}
+function enqueueConcurrentClassUpdate(fiber, queue, update, lane) {
+  var interleaved = queue.interleaved;
+
+  if (interleaved === null) {
+    // This is the first update. Create a circular list.
+    update.next = update; // At the end of the current render, this queue's interleaved updates will
+    // be transferred to the pending queue.
+
+    pushConcurrentUpdateQueue(queue);
+  } else {
+    update.next = interleaved.next;
+    interleaved.next = update;
+  }
+
+  queue.interleaved = update;
+  return markUpdateLaneFromFiberToRoot(fiber, lane);
+}
+function enqueueConcurrentRenderForLane(fiber, lane) {
+  return markUpdateLaneFromFiberToRoot(fiber, lane);
+} // Calling this function outside this module should only be done for backwards
+// compatibility and should always be accompanied by a warning.
+
+var unsafe_markUpdateLaneFromFiberToRoot = markUpdateLaneFromFiberToRoot;
+
+function markUpdateLaneFromFiberToRoot(sourceFiber, lane) {
+  // Update the source fiber's lanes
+  sourceFiber.lanes = mergeLanes(sourceFiber.lanes, lane);
+  var alternate = sourceFiber.alternate;
+
+  if (alternate !== null) {
+    alternate.lanes = mergeLanes(alternate.lanes, lane);
+  }
+
+  {
+    if (alternate === null && (sourceFiber.flags & (Placement | Hydrating)) !== NoFlags) {
+      warnAboutUpdateOnNotYetMountedFiberInDEV(sourceFiber);
+    }
+  } // Walk the parent path to the root and update the child lanes.
+
+
+  var node = sourceFiber;
+  var parent = sourceFiber.return;
+
+  while (parent !== null) {
+    parent.childLanes = mergeLanes(parent.childLanes, lane);
+    alternate = parent.alternate;
+
+    if (alternate !== null) {
+      alternate.childLanes = mergeLanes(alternate.childLanes, lane);
+    } else {
+      {
+        if ((parent.flags & (Placement | Hydrating)) !== NoFlags) {
+          warnAboutUpdateOnNotYetMountedFiberInDEV(sourceFiber);
+        }
+      }
+    }
+
+    node = parent;
+    parent = parent.return;
+  }
+
+  if (node.tag === HostRoot) {
+    var root = node.stateNode;
+    return root;
+  } else {
+    return null;
+  }
+}
+
+var UpdateState = 0;
+var ReplaceState = 1;
+var ForceUpdate = 2;
+var CaptureUpdate = 3; // Global state that is reset at the beginning of calling `processUpdateQueue`.
+// It should only be read right after calling `processUpdateQueue`, via
+// `checkHasForceUpdateAfterProcessing`.
+
+var hasForceUpdate = false;
+var didWarnUpdateInsideUpdate;
+var currentlyProcessingQueue;
+
+{
+  didWarnUpdateInsideUpdate = false;
+  currentlyProcessingQueue = null;
+}
+
+function initializeUpdateQueue(fiber) {
+  var queue = {
+    baseState: fiber.memoizedState,
+    firstBaseUpdate: null,
+    lastBaseUpdate: null,
+    shared: {
+      pending: null,
+      interleaved: null,
+      lanes: NoLanes
+    },
+    effects: null
+  };
+  fiber.updateQueue = queue;
+}
+function cloneUpdateQueue(current, workInProgress) {
+  // Clone the update queue from current. Unless it's already a clone.
+  var queue = workInProgress.updateQueue;
+  var currentQueue = current.updateQueue;
+
+  if (queue === currentQueue) {
+    var clone = {
+      baseState: currentQueue.baseState,
+      firstBaseUpdate: currentQueue.firstBaseUpdate,
+      lastBaseUpdate: currentQueue.lastBaseUpdate,
+      shared: currentQueue.shared,
+      effects: currentQueue.effects
+    };
+    workInProgress.updateQueue = clone;
+  }
+}
+function createUpdate(eventTime, lane) {
+  var update = {
+    eventTime: eventTime,
+    lane: lane,
+    tag: UpdateState,
+    payload: null,
+    callback: null,
+    next: null
+  };
+  return update;
+}
+function enqueueUpdate(fiber, update, lane) {
+  var updateQueue = fiber.updateQueue;
+
+  if (updateQueue === null) {
+    // Only occurs if the fiber has been unmounted.
+    return null;
+  }
+
+  var sharedQueue = updateQueue.shared;
+
+  {
+    if (currentlyProcessingQueue === sharedQueue && !didWarnUpdateInsideUpdate) {
+      error('An update (setState, replaceState, or forceUpdate) was scheduled ' + 'from inside an update function. Update functions should be pure, ' + 'with zero side-effects. Consider using componentDidUpdate or a ' + 'callback.');
+
+      didWarnUpdateInsideUpdate = true;
+    }
+  }
+
+  if (isUnsafeClassRenderPhaseUpdate()) {
+    // This is an unsafe render phase update. Add directly to the update
+    // queue so we can process it immediately during the current render.
+    var pending = sharedQueue.pending;
+
+    if (pending === null) {
+      // This is the first update. Create a circular list.
+      update.next = update;
+    } else {
+      update.next = pending.next;
+      pending.next = update;
+    }
+
+    sharedQueue.pending = update; // Update the childLanes even though we're most likely already rendering
+    // this fiber. This is for backwards compatibility in the case where you
+    // update a different component during render phase than the one that is
+    // currently renderings (a pattern that is accompanied by a warning).
+
+    return unsafe_markUpdateLaneFromFiberToRoot(fiber, lane);
+  } else {
+    return enqueueConcurrentClassUpdate(fiber, sharedQueue, update, lane);
+  }
+}
+function entangleTransitions(root, fiber, lane) {
+  var updateQueue = fiber.updateQueue;
+
+  if (updateQueue === null) {
+    // Only occurs if the fiber has been unmounted.
+    return;
+  }
+
+  var sharedQueue = updateQueue.shared;
+
+  if (isTransitionLane(lane)) {
+    var queueLanes = sharedQueue.lanes; // If any entangled lanes are no longer pending on the root, then they must
+    // have finished. We can remove them from the shared queue, which represents
+    // a superset of the actually pending lanes. In some cases we may entangle
+    // more than we need to, but that's OK. In fact it's worse if we *don't*
+    // entangle when we should.
+
+    queueLanes = intersectLanes(queueLanes, root.pendingLanes); // Entangle the new transition lane with the other transition lanes.
+
+    var newQueueLanes = mergeLanes(queueLanes, lane);
+    sharedQueue.lanes = newQueueLanes; // Even if queue.lanes already include lane, we don't know for certain if
+    // the lane finished since the last time we entangled it. So we need to
+    // entangle it again, just to be sure.
+
+    markRootEntangled(root, newQueueLanes);
+  }
+}
+function enqueueCapturedUpdate(workInProgress, capturedUpdate) {
+  // Captured updates are updates that are thrown by a child during the render
+  // phase. They should be discarded if the render is aborted. Therefore,
+  // we should only put them on the work-in-progress queue, not the current one.
+  var queue = workInProgress.updateQueue; // Check if the work-in-progress queue is a clone.
+
+  var current = workInProgress.alternate;
+
+  if (current !== null) {
+    var currentQueue = current.updateQueue;
+
+    if (queue === currentQueue) {
+      // The work-in-progress queue is the same as current. This happens when
+      // we bail out on a parent fiber that then captures an error thrown by
+      // a child. Since we want to append the update only to the work-in
+      // -progress queue, we need to clone the updates. We usually clone during
+      // processUpdateQueue, but that didn't happen in this case because we
+      // skipped over the parent when we bailed out.
+      var newFirst = null;
+      var newLast = null;
+      var firstBaseUpdate = queue.firstBaseUpdate;
+
+      if (firstBaseUpdate !== null) {
+        // Loop through the updates and clone them.
+        var update = firstBaseUpdate;
+
+        do {
+          var clone = {
+            eventTime: update.eventTime,
+            lane: update.lane,
+            tag: update.tag,
+            payload: update.payload,
+            callback: update.callback,
+            next: null
+          };
+
+          if (newLast === null) {
+            newFirst = newLast = clone;
+          } else {
+            newLast.next = clone;
+            newLast = clone;
+          }
+
+          update = update.next;
+        } while (update !== null); // Append the captured update the end of the cloned list.
+
+
+        if (newLast === null) {
+          newFirst = newLast = capturedUpdate;
+        } else {
+          newLast.next = capturedUpdate;
+          newLast = capturedUpdate;
+        }
+      } else {
+        // There are no base updates.
+        newFirst = newLast = capturedUpdate;
+      }
+
+      queue = {
+        baseState: currentQueue.baseState,
+        firstBaseUpdate: newFirst,
+        lastBaseUpdate: newLast,
+        shared: currentQueue.shared,
+        effects: currentQueue.effects
+      };
+      workInProgress.updateQueue = queue;
+      return;
+    }
+  } // Append the update to the end of the list.
+
+
+  var lastBaseUpdate = queue.lastBaseUpdate;
+
+  if (lastBaseUpdate === null) {
+    queue.firstBaseUpdate = capturedUpdate;
+  } else {
+    lastBaseUpdate.next = capturedUpdate;
+  }
+
+  queue.lastBaseUpdate = capturedUpdate;
+}
+
+function getStateFromUpdate(workInProgress, queue, update, prevState, nextProps, instance) {
+  switch (update.tag) {
+    case ReplaceState:
+      {
+        var payload = update.payload;
+
+        if (typeof payload === 'function') {
+          // Updater function
+          {
+            enterDisallowedContextReadInDEV();
+          }
+
+          var nextState = payload.call(instance, prevState, nextProps);
+
+          {
+            if ( workInProgress.mode & StrictLegacyMode) {
+              setIsStrictModeForDevtools(true);
+
+              try {
+                payload.call(instance, prevState, nextProps);
+              } finally {
+                setIsStrictModeForDevtools(false);
+              }
+            }
+
+            exitDisallowedContextReadInDEV();
+          }
+
+          return nextState;
+        } // State object
+
+
+        return payload;
+      }
+
+    case CaptureUpdate:
+      {
+        workInProgress.flags = workInProgress.flags & ~ShouldCapture | DidCapture;
+      }
+    // Intentional fallthrough
+
+    case UpdateState:
+      {
+        var _payload = update.payload;
+        var partialState;
+
+        if (typeof _payload === 'function') {
+          // Updater function
+          {
+            enterDisallowedContextReadInDEV();
+          }
+
+          partialState = _payload.call(instance, prevState, nextProps);
+
+          {
+            if ( workInProgress.mode & StrictLegacyMode) {
+              setIsStrictModeForDevtools(true);
+
+              try {
+                _payload.call(instance, prevState, nextProps);
+              } finally {
+                setIsStrictModeForDevtools(false);
+              }
+            }
+
+            exitDisallowedContextReadInDEV();
+          }
+        } else {
+          // Partial state object
+          partialState = _payload;
+        }
+
+        if (partialState === null || partialState === undefined) {
+          // Null and undefined are treated as no-ops.
+          return prevState;
+        } // Merge the partial state and the previous state.
+
+
+        return assign({}, prevState, partialState);
+      }
+
+    case ForceUpdate:
+      {
+        hasForceUpdate = true;
+        return prevState;
+      }
+  }
+
+  return prevState;
+}
+
+function processUpdateQueue(workInProgress, props, instance, renderLanes) {
+  // This is always non-null on a ClassComponent or HostRoot
+  var queue = workInProgress.updateQueue;
+  hasForceUpdate = false;
+
+  {
+    currentlyProcessingQueue = queue.shared;
+  }
+
+  var firstBaseUpdate = queue.firstBaseUpdate;
+  var lastBaseUpdate = queue.lastBaseUpdate; // Check if there are pending updates. If so, transfer them to the base queue.
+
+  var pendingQueue = queue.shared.pending;
+
+  if (pendingQueue !== null) {
+    queue.shared.pending = null; // The pending queue is circular. Disconnect the pointer between first
+    // and last so that it's non-circular.
+
+    var lastPendingUpdate = pendingQueue;
+    var firstPendingUpdate = lastPendingUpdate.next;
+    lastPendingUpdate.next = null; // Append pending updates to base queue
+
+    if (lastBaseUpdate === null) {
+      firstBaseUpdate = firstPendingUpdate;
+    } else {
+      lastBaseUpdate.next = firstPendingUpdate;
+    }
+
+    lastBaseUpdate = lastPendingUpdate; // If there's a current queue, and it's different from the base queue, then
+    // we need to transfer the updates to that queue, too. Because the base
+    // queue is a singly-linked list with no cycles, we can append to both
+    // lists and take advantage of structural sharing.
+    // TODO: Pass `current` as argument
+
+    var current = workInProgress.alternate;
+
+    if (current !== null) {
+      // This is always non-null on a ClassComponent or HostRoot
+      var currentQueue = current.updateQueue;
+      var currentLastBaseUpdate = currentQueue.lastBaseUpdate;
+
+      if (currentLastBaseUpdate !== lastBaseUpdate) {
+        if (currentLastBaseUpdate === null) {
+          currentQueue.firstBaseUpdate = firstPendingUpdate;
+        } else {
+          currentLastBaseUpdate.next = firstPendingUpdate;
+        }
+
+        currentQueue.lastBaseUpdate = lastPendingUpdate;
+      }
+    }
+  } // These values may change as we process the queue.
+
+
+  if (firstBaseUpdate !== null) {
+    // Iterate through the list of updates to compute the result.
+    var newState = queue.baseState; // TODO: Don't need to accumulate this. Instead, we can remove renderLanes
+    // from the original lanes.
+
+    var newLanes = NoLanes;
+    var newBaseState = null;
+    var newFirstBaseUpdate = null;
+    var newLastBaseUpdate = null;
+    var update = firstBaseUpdate;
+
+    do {
+      var updateLane = update.lane;
+      var updateEventTime = update.eventTime;
+
+      if (!isSubsetOfLanes(renderLanes, updateLane)) {
+        // Priority is insufficient. Skip this update. If this is the first
+        // skipped update, the previous update/state is the new base
+        // update/state.
+        var clone = {
+          eventTime: updateEventTime,
+          lane: updateLane,
+          tag: update.tag,
+          payload: update.payload,
+          callback: update.callback,
+          next: null
+        };
+
+        if (newLastBaseUpdate === null) {
+          newFirstBaseUpdate = newLastBaseUpdate = clone;
+          newBaseState = newState;
+        } else {
+          newLastBaseUpdate = newLastBaseUpdate.next = clone;
+        } // Update the remaining priority in the queue.
+
+
+        newLanes = mergeLanes(newLanes, updateLane);
+      } else {
+        // This update does have sufficient priority.
+        if (newLastBaseUpdate !== null) {
+          var _clone = {
+            eventTime: updateEventTime,
+            // This update is going to be committed so we never want uncommit
+            // it. Using NoLane works because 0 is a subset of all bitmasks, so
+            // this will never be skipped by the check above.
+            lane: NoLane,
+            tag: update.tag,
+            payload: update.payload,
+            callback: update.callback,
+            next: null
+          };
+          newLastBaseUpdate = newLastBaseUpdate.next = _clone;
+        } // Process this update.
+
+
+        newState = getStateFromUpdate(workInProgress, queue, update, newState, props, instance);
+        var callback = update.callback;
+
+        if (callback !== null && // If the update was already committed, we should not queue its
+        // callback again.
+        update.lane !== NoLane) {
+          workInProgress.flags |= Callback;
+          var effects = queue.effects;
+
+          if (effects === null) {
+            queue.effects = [update];
+          } else {
+            effects.push(update);
+          }
+        }
+      }
+
+      update = update.next;
+
+      if (update === null) {
+        pendingQueue = queue.shared.pending;
+
+        if (pendingQueue === null) {
+          break;
+        } else {
+          // An update was scheduled from inside a reducer. Add the new
+          // pending updates to the end of the list and keep processing.
+          var _lastPendingUpdate = pendingQueue; // Intentionally unsound. Pending updates form a circular list, but we
+          // unravel them when transferring them to the base queue.
+
+          var _firstPendingUpdate = _lastPendingUpdate.next;
+          _lastPendingUpdate.next = null;
+          update = _firstPendingUpdate;
+          queue.lastBaseUpdate = _lastPendingUpdate;
+          queue.shared.pending = null;
+        }
+      }
+    } while (true);
+
+    if (newLastBaseUpdate === null) {
+      newBaseState = newState;
+    }
+
+    queue.baseState = newBaseState;
+    queue.firstBaseUpdate = newFirstBaseUpdate;
+    queue.lastBaseUpdate = newLastBaseUpdate; // Interleaved updates are stored on a separate queue. We aren't going to
+    // process them during this render, but we do need to track which lanes
+    // are remaining.
+
+    var lastInterleaved = queue.shared.interleaved;
+
+    if (lastInterleaved !== null) {
+      var interleaved = lastInterleaved;
+
+      do {
+        newLanes = mergeLanes(newLanes, interleaved.lane);
+        interleaved = interleaved.next;
+      } while (interleaved !== lastInterleaved);
+    } else if (firstBaseUpdate === null) {
+      // `queue.lanes` is used for entangling transitions. We can set it back to
+      // zero once the queue is empty.
+      queue.shared.lanes = NoLanes;
+    } // Set the remaining expiration time to be whatever is remaining in the queue.
+    // This should be fine because the only two other things that contribute to
+    // expiration time are props and context. We're already in the middle of the
+    // begin phase by the time we start processing the queue, so we've already
+    // dealt with the props. Context in components that specify
+    // shouldComponentUpdate is tricky; but we'll have to account for
+    // that regardless.
+
+
+    markSkippedUpdateLanes(newLanes);
+    workInProgress.lanes = newLanes;
+    workInProgress.memoizedState = newState;
+  }
+
+  {
+    currentlyProcessingQueue = null;
+  }
+}
+
+function callCallback(callback, context) {
+  if (typeof callback !== 'function') {
+    throw new Error('Invalid argument passed as callback. Expected a function. Instead ' + ("received: " + callback));
+  }
+
+  callback.call(context);
+}
+
+function resetHasForceUpdateBeforeProcessing() {
+  hasForceUpdate = false;
+}
+function checkHasForceUpdateAfterProcessing() {
+  return hasForceUpdate;
+}
+function commitUpdateQueue(finishedWork, finishedQueue, instance) {
+  // Commit the effects
+  var effects = finishedQueue.effects;
+  finishedQueue.effects = null;
+
+  if (effects !== null) {
+    for (var i = 0; i < effects.length; i++) {
+      var effect = effects[i];
+      var callback = effect.callback;
+
+      if (callback !== null) {
+        effect.callback = null;
+        callCallback(callback, instance);
+      }
+    }
   }
 }
 
@@ -25976,6 +24016,842 @@ function transferActualDuration(fiber) {
   }
 }
 
+function resolveDefaultProps(Component, baseProps) {
+  if (Component && Component.defaultProps) {
+    // Resolve default props. Taken from ReactElement
+    var props = assign({}, baseProps);
+    var defaultProps = Component.defaultProps;
+
+    for (var propName in defaultProps) {
+      if (props[propName] === undefined) {
+        props[propName] = defaultProps[propName];
+      }
+    }
+
+    return props;
+  }
+
+  return baseProps;
+}
+
+var fakeInternalInstance = {};
+var didWarnAboutStateAssignmentForComponent;
+var didWarnAboutUninitializedState;
+var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
+var didWarnAboutLegacyLifecyclesAndDerivedState;
+var didWarnAboutUndefinedDerivedState;
+var warnOnUndefinedDerivedState;
+var warnOnInvalidCallback;
+var didWarnAboutDirectlyAssigningPropsToState;
+var didWarnAboutContextTypeAndContextTypes;
+var didWarnAboutInvalidateContextType;
+var didWarnAboutLegacyContext$1;
+
+{
+  didWarnAboutStateAssignmentForComponent = new Set();
+  didWarnAboutUninitializedState = new Set();
+  didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate = new Set();
+  didWarnAboutLegacyLifecyclesAndDerivedState = new Set();
+  didWarnAboutDirectlyAssigningPropsToState = new Set();
+  didWarnAboutUndefinedDerivedState = new Set();
+  didWarnAboutContextTypeAndContextTypes = new Set();
+  didWarnAboutInvalidateContextType = new Set();
+  didWarnAboutLegacyContext$1 = new Set();
+  var didWarnOnInvalidCallback = new Set();
+
+  warnOnInvalidCallback = function (callback, callerName) {
+    if (callback === null || typeof callback === 'function') {
+      return;
+    }
+
+    var key = callerName + '_' + callback;
+
+    if (!didWarnOnInvalidCallback.has(key)) {
+      didWarnOnInvalidCallback.add(key);
+
+      error('%s(...): Expected the last optional `callback` argument to be a ' + 'function. Instead received: %s.', callerName, callback);
+    }
+  };
+
+  warnOnUndefinedDerivedState = function (type, partialState) {
+    if (partialState === undefined) {
+      var componentName = getComponentNameFromType(type) || 'Component';
+
+      if (!didWarnAboutUndefinedDerivedState.has(componentName)) {
+        didWarnAboutUndefinedDerivedState.add(componentName);
+
+        error('%s.getDerivedStateFromProps(): A valid state object (or null) must be returned. ' + 'You have returned undefined.', componentName);
+      }
+    }
+  }; // This is so gross but it's at least non-critical and can be removed if
+  // it causes problems. This is meant to give a nicer error message for
+  // ReactDOM15.unstable_renderSubtreeIntoContainer(reactDOM16Component,
+  // ...)) which otherwise throws a "_processChildContext is not a function"
+  // exception.
+
+
+  Object.defineProperty(fakeInternalInstance, '_processChildContext', {
+    enumerable: false,
+    value: function () {
+      throw new Error('_processChildContext is not available in React 16+. This likely ' + 'means you have multiple copies of React and are attempting to nest ' + 'a React 15 tree inside a React 16 tree using ' + "unstable_renderSubtreeIntoContainer, which isn't supported. Try " + 'to make sure you have only one copy of React (and ideally, switch ' + 'to ReactDOM.createPortal).');
+    }
+  });
+  Object.freeze(fakeInternalInstance);
+}
+
+function applyDerivedStateFromProps(workInProgress, ctor, getDerivedStateFromProps, nextProps) {
+  var prevState = workInProgress.memoizedState;
+  var partialState = getDerivedStateFromProps(nextProps, prevState);
+
+  {
+    if ( workInProgress.mode & StrictLegacyMode) {
+      setIsStrictModeForDevtools(true);
+
+      try {
+        // Invoke the function an extra time to help detect side-effects.
+        partialState = getDerivedStateFromProps(nextProps, prevState);
+      } finally {
+        setIsStrictModeForDevtools(false);
+      }
+    }
+
+    warnOnUndefinedDerivedState(ctor, partialState);
+  } // Merge the partial state and the previous state.
+
+
+  var memoizedState = partialState === null || partialState === undefined ? prevState : assign({}, prevState, partialState);
+  workInProgress.memoizedState = memoizedState; // Once the update queue is empty, persist the derived state onto the
+  // base state.
+
+  if (workInProgress.lanes === NoLanes) {
+    // Queue is always non-null for classes
+    var updateQueue = workInProgress.updateQueue;
+    updateQueue.baseState = memoizedState;
+  }
+}
+
+var classComponentUpdater = {
+  isMounted: isMounted,
+  enqueueSetState: function (inst, payload, callback) {
+    var fiber = get(inst);
+    var eventTime = requestEventTime();
+    var lane = requestUpdateLane(fiber);
+    var update = createUpdate(eventTime, lane);
+    update.payload = payload;
+
+    if (callback !== undefined && callback !== null) {
+      {
+        warnOnInvalidCallback(callback, 'setState');
+      }
+
+      update.callback = callback;
+    }
+
+    var root = enqueueUpdate(fiber, update, lane);
+
+    if (root !== null) {
+      scheduleUpdateOnFiber(root, fiber, lane, eventTime);
+      entangleTransitions(root, fiber, lane);
+    }
+
+    {
+      markStateUpdateScheduled(fiber, lane);
+    }
+  },
+  enqueueReplaceState: function (inst, payload, callback) {
+    var fiber = get(inst);
+    var eventTime = requestEventTime();
+    var lane = requestUpdateLane(fiber);
+    var update = createUpdate(eventTime, lane);
+    update.tag = ReplaceState;
+    update.payload = payload;
+
+    if (callback !== undefined && callback !== null) {
+      {
+        warnOnInvalidCallback(callback, 'replaceState');
+      }
+
+      update.callback = callback;
+    }
+
+    var root = enqueueUpdate(fiber, update, lane);
+
+    if (root !== null) {
+      scheduleUpdateOnFiber(root, fiber, lane, eventTime);
+      entangleTransitions(root, fiber, lane);
+    }
+
+    {
+      markStateUpdateScheduled(fiber, lane);
+    }
+  },
+  enqueueForceUpdate: function (inst, callback) {
+    var fiber = get(inst);
+    var eventTime = requestEventTime();
+    var lane = requestUpdateLane(fiber);
+    var update = createUpdate(eventTime, lane);
+    update.tag = ForceUpdate;
+
+    if (callback !== undefined && callback !== null) {
+      {
+        warnOnInvalidCallback(callback, 'forceUpdate');
+      }
+
+      update.callback = callback;
+    }
+
+    var root = enqueueUpdate(fiber, update, lane);
+
+    if (root !== null) {
+      scheduleUpdateOnFiber(root, fiber, lane, eventTime);
+      entangleTransitions(root, fiber, lane);
+    }
+
+    {
+      markForceUpdateScheduled(fiber, lane);
+    }
+  }
+};
+
+function checkShouldComponentUpdate(workInProgress, ctor, oldProps, newProps, oldState, newState, nextContext) {
+  var instance = workInProgress.stateNode;
+
+  if (typeof instance.shouldComponentUpdate === 'function') {
+    var shouldUpdate = instance.shouldComponentUpdate(newProps, newState, nextContext);
+
+    {
+      if ( workInProgress.mode & StrictLegacyMode) {
+        setIsStrictModeForDevtools(true);
+
+        try {
+          // Invoke the function an extra time to help detect side-effects.
+          shouldUpdate = instance.shouldComponentUpdate(newProps, newState, nextContext);
+        } finally {
+          setIsStrictModeForDevtools(false);
+        }
+      }
+
+      if (shouldUpdate === undefined) {
+        error('%s.shouldComponentUpdate(): Returned undefined instead of a ' + 'boolean value. Make sure to return true or false.', getComponentNameFromType(ctor) || 'Component');
+      }
+    }
+
+    return shouldUpdate;
+  }
+
+  if (ctor.prototype && ctor.prototype.isPureReactComponent) {
+    return !shallowEqual(oldProps, newProps) || !shallowEqual(oldState, newState);
+  }
+
+  return true;
+}
+
+function checkClassInstance(workInProgress, ctor, newProps) {
+  var instance = workInProgress.stateNode;
+
+  {
+    var name = getComponentNameFromType(ctor) || 'Component';
+    var renderPresent = instance.render;
+
+    if (!renderPresent) {
+      if (ctor.prototype && typeof ctor.prototype.render === 'function') {
+        error('%s(...): No `render` method found on the returned component ' + 'instance: did you accidentally return an object from the constructor?', name);
+      } else {
+        error('%s(...): No `render` method found on the returned component ' + 'instance: you may have forgotten to define `render`.', name);
+      }
+    }
+
+    if (instance.getInitialState && !instance.getInitialState.isReactClassApproved && !instance.state) {
+      error('getInitialState was defined on %s, a plain JavaScript class. ' + 'This is only supported for classes created using React.createClass. ' + 'Did you mean to define a state property instead?', name);
+    }
+
+    if (instance.getDefaultProps && !instance.getDefaultProps.isReactClassApproved) {
+      error('getDefaultProps was defined on %s, a plain JavaScript class. ' + 'This is only supported for classes created using React.createClass. ' + 'Use a static property to define defaultProps instead.', name);
+    }
+
+    if (instance.propTypes) {
+      error('propTypes was defined as an instance property on %s. Use a static ' + 'property to define propTypes instead.', name);
+    }
+
+    if (instance.contextType) {
+      error('contextType was defined as an instance property on %s. Use a static ' + 'property to define contextType instead.', name);
+    }
+
+    {
+      if (ctor.childContextTypes && !didWarnAboutLegacyContext$1.has(ctor) && // Strict Mode has its own warning for legacy context, so we can skip
+      // this one.
+      (workInProgress.mode & StrictLegacyMode) === NoMode) {
+        didWarnAboutLegacyContext$1.add(ctor);
+
+        error('%s uses the legacy childContextTypes API which is no longer ' + 'supported and will be removed in the next major release. Use ' + 'React.createContext() instead\n\n.' + 'Learn more about this warning here: https://reactjs.org/link/legacy-context', name);
+      }
+
+      if (ctor.contextTypes && !didWarnAboutLegacyContext$1.has(ctor) && // Strict Mode has its own warning for legacy context, so we can skip
+      // this one.
+      (workInProgress.mode & StrictLegacyMode) === NoMode) {
+        didWarnAboutLegacyContext$1.add(ctor);
+
+        error('%s uses the legacy contextTypes API which is no longer supported ' + 'and will be removed in the next major release. Use ' + 'React.createContext() with static contextType instead.\n\n' + 'Learn more about this warning here: https://reactjs.org/link/legacy-context', name);
+      }
+
+      if (instance.contextTypes) {
+        error('contextTypes was defined as an instance property on %s. Use a static ' + 'property to define contextTypes instead.', name);
+      }
+
+      if (ctor.contextType && ctor.contextTypes && !didWarnAboutContextTypeAndContextTypes.has(ctor)) {
+        didWarnAboutContextTypeAndContextTypes.add(ctor);
+
+        error('%s declares both contextTypes and contextType static properties. ' + 'The legacy contextTypes property will be ignored.', name);
+      }
+    }
+
+    if (typeof instance.componentShouldUpdate === 'function') {
+      error('%s has a method called ' + 'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' + 'The name is phrased as a question because the function is ' + 'expected to return a value.', name);
+    }
+
+    if (ctor.prototype && ctor.prototype.isPureReactComponent && typeof instance.shouldComponentUpdate !== 'undefined') {
+      error('%s has a method called shouldComponentUpdate(). ' + 'shouldComponentUpdate should not be used when extending React.PureComponent. ' + 'Please extend React.Component if shouldComponentUpdate is used.', getComponentNameFromType(ctor) || 'A pure component');
+    }
+
+    if (typeof instance.componentDidUnmount === 'function') {
+      error('%s has a method called ' + 'componentDidUnmount(). But there is no such lifecycle method. ' + 'Did you mean componentWillUnmount()?', name);
+    }
+
+    if (typeof instance.componentDidReceiveProps === 'function') {
+      error('%s has a method called ' + 'componentDidReceiveProps(). But there is no such lifecycle method. ' + 'If you meant to update the state in response to changing props, ' + 'use componentWillReceiveProps(). If you meant to fetch data or ' + 'run side-effects or mutations after React has updated the UI, use componentDidUpdate().', name);
+    }
+
+    if (typeof instance.componentWillRecieveProps === 'function') {
+      error('%s has a method called ' + 'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?', name);
+    }
+
+    if (typeof instance.UNSAFE_componentWillRecieveProps === 'function') {
+      error('%s has a method called ' + 'UNSAFE_componentWillRecieveProps(). Did you mean UNSAFE_componentWillReceiveProps()?', name);
+    }
+
+    var hasMutatedProps = instance.props !== newProps;
+
+    if (instance.props !== undefined && hasMutatedProps) {
+      error('%s(...): When calling super() in `%s`, make sure to pass ' + "up the same props that your component's constructor was passed.", name, name);
+    }
+
+    if (instance.defaultProps) {
+      error('Setting defaultProps as an instance property on %s is not supported and will be ignored.' + ' Instead, define defaultProps as a static property on %s.', name, name);
+    }
+
+    if (typeof instance.getSnapshotBeforeUpdate === 'function' && typeof instance.componentDidUpdate !== 'function' && !didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate.has(ctor)) {
+      didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate.add(ctor);
+
+      error('%s: getSnapshotBeforeUpdate() should be used with componentDidUpdate(). ' + 'This component defines getSnapshotBeforeUpdate() only.', getComponentNameFromType(ctor));
+    }
+
+    if (typeof instance.getDerivedStateFromProps === 'function') {
+      error('%s: getDerivedStateFromProps() is defined as an instance method ' + 'and will be ignored. Instead, declare it as a static method.', name);
+    }
+
+    if (typeof instance.getDerivedStateFromError === 'function') {
+      error('%s: getDerivedStateFromError() is defined as an instance method ' + 'and will be ignored. Instead, declare it as a static method.', name);
+    }
+
+    if (typeof ctor.getSnapshotBeforeUpdate === 'function') {
+      error('%s: getSnapshotBeforeUpdate() is defined as a static method ' + 'and will be ignored. Instead, declare it as an instance method.', name);
+    }
+
+    var _state = instance.state;
+
+    if (_state && (typeof _state !== 'object' || isArray(_state))) {
+      error('%s.state: must be set to an object or null', name);
+    }
+
+    if (typeof instance.getChildContext === 'function' && typeof ctor.childContextTypes !== 'object') {
+      error('%s.getChildContext(): childContextTypes must be defined in order to ' + 'use getChildContext().', name);
+    }
+  }
+}
+
+function adoptClassInstance(workInProgress, instance) {
+  instance.updater = classComponentUpdater;
+  workInProgress.stateNode = instance; // The instance needs access to the fiber so that it can schedule updates
+
+  set(instance, workInProgress);
+
+  {
+    instance._reactInternalInstance = fakeInternalInstance;
+  }
+}
+
+function constructClassInstance(workInProgress, ctor, props) {
+  var isLegacyContextConsumer = false;
+  var unmaskedContext = emptyContextObject;
+  var context = emptyContextObject;
+  var contextType = ctor.contextType;
+
+  {
+    if ('contextType' in ctor) {
+      var isValid = // Allow null for conditional declaration
+      contextType === null || contextType !== undefined && contextType.$$typeof === REACT_CONTEXT_TYPE && contextType._context === undefined; // Not a <Context.Consumer>
+
+      if (!isValid && !didWarnAboutInvalidateContextType.has(ctor)) {
+        didWarnAboutInvalidateContextType.add(ctor);
+        var addendum = '';
+
+        if (contextType === undefined) {
+          addendum = ' However, it is set to undefined. ' + 'This can be caused by a typo or by mixing up named and default imports. ' + 'This can also happen due to a circular dependency, so ' + 'try moving the createContext() call to a separate file.';
+        } else if (typeof contextType !== 'object') {
+          addendum = ' However, it is set to a ' + typeof contextType + '.';
+        } else if (contextType.$$typeof === REACT_PROVIDER_TYPE) {
+          addendum = ' Did you accidentally pass the Context.Provider instead?';
+        } else if (contextType._context !== undefined) {
+          // <Context.Consumer>
+          addendum = ' Did you accidentally pass the Context.Consumer instead?';
+        } else {
+          addendum = ' However, it is set to an object with keys {' + Object.keys(contextType).join(', ') + '}.';
+        }
+
+        error('%s defines an invalid contextType. ' + 'contextType should point to the Context object returned by React.createContext().%s', getComponentNameFromType(ctor) || 'Component', addendum);
+      }
+    }
+  }
+
+  if (typeof contextType === 'object' && contextType !== null) {
+    context = readContext(contextType);
+  } else {
+    unmaskedContext = getUnmaskedContext(workInProgress, ctor, true);
+    var contextTypes = ctor.contextTypes;
+    isLegacyContextConsumer = contextTypes !== null && contextTypes !== undefined;
+    context = isLegacyContextConsumer ? getMaskedContext(workInProgress, unmaskedContext) : emptyContextObject;
+  }
+
+  var instance = new ctor(props, context); // Instantiate twice to help detect side-effects.
+
+  {
+    if ( workInProgress.mode & StrictLegacyMode) {
+      setIsStrictModeForDevtools(true);
+
+      try {
+        instance = new ctor(props, context); // eslint-disable-line no-new
+      } finally {
+        setIsStrictModeForDevtools(false);
+      }
+    }
+  }
+
+  var state = workInProgress.memoizedState = instance.state !== null && instance.state !== undefined ? instance.state : null;
+  adoptClassInstance(workInProgress, instance);
+
+  {
+    if (typeof ctor.getDerivedStateFromProps === 'function' && state === null) {
+      var componentName = getComponentNameFromType(ctor) || 'Component';
+
+      if (!didWarnAboutUninitializedState.has(componentName)) {
+        didWarnAboutUninitializedState.add(componentName);
+
+        error('`%s` uses `getDerivedStateFromProps` but its initial state is ' + '%s. This is not recommended. Instead, define the initial state by ' + 'assigning an object to `this.state` in the constructor of `%s`. ' + 'This ensures that `getDerivedStateFromProps` arguments have a consistent shape.', componentName, instance.state === null ? 'null' : 'undefined', componentName);
+      }
+    } // If new component APIs are defined, "unsafe" lifecycles won't be called.
+    // Warn about these lifecycles if they are present.
+    // Don't warn about react-lifecycles-compat polyfilled methods though.
+
+
+    if (typeof ctor.getDerivedStateFromProps === 'function' || typeof instance.getSnapshotBeforeUpdate === 'function') {
+      var foundWillMountName = null;
+      var foundWillReceivePropsName = null;
+      var foundWillUpdateName = null;
+
+      if (typeof instance.componentWillMount === 'function' && instance.componentWillMount.__suppressDeprecationWarning !== true) {
+        foundWillMountName = 'componentWillMount';
+      } else if (typeof instance.UNSAFE_componentWillMount === 'function') {
+        foundWillMountName = 'UNSAFE_componentWillMount';
+      }
+
+      if (typeof instance.componentWillReceiveProps === 'function' && instance.componentWillReceiveProps.__suppressDeprecationWarning !== true) {
+        foundWillReceivePropsName = 'componentWillReceiveProps';
+      } else if (typeof instance.UNSAFE_componentWillReceiveProps === 'function') {
+        foundWillReceivePropsName = 'UNSAFE_componentWillReceiveProps';
+      }
+
+      if (typeof instance.componentWillUpdate === 'function' && instance.componentWillUpdate.__suppressDeprecationWarning !== true) {
+        foundWillUpdateName = 'componentWillUpdate';
+      } else if (typeof instance.UNSAFE_componentWillUpdate === 'function') {
+        foundWillUpdateName = 'UNSAFE_componentWillUpdate';
+      }
+
+      if (foundWillMountName !== null || foundWillReceivePropsName !== null || foundWillUpdateName !== null) {
+        var _componentName = getComponentNameFromType(ctor) || 'Component';
+
+        var newApiName = typeof ctor.getDerivedStateFromProps === 'function' ? 'getDerivedStateFromProps()' : 'getSnapshotBeforeUpdate()';
+
+        if (!didWarnAboutLegacyLifecyclesAndDerivedState.has(_componentName)) {
+          didWarnAboutLegacyLifecyclesAndDerivedState.add(_componentName);
+
+          error('Unsafe legacy lifecycles will not be called for components using new component APIs.\n\n' + '%s uses %s but also contains the following legacy lifecycles:%s%s%s\n\n' + 'The above lifecycles should be removed. Learn more about this warning here:\n' + 'https://reactjs.org/link/unsafe-component-lifecycles', _componentName, newApiName, foundWillMountName !== null ? "\n  " + foundWillMountName : '', foundWillReceivePropsName !== null ? "\n  " + foundWillReceivePropsName : '', foundWillUpdateName !== null ? "\n  " + foundWillUpdateName : '');
+        }
+      }
+    }
+  } // Cache unmasked context so we can avoid recreating masked context unless necessary.
+  // ReactFiberContext usually updates this cache but can't for newly-created instances.
+
+
+  if (isLegacyContextConsumer) {
+    cacheContext(workInProgress, unmaskedContext, context);
+  }
+
+  return instance;
+}
+
+function callComponentWillMount(workInProgress, instance) {
+  var oldState = instance.state;
+
+  if (typeof instance.componentWillMount === 'function') {
+    instance.componentWillMount();
+  }
+
+  if (typeof instance.UNSAFE_componentWillMount === 'function') {
+    instance.UNSAFE_componentWillMount();
+  }
+
+  if (oldState !== instance.state) {
+    {
+      error('%s.componentWillMount(): Assigning directly to this.state is ' + "deprecated (except inside a component's " + 'constructor). Use setState instead.', getComponentNameFromFiber(workInProgress) || 'Component');
+    }
+
+    classComponentUpdater.enqueueReplaceState(instance, instance.state, null);
+  }
+}
+
+function callComponentWillReceiveProps(workInProgress, instance, newProps, nextContext) {
+  var oldState = instance.state;
+
+  if (typeof instance.componentWillReceiveProps === 'function') {
+    instance.componentWillReceiveProps(newProps, nextContext);
+  }
+
+  if (typeof instance.UNSAFE_componentWillReceiveProps === 'function') {
+    instance.UNSAFE_componentWillReceiveProps(newProps, nextContext);
+  }
+
+  if (instance.state !== oldState) {
+    {
+      var componentName = getComponentNameFromFiber(workInProgress) || 'Component';
+
+      if (!didWarnAboutStateAssignmentForComponent.has(componentName)) {
+        didWarnAboutStateAssignmentForComponent.add(componentName);
+
+        error('%s.componentWillReceiveProps(): Assigning directly to ' + "this.state is deprecated (except inside a component's " + 'constructor). Use setState instead.', componentName);
+      }
+    }
+
+    classComponentUpdater.enqueueReplaceState(instance, instance.state, null);
+  }
+} // Invokes the mount life-cycles on a previously never rendered instance.
+
+
+function mountClassInstance(workInProgress, ctor, newProps, renderLanes) {
+  {
+    checkClassInstance(workInProgress, ctor, newProps);
+  }
+
+  var instance = workInProgress.stateNode;
+  instance.props = newProps;
+  instance.state = workInProgress.memoizedState;
+  instance.refs = {};
+  initializeUpdateQueue(workInProgress);
+  var contextType = ctor.contextType;
+
+  if (typeof contextType === 'object' && contextType !== null) {
+    instance.context = readContext(contextType);
+  } else {
+    var unmaskedContext = getUnmaskedContext(workInProgress, ctor, true);
+    instance.context = getMaskedContext(workInProgress, unmaskedContext);
+  }
+
+  {
+    if (instance.state === newProps) {
+      var componentName = getComponentNameFromType(ctor) || 'Component';
+
+      if (!didWarnAboutDirectlyAssigningPropsToState.has(componentName)) {
+        didWarnAboutDirectlyAssigningPropsToState.add(componentName);
+
+        error('%s: It is not recommended to assign props directly to state ' + "because updates to props won't be reflected in state. " + 'In most cases, it is better to use props directly.', componentName);
+      }
+    }
+
+    if (workInProgress.mode & StrictLegacyMode) {
+      ReactStrictModeWarnings.recordLegacyContextWarning(workInProgress, instance);
+    }
+
+    {
+      ReactStrictModeWarnings.recordUnsafeLifecycleWarnings(workInProgress, instance);
+    }
+  }
+
+  instance.state = workInProgress.memoizedState;
+  var getDerivedStateFromProps = ctor.getDerivedStateFromProps;
+
+  if (typeof getDerivedStateFromProps === 'function') {
+    applyDerivedStateFromProps(workInProgress, ctor, getDerivedStateFromProps, newProps);
+    instance.state = workInProgress.memoizedState;
+  } // In order to support react-lifecycles-compat polyfilled components,
+  // Unsafe lifecycles should not be invoked for components using the new APIs.
+
+
+  if (typeof ctor.getDerivedStateFromProps !== 'function' && typeof instance.getSnapshotBeforeUpdate !== 'function' && (typeof instance.UNSAFE_componentWillMount === 'function' || typeof instance.componentWillMount === 'function')) {
+    callComponentWillMount(workInProgress, instance); // If we had additional state updates during this life-cycle, let's
+    // process them now.
+
+    processUpdateQueue(workInProgress, newProps, instance, renderLanes);
+    instance.state = workInProgress.memoizedState;
+  }
+
+  if (typeof instance.componentDidMount === 'function') {
+    var fiberFlags = Update;
+
+    {
+      fiberFlags |= LayoutStatic;
+    }
+
+    if ( (workInProgress.mode & StrictEffectsMode) !== NoMode) {
+      fiberFlags |= MountLayoutDev;
+    }
+
+    workInProgress.flags |= fiberFlags;
+  }
+}
+
+function resumeMountClassInstance(workInProgress, ctor, newProps, renderLanes) {
+  var instance = workInProgress.stateNode;
+  var oldProps = workInProgress.memoizedProps;
+  instance.props = oldProps;
+  var oldContext = instance.context;
+  var contextType = ctor.contextType;
+  var nextContext = emptyContextObject;
+
+  if (typeof contextType === 'object' && contextType !== null) {
+    nextContext = readContext(contextType);
+  } else {
+    var nextLegacyUnmaskedContext = getUnmaskedContext(workInProgress, ctor, true);
+    nextContext = getMaskedContext(workInProgress, nextLegacyUnmaskedContext);
+  }
+
+  var getDerivedStateFromProps = ctor.getDerivedStateFromProps;
+  var hasNewLifecycles = typeof getDerivedStateFromProps === 'function' || typeof instance.getSnapshotBeforeUpdate === 'function'; // Note: During these life-cycles, instance.props/instance.state are what
+  // ever the previously attempted to render - not the "current". However,
+  // during componentDidUpdate we pass the "current" props.
+  // In order to support react-lifecycles-compat polyfilled components,
+  // Unsafe lifecycles should not be invoked for components using the new APIs.
+
+  if (!hasNewLifecycles && (typeof instance.UNSAFE_componentWillReceiveProps === 'function' || typeof instance.componentWillReceiveProps === 'function')) {
+    if (oldProps !== newProps || oldContext !== nextContext) {
+      callComponentWillReceiveProps(workInProgress, instance, newProps, nextContext);
+    }
+  }
+
+  resetHasForceUpdateBeforeProcessing();
+  var oldState = workInProgress.memoizedState;
+  var newState = instance.state = oldState;
+  processUpdateQueue(workInProgress, newProps, instance, renderLanes);
+  newState = workInProgress.memoizedState;
+
+  if (oldProps === newProps && oldState === newState && !hasContextChanged() && !checkHasForceUpdateAfterProcessing()) {
+    // If an update was already in progress, we should schedule an Update
+    // effect even though we're bailing out, so that cWU/cDU are called.
+    if (typeof instance.componentDidMount === 'function') {
+      var fiberFlags = Update;
+
+      {
+        fiberFlags |= LayoutStatic;
+      }
+
+      if ( (workInProgress.mode & StrictEffectsMode) !== NoMode) {
+        fiberFlags |= MountLayoutDev;
+      }
+
+      workInProgress.flags |= fiberFlags;
+    }
+
+    return false;
+  }
+
+  if (typeof getDerivedStateFromProps === 'function') {
+    applyDerivedStateFromProps(workInProgress, ctor, getDerivedStateFromProps, newProps);
+    newState = workInProgress.memoizedState;
+  }
+
+  var shouldUpdate = checkHasForceUpdateAfterProcessing() || checkShouldComponentUpdate(workInProgress, ctor, oldProps, newProps, oldState, newState, nextContext);
+
+  if (shouldUpdate) {
+    // In order to support react-lifecycles-compat polyfilled components,
+    // Unsafe lifecycles should not be invoked for components using the new APIs.
+    if (!hasNewLifecycles && (typeof instance.UNSAFE_componentWillMount === 'function' || typeof instance.componentWillMount === 'function')) {
+      if (typeof instance.componentWillMount === 'function') {
+        instance.componentWillMount();
+      }
+
+      if (typeof instance.UNSAFE_componentWillMount === 'function') {
+        instance.UNSAFE_componentWillMount();
+      }
+    }
+
+    if (typeof instance.componentDidMount === 'function') {
+      var _fiberFlags = Update;
+
+      {
+        _fiberFlags |= LayoutStatic;
+      }
+
+      if ( (workInProgress.mode & StrictEffectsMode) !== NoMode) {
+        _fiberFlags |= MountLayoutDev;
+      }
+
+      workInProgress.flags |= _fiberFlags;
+    }
+  } else {
+    // If an update was already in progress, we should schedule an Update
+    // effect even though we're bailing out, so that cWU/cDU are called.
+    if (typeof instance.componentDidMount === 'function') {
+      var _fiberFlags2 = Update;
+
+      {
+        _fiberFlags2 |= LayoutStatic;
+      }
+
+      if ( (workInProgress.mode & StrictEffectsMode) !== NoMode) {
+        _fiberFlags2 |= MountLayoutDev;
+      }
+
+      workInProgress.flags |= _fiberFlags2;
+    } // If shouldComponentUpdate returned false, we should still update the
+    // memoized state to indicate that this work can be reused.
+
+
+    workInProgress.memoizedProps = newProps;
+    workInProgress.memoizedState = newState;
+  } // Update the existing instance's state, props, and context pointers even
+  // if shouldComponentUpdate returns false.
+
+
+  instance.props = newProps;
+  instance.state = newState;
+  instance.context = nextContext;
+  return shouldUpdate;
+} // Invokes the update life-cycles and returns false if it shouldn't rerender.
+
+
+function updateClassInstance(current, workInProgress, ctor, newProps, renderLanes) {
+  var instance = workInProgress.stateNode;
+  cloneUpdateQueue(current, workInProgress);
+  var unresolvedOldProps = workInProgress.memoizedProps;
+  var oldProps = workInProgress.type === workInProgress.elementType ? unresolvedOldProps : resolveDefaultProps(workInProgress.type, unresolvedOldProps);
+  instance.props = oldProps;
+  var unresolvedNewProps = workInProgress.pendingProps;
+  var oldContext = instance.context;
+  var contextType = ctor.contextType;
+  var nextContext = emptyContextObject;
+
+  if (typeof contextType === 'object' && contextType !== null) {
+    nextContext = readContext(contextType);
+  } else {
+    var nextUnmaskedContext = getUnmaskedContext(workInProgress, ctor, true);
+    nextContext = getMaskedContext(workInProgress, nextUnmaskedContext);
+  }
+
+  var getDerivedStateFromProps = ctor.getDerivedStateFromProps;
+  var hasNewLifecycles = typeof getDerivedStateFromProps === 'function' || typeof instance.getSnapshotBeforeUpdate === 'function'; // Note: During these life-cycles, instance.props/instance.state are what
+  // ever the previously attempted to render - not the "current". However,
+  // during componentDidUpdate we pass the "current" props.
+  // In order to support react-lifecycles-compat polyfilled components,
+  // Unsafe lifecycles should not be invoked for components using the new APIs.
+
+  if (!hasNewLifecycles && (typeof instance.UNSAFE_componentWillReceiveProps === 'function' || typeof instance.componentWillReceiveProps === 'function')) {
+    if (unresolvedOldProps !== unresolvedNewProps || oldContext !== nextContext) {
+      callComponentWillReceiveProps(workInProgress, instance, newProps, nextContext);
+    }
+  }
+
+  resetHasForceUpdateBeforeProcessing();
+  var oldState = workInProgress.memoizedState;
+  var newState = instance.state = oldState;
+  processUpdateQueue(workInProgress, newProps, instance, renderLanes);
+  newState = workInProgress.memoizedState;
+
+  if (unresolvedOldProps === unresolvedNewProps && oldState === newState && !hasContextChanged() && !checkHasForceUpdateAfterProcessing() && !(enableLazyContextPropagation   )) {
+    // If an update was already in progress, we should schedule an Update
+    // effect even though we're bailing out, so that cWU/cDU are called.
+    if (typeof instance.componentDidUpdate === 'function') {
+      if (unresolvedOldProps !== current.memoizedProps || oldState !== current.memoizedState) {
+        workInProgress.flags |= Update;
+      }
+    }
+
+    if (typeof instance.getSnapshotBeforeUpdate === 'function') {
+      if (unresolvedOldProps !== current.memoizedProps || oldState !== current.memoizedState) {
+        workInProgress.flags |= Snapshot;
+      }
+    }
+
+    return false;
+  }
+
+  if (typeof getDerivedStateFromProps === 'function') {
+    applyDerivedStateFromProps(workInProgress, ctor, getDerivedStateFromProps, newProps);
+    newState = workInProgress.memoizedState;
+  }
+
+  var shouldUpdate = checkHasForceUpdateAfterProcessing() || checkShouldComponentUpdate(workInProgress, ctor, oldProps, newProps, oldState, newState, nextContext) || // TODO: In some cases, we'll end up checking if context has changed twice,
+  // both before and after `shouldComponentUpdate` has been called. Not ideal,
+  // but I'm loath to refactor this function. This only happens for memoized
+  // components so it's not that common.
+  enableLazyContextPropagation   ;
+
+  if (shouldUpdate) {
+    // In order to support react-lifecycles-compat polyfilled components,
+    // Unsafe lifecycles should not be invoked for components using the new APIs.
+    if (!hasNewLifecycles && (typeof instance.UNSAFE_componentWillUpdate === 'function' || typeof instance.componentWillUpdate === 'function')) {
+      if (typeof instance.componentWillUpdate === 'function') {
+        instance.componentWillUpdate(newProps, newState, nextContext);
+      }
+
+      if (typeof instance.UNSAFE_componentWillUpdate === 'function') {
+        instance.UNSAFE_componentWillUpdate(newProps, newState, nextContext);
+      }
+    }
+
+    if (typeof instance.componentDidUpdate === 'function') {
+      workInProgress.flags |= Update;
+    }
+
+    if (typeof instance.getSnapshotBeforeUpdate === 'function') {
+      workInProgress.flags |= Snapshot;
+    }
+  } else {
+    // If an update was already in progress, we should schedule an Update
+    // effect even though we're bailing out, so that cWU/cDU are called.
+    if (typeof instance.componentDidUpdate === 'function') {
+      if (unresolvedOldProps !== current.memoizedProps || oldState !== current.memoizedState) {
+        workInProgress.flags |= Update;
+      }
+    }
+
+    if (typeof instance.getSnapshotBeforeUpdate === 'function') {
+      if (unresolvedOldProps !== current.memoizedProps || oldState !== current.memoizedState) {
+        workInProgress.flags |= Snapshot;
+      }
+    } // If shouldComponentUpdate returned false, we should still update the
+    // memoized props/state to indicate that this work can be reused.
+
+
+    workInProgress.memoizedProps = newProps;
+    workInProgress.memoizedState = newState;
+  } // Update the existing instance's state, props, and context pointers even
+  // if shouldComponentUpdate returns false.
+
+
+  instance.props = newProps;
+  instance.state = newState;
+  instance.context = nextContext;
+  return shouldUpdate;
+}
+
 function createCapturedValueAtFiber(value, source) {
   // If the value is an error, call this function immediately after it is thrown
   // so the stack is accurate.
@@ -26510,6 +25386,7 @@ var didWarnAboutFunctionRefs;
 var didWarnAboutReassigningProps;
 var didWarnAboutRevealOrder;
 var didWarnAboutTailOptions;
+var didWarnAboutDefaultPropsOnFunctionComponent;
 
 {
   didWarnAboutBadClass = {};
@@ -26520,6 +25397,7 @@ var didWarnAboutTailOptions;
   didWarnAboutReassigningProps = false;
   didWarnAboutRevealOrder = {};
   didWarnAboutTailOptions = {};
+  didWarnAboutDefaultPropsOnFunctionComponent = {};
 }
 
 function reconcileChildren(current, workInProgress, nextChildren, renderLanes) {
@@ -26656,6 +25534,16 @@ function updateMemoComponent(current, workInProgress, Component, nextProps, rend
         // We could move it there, but we'd still need this for lazy code path.
         checkPropTypes(innerPropTypes, nextProps, // Resolved props
         'prop', getComponentNameFromType(type));
+      }
+
+      if ( Component.defaultProps !== undefined) {
+        var componentName = getComponentNameFromType(type) || 'Unknown';
+
+        if (!didWarnAboutDefaultPropsOnFunctionComponent[componentName]) {
+          error('%s: Support for defaultProps will be removed from memo components ' + 'in a future major release. Use JavaScript default parameters instead.', componentName);
+
+          didWarnAboutDefaultPropsOnFunctionComponent[componentName] = true;
+        }
       }
     }
 
@@ -27555,6 +26443,16 @@ function validateFunctionComponentInDev(workInProgress, Component) {
         didWarnAboutFunctionRefs[warningKey] = true;
 
         error('Function components cannot be given refs. ' + 'Attempts to access this ref will fail. ' + 'Did you mean to use React.forwardRef()?%s', info);
+      }
+    }
+
+    if ( Component.defaultProps !== undefined) {
+      var componentName = getComponentNameFromType(Component) || 'Unknown';
+
+      if (!didWarnAboutDefaultPropsOnFunctionComponent[componentName]) {
+        error('%s: Support for defaultProps will be removed from function components ' + 'in a future major release. Use JavaScript default parameters instead.', componentName);
+
+        didWarnAboutDefaultPropsOnFunctionComponent[componentName] = true;
       }
     }
 
@@ -36046,7 +34944,7 @@ identifierPrefix, onRecoverableError, transitionCallbacks) {
   return root;
 }
 
-var ReactVersion = '18.2.0';
+var ReactVersion = '18.3.1';
 
 function createPortal(children, containerInfo, // TODO: figure out the API for cross-renderer implementation.
 implementation) {
@@ -36982,8 +35880,15 @@ function legacyRenderSubtreeIntoContainer(parentComponent, children, container, 
   return getPublicRootInstance(root);
 }
 
+var didWarnAboutFindDOMNode = false;
 function findDOMNode(componentOrElement) {
   {
+    if (!didWarnAboutFindDOMNode) {
+      didWarnAboutFindDOMNode = true;
+
+      error('findDOMNode is deprecated and will be removed in the next major ' + 'release. Instead, add a ref directly to the element you want ' + 'to reference. Learn more about using refs safely here: ' + 'https://reactjs.org/link/strict-mode-find-node');
+    }
+
     var owner = ReactCurrentOwner$3.current;
 
     if (owner !== null && owner.stateNode !== null) {
@@ -37063,7 +35968,16 @@ function unstable_renderSubtreeIntoContainer(parentComponent, element, container
 
   return legacyRenderSubtreeIntoContainer(parentComponent, element, containerNode, false, callback);
 }
+var didWarnAboutUnmountComponentAtNode = false;
 function unmountComponentAtNode(container) {
+  {
+    if (!didWarnAboutUnmountComponentAtNode) {
+      didWarnAboutUnmountComponentAtNode = true;
+
+      error('unmountComponentAtNode is deprecated and will be removed in the ' + 'next major release. Switch to the createRoot API. Learn ' + 'more: https://reactjs.org/link/switch-to-createroot');
+    }
+  }
+
   if (!isValidContainerLegacy(container)) {
     throw new Error('unmountComponentAtNode(...): Target container is not a DOM element.');
   }
@@ -37341,7 +36255,7 @@ if (
 ) {
   __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
 }
-          var ReactVersion = '18.2.0';
+          var ReactVersion = '18.3.1';
 
 // ATTENTION
 // When adding new symbols to this file,
@@ -40017,6 +38931,7 @@ exports.PureComponent = PureComponent;
 exports.StrictMode = REACT_STRICT_MODE_TYPE;
 exports.Suspense = REACT_SUSPENSE_TYPE;
 exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
+exports.act = act;
 exports.cloneElement = cloneElement$1;
 exports.createContext = createContext;
 exports.createElement = createElement$1;
@@ -40781,6 +39696,1079 @@ module.exports = __webpack_require__.p + "/assets/images/drop-color.png";
 
 module.exports = __webpack_require__.p + "/assets/images/vaho.jpg";
 
+/***/ }),
+
+/***/ "./src/apps/rain2/js/app.js":
+/*!**********************************!*\
+  !*** ./src/apps/rain2/js/app.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _vaho__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./vaho */ "./src/apps/rain2/js/vaho.js");
+/* harmony import */ var assets_images_vaho_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! assets/images/vaho.jpg */ "./poeticsoft-minimal-theme/assets/images/vaho.jpg");
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (props) {
+  var imgRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+  var canvasRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (imgRef.current, canvasRef.current) {
+      (0,_vaho__WEBPACK_IMPORTED_MODULE_1__["default"])(canvasRef.current, imgRef.current);
+    }
+  }, [imgRef.current, canvasRef.current]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    id: "Rain"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+    id: "Texture",
+    src: assets_images_vaho_jpg__WEBPACK_IMPORTED_MODULE_2__,
+    ref: imgRef
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("canvas", {
+    id: "container",
+    ref: canvasRef
+  }));
+});
+/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("canvas", {
+  id: "Container"
+});
+
+/***/ }),
+
+/***/ "./src/apps/rain2/js/createcanvas.js":
+/*!*******************************************!*\
+  !*** ./src/apps/rain2/js/createcanvas.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ createCanvas)
+/* harmony export */ });
+function createCanvas(width, height) {
+  var canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  return canvas;
+}
+
+/***/ }),
+
+/***/ "./src/apps/rain2/js/globj.js":
+/*!************************************!*\
+  !*** ./src/apps/rain2/js/globj.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _webgl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./webgl */ "./src/apps/rain2/js/webgl.js");
+
+function GL(canvas, options, vert, frag) {
+  this.init(canvas, options, vert, frag);
+}
+GL.prototype = {
+  canvas: null,
+  gl: null,
+  program: null,
+  width: 0,
+  height: 0,
+  init: function init(canvas, options, vert, frag) {
+    this.canvas = canvas;
+    this.width = canvas.width;
+    this.height = canvas.height;
+    this.gl = _webgl__WEBPACK_IMPORTED_MODULE_0__.getContext(canvas, options);
+    this.program = this.createProgram(vert, frag);
+    this.useProgram(this.program);
+  },
+  createProgram: function createProgram(vert, frag) {
+    var program = _webgl__WEBPACK_IMPORTED_MODULE_0__.createProgram(this.gl, vert, frag);
+    return program;
+  },
+  useProgram: function useProgram(program) {
+    this.program = program;
+    this.gl.useProgram(program);
+  },
+  createTexture: function createTexture(source, i) {
+    return _webgl__WEBPACK_IMPORTED_MODULE_0__.createTexture(this.gl, source, i);
+  },
+  createUniform: function createUniform(type, name) {
+    for (var _len = arguments.length, v = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+      v[_key - 2] = arguments[_key];
+    }
+    _webgl__WEBPACK_IMPORTED_MODULE_0__.createUniform.apply(_webgl__WEBPACK_IMPORTED_MODULE_0__, [this.gl, this.program, type, name].concat(v));
+  },
+  activeTexture: function activeTexture(i) {
+    _webgl__WEBPACK_IMPORTED_MODULE_0__.activeTexture(this.gl, i);
+  },
+  updateTexture: function updateTexture(source) {
+    _webgl__WEBPACK_IMPORTED_MODULE_0__.updateTexture(this.gl, source);
+  },
+  draw: function draw() {
+    _webgl__WEBPACK_IMPORTED_MODULE_0__.setRectangle(this.gl, -1, -1, 2, 2);
+    this.gl.drawArrays(this.gl.TRIANGLES, 0, 6);
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GL);
+
+/***/ }),
+
+/***/ "./src/apps/rain2/js/imageloader.js":
+/*!******************************************!*\
+  !*** ./src/apps/rain2/js/imageloader.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ImageLoader)
+/* harmony export */ });
+function loadImage(src, i, onLoad) {
+  return new Promise(function (resolve, reject) {
+    if (typeof src == "string") {
+      src = {
+        name: "image" + i,
+        src: src
+      };
+    }
+    var img = new Image();
+    src.img = img;
+    img.addEventListener("load", function (event) {
+      if (typeof onLoad == "function") {
+        onLoad.call(null, img, i);
+      }
+      resolve(src);
+    });
+    img.src = src.src;
+  });
+}
+function loadImages(images, onLoad) {
+  return Promise.all(images.map(function (src, i) {
+    return loadImage(src, i, onLoad);
+  }));
+}
+function ImageLoader(images, onLoad) {
+  return new Promise(function (resolve, reject) {
+    loadImages(images, onLoad).then(function (loadedImages) {
+      var r = {};
+      loadedImages.forEach(function (curImage) {
+        r[curImage.name] = {
+          img: curImage.img,
+          src: curImage.src
+        };
+      });
+      resolve(r);
+    });
+  });
+}
+
+/***/ }),
+
+/***/ "./src/apps/rain2/js/raindrops.js":
+/*!****************************************!*\
+  !*** ./src/apps/rain2/js/raindrops.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _times_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./times.js */ "./src/apps/rain2/js/times.js");
+/* harmony import */ var _createcanvas_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createcanvas.js */ "./src/apps/rain2/js/createcanvas.js");
+/* harmony import */ var _random__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./random */ "./src/apps/rain2/js/random.js");
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+
+
+
+var dropSize = 64;
+var Drop = {
+  x: 0,
+  y: 0,
+  r: 0,
+  spreadX: 0,
+  spreadY: 0,
+  momentum: 0,
+  momentumX: 0,
+  lastSpawn: 0,
+  nextSpawn: 0,
+  parent: null,
+  isNew: true,
+  killed: false,
+  shrink: 0
+};
+var defaultOptions = {
+  minR: 10,
+  maxR: 40,
+  maxDrops: 900,
+  rainChance: 0.3,
+  rainLimit: 3,
+  dropletsRate: 50,
+  dropletsSize: [2, 4],
+  dropletsCleaningRadiusMultiplier: 0.43,
+  raining: true,
+  globalTimeScale: 1,
+  trailRate: 1,
+  autoShrink: true,
+  spawnArea: [-0.1, 0.95],
+  trailScaleRange: [0.2, 0.5],
+  collisionRadius: 0.65,
+  collisionRadiusIncrease: 0.01,
+  dropFallMultiplier: 1,
+  collisionBoostMultiplier: 0.05,
+  collisionBoost: 1
+};
+function Raindrops(width, height, scale, dropAlpha, dropColor) {
+  var options = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
+  this.width = width;
+  this.height = height;
+  this.scale = scale;
+  this.dropAlpha = dropAlpha;
+  this.dropColor = dropColor;
+  this.options = Object.assign({}, defaultOptions, options);
+  this.init();
+}
+Raindrops.prototype = {
+  dropColor: null,
+  dropAlpha: null,
+  canvas: null,
+  ctx: null,
+  width: 0,
+  height: 0,
+  scale: 0,
+  dropletsPixelDensity: 1,
+  droplets: null,
+  dropletsCtx: null,
+  dropletsCounter: 0,
+  drops: null,
+  dropsGfx: null,
+  clearDropletsGfx: null,
+  textureCleaningIterations: 0,
+  lastRender: null,
+  options: null,
+  init: function init() {
+    this.canvas = (0,_createcanvas_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.width, this.height);
+    this.ctx = this.canvas.getContext('2d');
+    this.droplets = (0,_createcanvas_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.width * this.dropletsPixelDensity, this.height * this.dropletsPixelDensity);
+    this.dropletsCtx = this.droplets.getContext('2d');
+    var DRAWCTX = this.dropletsCtx;
+    DRAWCTX.beginPath();
+    DRAWCTX.moveTo(0, 0);
+    DRAWCTX.lineWidth = window.BrushSize * 2;
+    DRAWCTX.strokeStyle = '#696969';
+    DRAWCTX.lineCap = "round";
+    DRAWCTX.lineJoin = "round";
+    window.startDrawing = function () {
+      DRAWCTX.moveTo(window.BrushX, window.BrushY);
+    };
+    window.stopDrawing = function () {
+      DRAWCTX.beginPath();
+    };
+    this.drops = [];
+    this.dropsGfx = [];
+    this.renderDropsGfx();
+    this.update();
+  },
+  get deltaR() {
+    return this.options.maxR - this.options.minR;
+  },
+  get area() {
+    return this.width * this.height / this.scale;
+  },
+  get areaMultiplier() {
+    return Math.sqrt(this.area / (1024 * 768));
+  },
+  drawDroplet: function drawDroplet(x, y, r) {
+    this.drawDrop(this.dropletsCtx, Object.assign(Object.create(Drop), {
+      x: x * this.dropletsPixelDensity,
+      y: y * this.dropletsPixelDensity,
+      r: r * this.dropletsPixelDensity
+    }));
+  },
+  renderDropsGfx: function renderDropsGfx() {
+    var _this = this;
+    var dropBuffer = (0,_createcanvas_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dropSize, dropSize);
+    var dropBufferCtx = dropBuffer.getContext('2d');
+    this.dropsGfx = Array.apply(null, Array(255)).map(function (cur, i) {
+      var drop = (0,_createcanvas_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dropSize, dropSize);
+      var dropCtx = drop.getContext('2d');
+      dropBufferCtx.clearRect(0, 0, dropSize, dropSize);
+
+      // color
+      dropBufferCtx.globalCompositeOperation = "source-over";
+      dropBufferCtx.drawImage(_this.dropColor, 0, 0, dropSize, dropSize);
+
+      // blue overlay, for depth
+      dropBufferCtx.globalCompositeOperation = "screen";
+      dropBufferCtx.fillStyle = "rgba(0,0," + i + ",1)";
+      dropBufferCtx.fillRect(0, 0, dropSize, dropSize);
+
+      // alpha
+      dropCtx.globalCompositeOperation = "source-over";
+      dropCtx.drawImage(_this.dropAlpha, 0, 0, dropSize, dropSize);
+      dropCtx.globalCompositeOperation = "source-in";
+      dropCtx.drawImage(dropBuffer, 0, 0, dropSize, dropSize);
+      return drop;
+    });
+
+    // create circle that will be used as a brush to remove droplets
+    this.clearDropletsGfx = (0,_createcanvas_js__WEBPACK_IMPORTED_MODULE_1__["default"])(128, 128);
+    var clearDropletsCtx = this.clearDropletsGfx.getContext("2d");
+    clearDropletsCtx.fillStyle = "#000";
+    clearDropletsCtx.beginPath();
+    clearDropletsCtx.arc(64, 64, 64, 0, Math.PI * 2);
+    clearDropletsCtx.fill();
+  },
+  drawDrop: function drawDrop(ctx, drop) {
+    if (this.dropsGfx.length > 0) {
+      var x = drop.x;
+      var y = drop.y;
+      var r = drop.r;
+      var spreadX = drop.spreadX;
+      var spreadY = drop.spreadY;
+      var scaleX = 1;
+      var scaleY = 1.5;
+      var d = Math.max(0, Math.min(1, (r - this.options.minR) / this.deltaR * 0.9));
+      d *= 1 / ((drop.spreadX + drop.spreadY) * 0.5 + 1);
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = "source-over";
+      d = Math.floor(d * (this.dropsGfx.length - 1));
+      ctx.drawImage(this.dropsGfx[d], (x - r * scaleX * (spreadX + 1)) * this.scale, (y - r * scaleY * (spreadY + 1)) * this.scale, r * 2 * scaleX * (spreadX + 1) * this.scale, r * 2 * scaleY * (spreadY + 1) * this.scale);
+    }
+  },
+  clearDroplets: function clearDroplets(x, y) {
+    var r = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 30;
+    var ctx = this.dropletsCtx;
+    ctx.globalCompositeOperation = "destination-out";
+    ctx.drawImage(this.clearDropletsGfx, (x - r) * this.dropletsPixelDensity * this.scale, (y - r) * this.dropletsPixelDensity * this.scale, r * 2 * this.dropletsPixelDensity * this.scale, r * 2 * this.dropletsPixelDensity * this.scale * 1.5);
+  },
+  clearCanvas: function clearCanvas() {
+    this.ctx.clearRect(0, 0, this.width, this.height);
+  },
+  createDrop: function createDrop(options) {
+    if (this.drops.length >= this.options.maxDrops * this.areaMultiplier) return null;
+    return Object.assign(Object.create(Drop), options);
+  },
+  addDrop: function addDrop(drop) {
+    if (this.drops.length >= this.options.maxDrops * this.areaMultiplier || drop == null) return false;
+    this.drops.push(drop);
+    return true;
+  },
+  updateRain: function updateRain(timeScale) {
+    var rainDrops = [];
+    if (this.options.raining) {
+      var limit = this.options.rainLimit * timeScale * this.areaMultiplier;
+      var count = 0;
+      while ((0,_random__WEBPACK_IMPORTED_MODULE_2__.chance)(this.options.rainChance * timeScale * this.areaMultiplier) && count < limit) {
+        count++;
+        var r = (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(this.options.minR, this.options.maxR, function (n) {
+          return Math.pow(n, 3);
+        });
+        var rainDrop = this.createDrop({
+          x: (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(this.width / this.scale),
+          y: (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(this.height / this.scale * this.options.spawnArea[0], this.height / this.scale * this.options.spawnArea[1]),
+          r: r,
+          momentum: 1 + (r - this.options.minR) * 0.1 + (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(2),
+          spreadX: 1.5,
+          spreadY: 1.5
+        });
+        if (rainDrop != null) {
+          rainDrops.push(rainDrop);
+        }
+      }
+    }
+    return rainDrops;
+  },
+  clearDrops: function clearDrops() {
+    this.drops.forEach(function (drop) {
+      setTimeout(function () {
+        drop.shrink = 0.1 + (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(0.5);
+      }, (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(1200));
+    });
+    this.clearTexture();
+  },
+  clearTexture: function clearTexture() {
+    this.textureCleaningIterations = 50;
+  },
+  updateDroplets: function updateDroplets(timeScale) {
+    var _this2 = this;
+    if (this.textureCleaningIterations > 0) {
+      this.textureCleaningIterations -= 1 * timeScale;
+      this.dropletsCtx.globalCompositeOperation = "destination-out";
+      this.dropletsCtx.fillStyle = "rgba(0,0,0," + 0.05 * timeScale + ")";
+      this.dropletsCtx.fillRect(0, 0, this.width * this.dropletsPixelDensity, this.height * this.dropletsPixelDensity);
+    }
+    if (this.options.raining) {
+      this.dropletsCounter += this.options.dropletsRate * timeScale * this.areaMultiplier;
+      (0,_times_js__WEBPACK_IMPORTED_MODULE_0__["default"])(this.dropletsCounter, function (i) {
+        _this2.dropletsCounter--;
+        _this2.drawDroplet((0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(_this2.width / _this2.scale), (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(_this2.height / _this2.scale), _random__WEBPACK_IMPORTED_MODULE_2__.random.apply(void 0, _toConsumableArray(_this2.options.dropletsSize).concat([function (n) {
+          return n * n;
+        }])));
+      });
+    }
+    this.ctx.globalCompositeOperation = "source-over";
+    this.ctx.drawImage(this.droplets, 0, 0, this.width, this.height);
+
+    // this.ctx.globalCompositeOperation = "destination-out";
+    // this.ctx.drawImage(window.textureTITLE,
+    //                     window.Texture2015Left,
+    //                     window.Texture2015Top,
+    //                     window.Texture2015Width,
+    //                     window.Texture2015Heigth);
+
+    // this.ctx.globalCompositeOperation = "soft-light";
+    // this.ctx.drawImage(window.textureTITLELight,
+    //                     window.Texture2015Left,
+    //                     window.Texture2015Top,
+    //                     window.Texture2015Width,
+    //                     window.Texture2015Heigth);   
+
+    //this.dropletsCtx.fillStyle = '#696969';
+
+    if (window.Drawing) {
+      this.dropletsCtx.fillStyle = '#00000009';
+      this.dropletsCtx.globalCompositeOperation = "source-over";
+      this.dropletsCtx.beginPath();
+      this.dropletsCtx.arc(window.BrushX, window.BrushY, window.BrushSize, 0, Math.PI * 2);
+      this.dropletsCtx.stroke();
+    }
+  },
+  updateDrops: function updateDrops(timeScale) {
+    var _this3 = this;
+    var newDrops = [];
+    this.updateDroplets(timeScale);
+    var rainDrops = this.updateRain(timeScale);
+    newDrops = newDrops.concat(rainDrops);
+    this.drops.sort(function (a, b) {
+      var va = a.y * (_this3.width / _this3.scale) + a.x;
+      var vb = b.y * (_this3.width / _this3.scale) + b.x;
+      return va > vb ? 1 : va == vb ? 0 : -1;
+    });
+    this.drops.forEach(function (drop, i) {
+      var _this4 = this;
+      if (!drop.killed) {
+        // update gravity
+        // (chance of drops "creeping down")
+        if ((0,_random__WEBPACK_IMPORTED_MODULE_2__.chance)((drop.r - this.options.minR * this.options.dropFallMultiplier) * (0.1 / this.deltaR) * timeScale)) {
+          drop.momentum += (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(drop.r / this.options.maxR * 4);
+        }
+        // clean small drops
+        if (this.options.autoShrink && drop.r <= this.options.minR && (0,_random__WEBPACK_IMPORTED_MODULE_2__.chance)(0.05 * timeScale)) {
+          drop.shrink += 0.01;
+        }
+        //update shrinkage
+        drop.r -= drop.shrink * timeScale;
+        if (drop.r <= 0) drop.killed = true;
+
+        // update trails
+        if (this.options.raining) {
+          drop.lastSpawn += drop.momentum * timeScale * this.options.trailRate;
+          if (drop.lastSpawn > drop.nextSpawn) {
+            var trailDrop = this.createDrop({
+              x: drop.x + (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(-drop.r, drop.r) * 0.1,
+              y: drop.y - drop.r * 0.01,
+              r: drop.r * _random__WEBPACK_IMPORTED_MODULE_2__.random.apply(void 0, _toConsumableArray(this.options.trailScaleRange)),
+              spreadY: drop.momentum * 0.1,
+              parent: drop
+            });
+            if (trailDrop != null) {
+              newDrops.push(trailDrop);
+              drop.r *= Math.pow(0.97, timeScale);
+              drop.lastSpawn = 0;
+              drop.nextSpawn = (0,_random__WEBPACK_IMPORTED_MODULE_2__.random)(this.options.minR, this.options.maxR) - drop.momentum * 2 * this.options.trailRate + (this.options.maxR - drop.r);
+            }
+          }
+        }
+
+        //normalize spread
+        drop.spreadX *= Math.pow(0.4, timeScale);
+        drop.spreadY *= Math.pow(0.7, timeScale);
+
+        //update position
+        var moved = drop.momentum > 0;
+        if (moved && !drop.killed) {
+          drop.y += drop.momentum * this.options.globalTimeScale;
+          drop.x += drop.momentumX * this.options.globalTimeScale;
+          if (drop.y > this.height / this.scale + drop.r) {
+            drop.killed = true;
+          }
+        }
+
+        // collision
+        var checkCollision = (moved || drop.isNew) && !drop.killed;
+        drop.isNew = false;
+        if (checkCollision) {
+          this.drops.slice(i + 1, i + 70).forEach(function (drop2) {
+            //basic check
+            if (drop != drop2 && drop.r > drop2.r && drop.parent != drop2 && drop2.parent != drop && !drop2.killed) {
+              var dx = drop2.x - drop.x;
+              var dy = drop2.y - drop.y;
+              var d = Math.sqrt(dx * dx + dy * dy);
+              //if it's within acceptable distance
+              if (d < (drop.r + drop2.r) * (_this4.options.collisionRadius + drop.momentum * _this4.options.collisionRadiusIncrease * timeScale)) {
+                var pi = Math.PI;
+                var r1 = drop.r;
+                var r2 = drop2.r;
+                var a1 = pi * (r1 * r1);
+                var a2 = pi * (r2 * r2);
+                var targetR = Math.sqrt((a1 + a2 * 0.8) / pi);
+                if (targetR > _this4.maxR) {
+                  targetR = _this4.maxR;
+                }
+                drop.r = targetR;
+                drop.momentumX += dx * 0.1;
+                drop.spreadX = 0;
+                drop.spreadY = 0;
+                drop2.killed = true;
+                drop.momentum = Math.max(drop2.momentum, Math.min(40, drop.momentum + targetR * _this4.options.collisionBoostMultiplier + _this4.options.collisionBoost));
+              }
+            }
+          });
+        }
+
+        //slowdown momentum
+        drop.momentum -= Math.max(1, this.options.minR * 0.5 - drop.momentum) * 0.1 * timeScale;
+        if (drop.momentum < 0) drop.momentum = 0;
+        drop.momentumX *= Math.pow(0.7, timeScale);
+        if (!drop.killed) {
+          newDrops.push(drop);
+          if (moved && this.options.dropletsRate > 0) this.clearDroplets(drop.x, drop.y, drop.r * this.options.dropletsCleaningRadiusMultiplier);
+          this.drawDrop(this.ctx, drop);
+        }
+      }
+    }, this);
+    this.drops = newDrops;
+  },
+  update: function update() {
+    if (window.VahoActivo) {
+      this.clearCanvas();
+      var now = Date.now();
+      if (this.lastRender == null) this.lastRender = now;
+      var deltaT = now - this.lastRender;
+      var timeScale = deltaT / (1 / 60 * 1000);
+      if (timeScale > 1.1) timeScale = 1.1;
+      timeScale *= this.options.globalTimeScale;
+      this.lastRender = now;
+      this.updateDrops(timeScale);
+    }
+    requestAnimationFrame(this.update.bind(this));
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Raindrops);
+
+/***/ }),
+
+/***/ "./src/apps/rain2/js/rainrenderer.js":
+/*!*******************************************!*\
+  !*** ./src/apps/rain2/js/rainrenderer.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _globj__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./globj */ "./src/apps/rain2/js/globj.js");
+/* harmony import */ var _createcanvas_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createcanvas.js */ "./src/apps/rain2/js/createcanvas.js");
+/* harmony import */ var _shaders_simple_vert_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shaders/simple.vert.js */ "./src/apps/rain2/js/shaders/simple.vert.js");
+/* harmony import */ var _shaders_water_frag_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./shaders/water.frag.js */ "./src/apps/rain2/js/shaders/water.frag.js");
+
+
+
+
+var defaultOptions = {
+  renderShadow: false,
+  minRefraction: 256,
+  maxRefraction: 512,
+  brightness: 1,
+  alphaMultiply: 20,
+  alphaSubtract: 5,
+  parallaxBg: 5,
+  parallaxFg: 20
+};
+function RainRenderer(canvas, canvasLiquid, imageFg, imageBg) {
+  var imageShine = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+  var options = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
+  this.canvas = canvas;
+  this.canvasLiquid = canvasLiquid;
+  this.imageShine = imageShine;
+  this.imageFg = imageFg;
+  this.imageBg = imageBg;
+  this.options = Object.assign({}, defaultOptions, options);
+  this.init();
+}
+RainRenderer.prototype = {
+  canvas: null,
+  gl: null,
+  canvasLiquid: null,
+  width: 0,
+  height: 0,
+  imageShine: '',
+  imageFg: '',
+  imageBg: '',
+  textures: null,
+  programWater: null,
+  programBlurX: null,
+  programBlurY: null,
+  parallaxX: 0,
+  parallaxY: 0,
+  renderShadow: false,
+  options: null,
+  init: function init() {
+    this.width = this.canvas.width;
+    this.height = this.canvas.height;
+    this.gl = new _globj__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvas, {
+      alpha: false
+    }, _shaders_simple_vert_js__WEBPACK_IMPORTED_MODULE_2__["default"], _shaders_water_frag_js__WEBPACK_IMPORTED_MODULE_3__["default"]);
+    var gl = this.gl;
+    this.programWater = gl.program;
+    gl.createUniform('2f', 'resolution', this.width, this.height);
+    gl.createUniform('1f', 'textureRatio', this.imageBg.width / this.imageBg.height);
+    gl.createUniform('1i', 'renderShine', this.imageShine == null ? false : true);
+    gl.createUniform('1i', 'renderShadow', this.options.renderShadow);
+    gl.createUniform('1f', 'minRefraction', this.options.minRefraction);
+    gl.createUniform('1f', 'refractionDelta', this.options.maxRefraction - this.options.minRefraction);
+    gl.createUniform('1f', 'brightness', this.options.brightness);
+    gl.createUniform('1f', 'alphaMultiply', this.options.alphaMultiply);
+    gl.createUniform('1f', 'alphaSubtract', this.options.alphaSubtract);
+    gl.createUniform('1f', 'parallaxBg', this.options.parallaxBg);
+    gl.createUniform('1f', 'parallaxFg', this.options.parallaxFg);
+    gl.createTexture(null, 0);
+    this.textures = [{
+      name: 'textureShine',
+      img: this.imageShine == null ? (0,_createcanvas_js__WEBPACK_IMPORTED_MODULE_1__["default"])(2, 2) : this.imageShine
+    }, {
+      name: 'textureFg',
+      img: this.imageFg
+    }, {
+      name: 'textureBg',
+      img: this.imageBg
+    }];
+    this.textures.forEach(function (texture, i) {
+      gl.createTexture(texture.img, i + 1);
+      gl.createUniform('1i', texture.name, i + 1);
+    });
+    this.draw();
+  },
+  draw: function draw() {
+    if (window.VahoActivo) {
+      this.gl.useProgram(this.programWater);
+      this.gl.createUniform('2f', 'parallax', this.parallaxX, this.parallaxY);
+      this.updateTexture();
+      this.gl.draw();
+    }
+    requestAnimationFrame(this.draw.bind(this));
+  },
+  updateTextures: function updateTextures() {
+    var _this = this;
+    this.textures.forEach(function (texture, i) {
+      _this.gl.activeTexture(i + 1);
+      _this.gl.updateTexture(texture.img);
+    });
+  },
+  updateTexture: function updateTexture() {
+    this.gl.activeTexture(0);
+    this.gl.updateTexture(this.canvasLiquid);
+  },
+  resize: function resize() {},
+  get overlayTexture() {},
+  set overlayTexture(v) {}
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RainRenderer);
+
+/***/ }),
+
+/***/ "./src/apps/rain2/js/random.js":
+/*!*************************************!*\
+  !*** ./src/apps/rain2/js/random.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   chance: () => (/* binding */ chance),
+/* harmony export */   random: () => (/* binding */ random)
+/* harmony export */ });
+function random() {
+  var from = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var to = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var interpolation = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  if (from == null) {
+    from = 0;
+    to = 1;
+  } else if (from != null && to == null) {
+    to = from;
+    from = 0;
+  }
+  var delta = to - from;
+  if (interpolation == null) {
+    interpolation = function interpolation(n) {
+      return n;
+    };
+  }
+  return from + interpolation(Math.random()) * delta;
+}
+function chance(c) {
+  return random() <= c;
+}
+
+/***/ }),
+
+/***/ "./src/apps/rain2/js/shaders/simple.vert.js":
+/*!**************************************************!*\
+  !*** ./src/apps/rain2/js/shaders/simple.vert.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\nprecision mediump float;\n\nattribute vec2 a_position;\n\nvoid main() {\n   gl_Position = vec4(a_position,0.0,1.0);\n}\n");
+
+/***/ }),
+
+/***/ "./src/apps/rain2/js/shaders/water.frag.js":
+/*!*************************************************!*\
+  !*** ./src/apps/rain2/js/shaders/water.frag.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\nprecision mediump float;\n\n// textures\nuniform sampler2D u_waterMap;\nuniform sampler2D u_textureShine;\nuniform sampler2D u_textureFg;\nuniform sampler2D u_textureBg;\n\n// the texCoords passed in from the vertex shader.\nvarying vec2 v_texCoord;\nuniform vec2 u_resolution;\nuniform vec2 u_parallax;\nuniform float u_parallaxFg;\nuniform float u_parallaxBg;\nuniform float u_textureRatio;\nuniform bool u_renderShine;\nuniform bool u_renderShadow;\nuniform float u_minRefraction;\nuniform float u_refractionDelta;\nuniform float u_brightness;\nuniform float u_alphaMultiply;\nuniform float u_alphaSubtract;\n\n// alpha-blends two colors\nvec4 blend(vec4 bg,vec4 fg){\n  vec3 bgm=bg.rgb*bg.a;\n  vec3 fgm=fg.rgb*fg.a;\n  float ia=1.0-fg.a;\n  float a=(fg.a + bg.a * ia);\n  vec3 rgb;\n  if(a!=0.0){\n    rgb=(fgm + bgm * ia) / a;\n  }else{\n    rgb=vec3(0.0,0.0,0.0);\n  }\n  return vec4(rgb,a);\n}\n\nvec2 pixel(){\n  return vec2(1.0,1.0)/u_resolution;\n}\n\nvec2 parallax(float v){\n  return u_parallax*pixel()*v;\n}\n\nvec2 texCoord(){\n  return vec2(gl_FragCoord.x, u_resolution.y-gl_FragCoord.y)/u_resolution;\n}\n\n// scales the bg up and proportionally to fill the container\nvec2 scaledTexCoord(){\n  float ratio=u_resolution.x/u_resolution.y;\n  vec2 scale=vec2(1.0,1.0);\n  vec2 offset=vec2(0.0,0.0);\n  float ratioDelta=ratio-u_textureRatio;\n  if(ratioDelta>=0.0){\n    scale.y=(1.0+ratioDelta);\n    offset.y=ratioDelta/2.0;\n  }else{\n    scale.x=(1.0-ratioDelta);\n    offset.x=-ratioDelta/2.0;\n  }\n  return (texCoord()+offset)/scale;\n}\n\n// get color from fg\nvec4 fgColor(float x, float y){\n  float p2=u_parallaxFg*2.0;\n  vec2 scale=vec2(\n    (u_resolution.x+p2)/u_resolution.x,\n    (u_resolution.y+p2)/u_resolution.y\n  );\n\n  vec2 scaledTexCoord=texCoord()/scale;\n  vec2 offset=vec2(\n    (1.0-(1.0/scale.x))/2.0,\n    (1.0-(1.0/scale.y))/2.0\n  );\n\n  return texture2D(u_waterMap,\n    (scaledTexCoord+offset)+(pixel()*vec2(x,y))+parallax(u_parallaxFg)\n  );\n}\n\nvoid main() {\n  vec4 bg=texture2D(u_textureBg,scaledTexCoord()+parallax(u_parallaxBg));\n\n  vec4 cur = fgColor(0.0,0.0);\n\n  float d=cur.b; // \"thickness\"\n  float x=cur.g;\n  float y=cur.r;\n\n  float a=clamp(cur.a*u_alphaMultiply-u_alphaSubtract, 0.0,1.0);\n\n  vec2 refraction = (vec2(x,y)-0.5)*2.0;\n  vec2 refractionParallax=parallax(u_parallaxBg-u_parallaxFg);\n  vec2 refractionPos = scaledTexCoord()\n    + (pixel()*refraction*(u_minRefraction+(d*u_refractionDelta)))\n    + refractionParallax;\n\n  vec4 tex=texture2D(u_textureFg,refractionPos);\n\n  if(u_renderShine){\n    float maxShine=490.0;\n    float minShine=maxShine*0.18;\n    vec2 shinePos=vec2(0.5,0.5) + ((1.0/512.0)*refraction)* -(minShine+((maxShine-minShine)*d));\n    vec4 shine=texture2D(u_textureShine,shinePos);\n    tex=blend(tex,shine);\n  }\n\n  vec4 fg=vec4(tex.rgb*u_brightness,a);\n\n  if(u_renderShadow){\n    float borderAlpha = fgColor(0.,0.-(d*6.0)).a;\n    borderAlpha=borderAlpha*u_alphaMultiply-(u_alphaSubtract+0.5);\n    borderAlpha=clamp(borderAlpha,0.,1.);\n    borderAlpha*=0.2;\n    vec4 border=vec4(0.,0.,0.,borderAlpha);\n    fg=blend(border,fg);\n  }\n\n  gl_FragColor = blend(bg,fg);\n}\n");
+
+/***/ }),
+
+/***/ "./src/apps/rain2/js/times.js":
+/*!************************************!*\
+  !*** ./src/apps/rain2/js/times.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ times)
+/* harmony export */ });
+function times(n, f) {
+  for (var i = 0; i < n; i++) {
+    f.call(this, i);
+  }
+}
+
+/***/ }),
+
+/***/ "./src/apps/rain2/js/vaho.js":
+/*!***********************************!*\
+  !*** ./src/apps/rain2/js/vaho.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _rainrenderer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./rainrenderer */ "./src/apps/rain2/js/rainrenderer.js");
+/* harmony import */ var _raindrops__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./raindrops */ "./src/apps/rain2/js/raindrops.js");
+/* harmony import */ var _imageloader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./imageloader */ "./src/apps/rain2/js/imageloader.js");
+/* harmony import */ var _createcanvas__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./createcanvas */ "./src/apps/rain2/js/createcanvas.js");
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/gsap-core.js");
+/* harmony import */ var assets_images_drop_alpha_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! assets/images/drop-alpha.png */ "./poeticsoft-minimal-theme/assets/images/drop-alpha.png");
+/* harmony import */ var assets_images_drop_color_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! assets/images/drop-color.png */ "./poeticsoft-minimal-theme/assets/images/drop-color.png");
+/* harmony import */ var assets_images_2015_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! assets/images/2015.png */ "./poeticsoft-minimal-theme/assets/images/2015.png");
+/* harmony import */ var assets_images_2015light_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! assets/images/2015light.png */ "./poeticsoft-minimal-theme/assets/images/2015light.png");
+
+
+
+
+
+
+
+
+
+var TextureImg,
+  dropColor,
+  dropAlpha,
+  dpi,
+  textureFg,
+  textureFgCtx,
+  textureBg,
+  textureBgCtx,
+  textureBgSize = {
+    width: 456,
+    height: 256
+  },
+  textureFgSize = {
+    width: 114,
+    height: 64
+  },
+  raindrops,
+  renderer,
+  canvas;
+var parallax = {
+  x: 0,
+  y: 0
+};
+var BrushSizeStart = {
+  x: 320,
+  y: 10
+};
+var BrushSizeTarget = {
+  x: 1400,
+  y: 20
+};
+var BrushSizeSlope = (BrushSizeTarget.y - BrushSizeStart.y) / (BrushSizeTarget.x - BrushSizeStart.x);
+var Texture2015WidthStart = {
+  x: 320,
+  y: 250
+};
+var Texture2015WidthTarget = {
+  x: 1400,
+  y: 700
+};
+var Texture2015WidthSlope = (Texture2015WidthTarget.y - Texture2015WidthStart.y) / (Texture2015WidthTarget.x - Texture2015WidthStart.x);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (CanvasElement, Texture) {
+  canvas = CanvasElement;
+  TextureImg = Texture;
+  (0,_imageloader__WEBPACK_IMPORTED_MODULE_2__["default"])([{
+    name: 'dropAlpha',
+    src: assets_images_drop_alpha_png__WEBPACK_IMPORTED_MODULE_4__
+  }, {
+    name: 'dropColor',
+    src: assets_images_drop_color_png__WEBPACK_IMPORTED_MODULE_5__
+  }, {
+    name: 'img2015',
+    src: assets_images_2015_png__WEBPACK_IMPORTED_MODULE_6__
+  }, {
+    name: 'img2015light',
+    src: assets_images_2015light_png__WEBPACK_IMPORTED_MODULE_7__
+  }]).then(function (images) {
+    dropColor = images.dropColor.img;
+    dropAlpha = images.dropAlpha.img;
+    window.textureTITLE = images.img2015.img;
+    window.textureTITLELight = images.img2015light.img;
+    window.VahoReady = true;
+    init(CanvasElement);
+  });
+});
+var init = function init(CanvasElement) {
+  dpi = window.devicePixelRatio;
+  CanvasElement.width = window.innerWidth;
+  CanvasElement.height = window.innerHeight;
+  CanvasElement.style.width = window.innerWidth + 'px';
+  CanvasElement.style.height = window.innerHeight + 'px';
+  window.BrushSize = BrushSizeSlope * window.innerWidth - BrushSizeSlope * BrushSizeStart.x + BrushSizeStart.y;
+  window.Texture2015Width = Texture2015WidthSlope * window.innerWidth - Texture2015WidthSlope * Texture2015WidthStart.x + Texture2015WidthStart.y;
+  window.Texture2015Heigth = window.Texture2015Width * textureBgSize.height / textureBgSize.width;
+  window.Texture2015Top = window.innerHeight / 2 - window.Texture2015Heigth / 2;
+  window.Texture2015Left = window.innerWidth / 2 - window.Texture2015Width / 2;
+  raindrops = new _raindrops__WEBPACK_IMPORTED_MODULE_1__["default"](CanvasElement.width, CanvasElement.height, dpi, dropAlpha, dropColor, {
+    minR: 10,
+    maxR: 20,
+    collisionRadiusIncrease: 0.002,
+    dropletsRate: 50,
+    dropletsSize: [3, 7.5],
+    dropletsCleaningRadiusMultiplier: 0.30
+  });
+  textureFg = (0,_createcanvas__WEBPACK_IMPORTED_MODULE_3__["default"])(textureFgSize.width, textureFgSize.height);
+  textureFgCtx = textureFg.getContext('2d');
+  textureBg = (0,_createcanvas__WEBPACK_IMPORTED_MODULE_3__["default"])(textureBgSize.width, textureBgSize.height);
+  textureBgCtx = textureBg.getContext('2d');
+  generateTextures();
+  renderer = new _rainrenderer__WEBPACK_IMPORTED_MODULE_0__["default"](CanvasElement, raindrops.canvas, textureFg, textureBg, null, {
+    brightness: 1.1,
+    alphaMultiply: 6,
+    alphaSubtract: 3,
+    parallaxFg: 40
+  });
+  setupParallax();
+  var handDraw = function handDraw(e) {
+    var x, y;
+    if (e.clientX) {
+      x = e.clientX;
+      y = e.clientY;
+    } else {
+      x = e.changedTouches[0].clientX;
+      y = e.changedTouches[0].clientY;
+    }
+    window.BrushX = x;
+    window.BrushY = y;
+  };
+  var startDrawing = function startDrawing(e) {
+    window.Drawing = true;
+  };
+  var endDrawing = function endDrawing(e) {
+    window.Drawing = false;
+  };
+  document.addEventListener('mousemove', handDraw);
+  document.addEventListener('mousedown', startDrawing);
+  document.addEventListener('mouseup', endDrawing);
+  document.addEventListener('touchstart', startDrawing);
+  document.addEventListener('touchmove', handDraw);
+  document.addEventListener('touchend', endDrawing);
+  window.VahoActivo = true;
+};
+function setupParallax() {
+  document.addEventListener('mousemove', function (event) {
+    if (!window.VahoActivo) {
+      return;
+    }
+    var x = event.pageX;
+    var y = event.pageY;
+    gsap__WEBPACK_IMPORTED_MODULE_8__["default"].to(parallax, 1, {
+      x: x / canvas.width * 2 - 1,
+      y: y / canvas.height * 2 - 1,
+      ease: gsap__WEBPACK_IMPORTED_MODULE_9__.Quint.easeOut,
+      onUpdate: function onUpdate() {
+        renderer.parallaxX = parallax.x;
+        renderer.parallaxY = parallax.y;
+      }
+    });
+  });
+}
+function generateTextures() {
+  textureFgCtx.drawImage(TextureImg, 0, textureBgSize.height, textureFgSize.width, textureFgSize.height, 0, 0, textureFgSize.width, textureFgSize.height);
+  textureBgCtx.drawImage(TextureImg, 0, 0, textureBgSize.width, textureBgSize.height, 0, 0, textureBgSize.width, textureBgSize.height);
+}
+
+/***/ }),
+
+/***/ "./src/apps/rain2/js/webgl.js":
+/*!************************************!*\
+  !*** ./src/apps/rain2/js/webgl.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   activeTexture: () => (/* binding */ activeTexture),
+/* harmony export */   createProgram: () => (/* binding */ createProgram),
+/* harmony export */   createShader: () => (/* binding */ createShader),
+/* harmony export */   createTexture: () => (/* binding */ createTexture),
+/* harmony export */   createUniform: () => (/* binding */ createUniform),
+/* harmony export */   getContext: () => (/* binding */ getContext),
+/* harmony export */   setRectangle: () => (/* binding */ setRectangle),
+/* harmony export */   updateTexture: () => (/* binding */ updateTexture)
+/* harmony export */ });
+function getContext(canvas) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var contexts = ['webgl', 'experimental-webgl'];
+  var context = null;
+  contexts.some(function (name) {
+    try {
+      context = canvas.getContext(name, options);
+    } catch (e) {}
+    ;
+    return context != null;
+  });
+  if (context == null) {
+    document.body.classList.add('no-webgl');
+  }
+  return context;
+}
+function createProgram(gl, vertexScript, fragScript) {
+  var vertexShader = createShader(gl, vertexScript, gl.VERTEX_SHADER);
+  var fragShader = createShader(gl, fragScript, gl.FRAGMENT_SHADER);
+  var program = gl.createProgram();
+  gl.attachShader(program, vertexShader);
+  gl.attachShader(program, fragShader);
+  gl.linkProgram(program);
+  var linked = gl.getProgramParameter(program, gl.LINK_STATUS);
+  if (!linked) {
+    var lastError = gl.getProgramInfoLog(program);
+    error('Error in program linking: ' + lastError);
+    gl.deleteProgram(program);
+    return null;
+  }
+
+  // var positionLocation = gl.getAttribLocation(program, 'a_position') || 0;
+  // var texCoordLocation = gl.getAttribLocation(program, 'a_texCoord') || 0;
+
+  var positionLocation = 0;
+  var texCoordLocation = 0;
+  var texCoordBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0]), gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(texCoordLocation);
+  gl.vertexAttribPointer(texCoordLocation, 2, gl.FLOAT, false, 0, 0);
+
+  // Create a buffer for the position of the rectangle corners.
+  var buffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  gl.enableVertexAttribArray(positionLocation);
+  gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+  return program;
+}
+function createShader(gl, script, type) {
+  var shader = gl.createShader(type);
+  gl.shaderSource(shader, script);
+  gl.compileShader(shader);
+  var compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+  if (!compiled) {
+    var lastError = gl.getShaderInfoLog(shader);
+    error('Error compiling shader  ' + shader + ':' + lastError);
+    gl.deleteShader(shader);
+    return null;
+  }
+  return shader;
+}
+function createTexture(gl, source, i) {
+  var texture = gl.createTexture();
+  activeTexture(gl, i);
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+
+  // Set the parameters so we can render any size image.
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  if (source == null) {
+    return texture;
+  } else {
+    updateTexture(gl, source);
+  }
+  return texture;
+}
+function createUniform(gl, program, type, name) {
+  var location = gl.getUniformLocation(program, 'u_' + name);
+  for (var _len = arguments.length, args = new Array(_len > 4 ? _len - 4 : 0), _key = 4; _key < _len; _key++) {
+    args[_key - 4] = arguments[_key];
+  }
+  gl['uniform' + type].apply(gl, [location].concat(args));
+}
+function activeTexture(gl, i) {
+  gl.activeTexture(gl['TEXTURE' + i]);
+}
+function updateTexture(gl, source) {
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, source);
+}
+function setRectangle(gl, x, y, width, height) {
+  var x1 = x;
+  var x2 = x + width;
+  var y1 = y;
+  var y2 = y + height;
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([x1, y1, x2, y1, x1, y2, x1, y2, x2, y1, x2, y2]), gl.STATIC_DRAW);
+}
+function error(msg) {
+  console.error(msg);
+}
+
 /***/ })
 
 /******/ 	});
@@ -40882,16 +40870,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var init = function init() {
   var app = document.createElement("div");
   app.setAttribute('id', 'APP');
   document.body.prepend(app);
   var domNode = document.getElementById('APP');
   var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(domNode);
-  root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_js_app__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_js_app__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
-
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {

@@ -1,10 +1,11 @@
 <?php
 
-function poeticsoft_openai_test(WP_REST_Request $req) {
+function poeticsoft_openai_images(WP_REST_Request $req) {
   
   require_once(ABSPATH . "wp-admin" . '/includes/image.php');
   require_once(ABSPATH . "wp-admin" . '/includes/file.php');
-  require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+  require_once(ABSPATH . "wp-admin" . '/includes/media.php'); 
+  require_once(dirname(__FILE__) . '/keys.php'); 
 
   $res = new WP_REST_Response();
 
@@ -12,8 +13,8 @@ function poeticsoft_openai_test(WP_REST_Request $req) {
 
     $uploaddir = wp_get_upload_dir();
     $basedir = $uploaddir['basedir'] . '/openai/';
+    $authtoken = poeticsoft_get_key('openai');
 
-    $authtoken = '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';
     $prompt = 'Baroque-style oil painting portrait of a mature man with a full, curly gray beard and wavy dark brown hair, slightly slicked back. He has deep-set, intense eyes, a strong nose, and a solemn, contemplative expression. He is wearing a simple dark V-neck shirt resembling 17th-century attire. The composition uses dramatic chiaroscuro lighting with strong contrast — a single directional light source illuminating his face and beard while the background fades into deep shadow. The color palette is rich and warm with deep browns, golds, and earthy tones, capturing the texture of the skin, hair, and fabric with painterly brushstrokes. Inspired by Caravaggio’s dramatic realism and intense emotional depth."';
     $data = array(
       'prompt' => $prompt,
@@ -111,11 +112,11 @@ add_action(
 
     register_rest_route(
       'poeticsoft/openai',
-      'test',
+      'images',
       array(
         array(
           'methods'  => 'GET',
-          'callback' => 'poeticsoft_openai_test',
+          'callback' => 'poeticsoft_openai_images',
           'permission_callback' => '__return_true'
         )
       )

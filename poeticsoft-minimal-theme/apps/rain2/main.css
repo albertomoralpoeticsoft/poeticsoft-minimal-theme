@@ -39,12 +39,16 @@ article,
     background-color: transparent;
   }
   .ast-builder-menu-mobile .main-navigation .main-header-menu .menu-link,
-.ast-builder-menu-mobile .main-navigation .main-header-menu .sub-menu {
+  .ast-builder-menu-mobile .main-navigation .main-header-menu .sub-menu {
     background-color: var(--ast-global-color-7);
     background-image: none;
   }
   .ast-builder-menu-mobile .main-navigation .main-header-menu .current-menu-item .menu-link {
     background-color: var(--ast-global-color-6);
+  }
+  .ast-builder-menu-mobile .main-navigation .main-header-menu .menu-item + .menu-item {
+    border: solid var(--ast-global-color-1);
+    border-width: 1px 0 0 0;
   }
 }
 #ast-mobile-header {
