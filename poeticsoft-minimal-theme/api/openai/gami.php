@@ -2,13 +2,13 @@
 
 function poeticsoft_openai_gami(WP_REST_Request $req) {
 
-  require_once(__DIR__ . '/../keys.php'); 
+  require_once(__DIR__ . '/keys.php'); 
 
   $res = new WP_REST_Response();
 
   try { 
 
-    $authtoken = poeticsoft_get_key('gamikey'); 
+    $authtoken = poeticsoft_openai_get_key('gamikey'); 
 
     /* REAL CALL   
 

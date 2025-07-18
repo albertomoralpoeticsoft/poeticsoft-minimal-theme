@@ -1,8 +1,8 @@
 <?php
 
-require_once(dirname(__FILE__) . '/tools/dom.php');
+require_once(get_stylesheet_directory() . '/tools/dom.php');
 
-require_once(__DIR__ . '/../keys.php');
+require_once(__DIR__ . '/keys.php');
 
 function poeticsoft_openai_source(WP_REST_Request $req) {
 
@@ -38,7 +38,7 @@ function poeticsoft_openai_manage(WP_REST_Request $req) {
 
   try { 
 
-    $authtoken = poeticsoft_get_key('gamikey'); 
+    $authtoken = poeticsoft_openai_get_key('gamikey'); 
     
     $source = $req->get_param('source');
     $sourcehtml = file_get_contents(dirname(__FILE__) . '/sources/dest-' . $source . '.html');
