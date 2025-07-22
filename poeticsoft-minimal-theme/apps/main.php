@@ -48,9 +48,7 @@ add_action(
         wp_enqueue_style( 
           'poeticsoft-theme-app-' . $appname,
           $url . '/apps/' . $appname . '/main.css', 
-          array(
-            'astra-theme-css'
-          ), 
+          [], 
           filemtime(get_stylesheet_directory() . '/apps/' . $appname . '/main.css'),
           'all' 
         );
@@ -68,9 +66,7 @@ add_action(
         wp_enqueue_style( 
           'poeticsoft-theme-dialog',
           $url . '/apps/dialog/main.css', 
-          array(
-            'astra-theme-css'
-          ), 
+          [], 
           filemtime(get_stylesheet_directory() . '/apps/dialog/main.css'),
           'all' 
         );
@@ -95,9 +91,7 @@ add_action(
     wp_enqueue_style( 
       'poeticsoft-theme-portfolio',
       $url . '/apps/portfolio/main.css', 
-      array(
-        'astra-theme-css'
-      ), 
+      [], 
       filemtime(get_stylesheet_directory() . '/apps/portfolio/main.css'),
       'all' 
     );

@@ -4,6 +4,9 @@
   "license": "GPL-2.0-or-later",
   "scripts": {
     
+    "themedev": "webpack --env=theme-dev",
+    "themeprod": "webpack --env=theme-prod",
+    
     "dialogdev": "webpack --env=apps-dialog-dev",
     "dialogprod": "webpack --env=apps-dialog-prod",
     "cloudsdev": "webpack --env=apps-clouds-dev",

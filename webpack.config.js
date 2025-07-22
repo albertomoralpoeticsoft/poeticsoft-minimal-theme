@@ -11,17 +11,37 @@ module.exports = env => {
   const input = Object.keys(env)[2] || ''
 
   const params = input.split('-')
-  const type = params[0] || 'apps' // apps
-  const unit = params[1] || 'clouds' // clouds | rain | fire | 
-  const mode = params[2] || 'dev' // dev | prod
+  const type = params[0] || 'apps' // apps | theme
 
-  const paths ={
-    entryjs: './src/' + type + '/' + unit + '/main.js',
-    entryscss: './src/' + type + '/' + unit + '/main.scss',
-    output: destdir  + '/' + type + '/' + unit,
+  let unit, mode
+  let paths = {
     public: themeplublic,
     cssfilename: 'main.css'
   }
+
+  switch(type) {
+
+    case 'apps':
+
+      unit = params[1] || 'clouds' // clouds | rain | fire | 
+      mode = params[2] || 'dev' // dev | prod
+      
+      paths.entryjs = './src/' + type + '/' + unit + '/main.js',
+      // paths.entryscss = './src/' + type + '/' + unit + '/main.scss',
+      paths.output = destdir  + '/' + type + '/' + unit
+
+      break
+
+    case 'theme':
+
+      mode = params[1] || 'dev' // dev | prod
+      
+      paths.entryjs = './src/' + type + '/main.js',
+      // paths.entryscss = './src/' + type + '/main.scss',
+      paths.output = destdir  + '/' + type
+
+      break
+  }  
 
   return {
     context: __dirname,
@@ -30,7 +50,7 @@ module.exports = env => {
     name: 'minimal',
     entry: {
       main: paths.entryjs,
-      maincss: paths.entryscss
+      // maincss: paths.entryscss
     },
     output: {
       path: paths.output,
@@ -104,7 +124,7 @@ module.exports = env => {
       extensions: ['.js'],
       alias: {
         jscommon: path.join(__dirname, 'src/apps/common/js'),
-        scsscommon: path.join(__dirname, 'src/apps/common/scss'),
+        scsscommon: path.join(__dirname, 'src/theme/scss'),
         assets: path.resolve(destdir + '/assets'),
         fonts: path.resolve(destdir + '/assets/fonts')
       }

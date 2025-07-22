@@ -2,10 +2,10 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/apps/dialog/main.scss":
-/*!***********************************!*\
-  !*** ./src/apps/dialog/main.scss ***!
-  \***********************************/
+/***/ "./src/theme/main.scss":
+/*!*****************************!*\
+  !*** ./src/theme/main.scss ***!
+  \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -56,69 +56,13 @@ __webpack_require__.r(__webpack_exports__);
 var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
-/*!*********************************!*\
-  !*** ./src/apps/dialog/main.js ***!
-  \*********************************/
+/*!***************************!*\
+  !*** ./src/theme/main.js ***!
+  \***************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main.scss */ "./src/apps/dialog/main.scss");
+/* harmony import */ var _main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main.scss */ "./src/theme/main.scss");
 
-(function ($) {
-  var $dialog = $('#Dialog');
-  var $slides = $dialog.find('.Slide');
-
-  /* Init slides */
-
-  $slides.each(function () {
-    var $this = $(this);
-    if (location.pathname == '/') {
-      $this.find('.wp-block-button.common.home').remove();
-    }
-    if ($this.hasClass('First')) {
-      $this.find('.wp-block-button.common.root').remove();
-    }
-  });
-
-  /* Slides height */
-
-  var calculateSize = function calculateSize() {
-    $dialog.removeClass('Calculated');
-    var width = 0;
-    var height = 0;
-    setTimeout(function () {
-      $slides.each(function () {
-        var $this = $(this);
-        width = Math.ceil(Math.max(height, $this.outerWidth()));
-        height = Math.ceil(Math.max(height, $this.outerHeight()));
-      });
-      $dialog.height(width);
-      $dialog.height(height);
-      $dialog.addClass('Calculated');
-    }, 100);
-  };
-  window.addEventListener('resize', calculateSize);
-  setTimeout(function () {
-    calculateSize();
-  }, 800);
-
-  /* Hash changes */
-
-  var hashchanged = function hashchanged() {
-    $slides.each(function () {
-      $(this).removeClass('Current');
-    });
-    var hash = location.hash;
-    var $targetSlide = hash ? $dialog.find(hash) : $dialog.find('.Slide.First');
-    setTimeout(function () {
-      if ($targetSlide.length) {
-        $targetSlide.addClass('Current');
-      }
-    }, 600);
-  };
-  window.addEventListener('hashchange', hashchanged);
-  setTimeout(function () {
-    hashchanged();
-  }, 1000);
-})(jQuery);
+console.log('theme');
 })();
 
 /******/ })()

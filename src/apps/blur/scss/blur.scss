@@ -1,9 +1,9 @@
-@use '~scsscommon/presets';
+@use '~scsscommon/mixin' as *;
 
 #Blur {
 
   @include absolutebox();
-  background-color: #000000; 
+  background-color: var(--color-a); 
 
   canvas {      
       

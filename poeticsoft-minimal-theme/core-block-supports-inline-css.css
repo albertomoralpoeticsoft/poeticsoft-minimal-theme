@@ -1,0 +1,25 @@
+.wp-container-core-navigation-is-layout-765c4724 {
+  justify-content: flex-end;
+}
+
+.wp-elements-d6d9047d8462d47c7bfca1a269ee841e a:where(:not(.wp-element-button)) {
+  color: var(--wp--preset--color--ast-global-color-2);
+}
+
+.wp-container-core-buttons-is-layout-c14fefd7 {
+  justify-content: flex-end;
+}
+
+.wp-container-core-cover-is-layout-d74413bc>.alignfull {
+  margin-right: calc(var(--wp--preset--spacing--40) * -1);
+  margin-left: calc(var(--wp--preset--spacing--50) * -1);
+}
+
+.wp-elements-832cc8ab36a9b0ee4d5e25aad17eaa80 a:where(:not(.wp-element-button)) {
+  color: var(--wp--preset--color--ast-global-color-2);
+}
+
+.wp-container-core-group-is-layout-02eb8ecd>.alignfull {
+  margin-right: calc(0px * -1);
+  margin-left: calc(0px * -1);
+}

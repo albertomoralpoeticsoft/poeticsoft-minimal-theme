@@ -1,3 +1,5 @@
+@use '~scsscommon/mixin' as *;
+
 #Fire {
 
   @include absolutebox();
