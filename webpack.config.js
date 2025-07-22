@@ -11,12 +11,19 @@ module.exports = env => {
   const input = Object.keys(env)[2] || ''
 
   const params = input.split('-')
+<<<<<<< HEAD
   const type = params[0] || 'block' // block 
   const name = params[1] || 'base' // base | etc.
   const mode = params[2] || 'dev' // dev | prod
 
   const paths = {
     output: destdir  + '/' + type + '/' + name,
+=======
+  const type = params[0] || 'apps' // apps | theme
+
+  let unit, mode
+  let paths = {
+>>>>>>> 467a4b227d6c871c291dad6bd1ecbb0d07e514c6
     public: themeplublic,
     cssfilename: '[name].css'
   }
@@ -32,6 +39,7 @@ module.exports = env => {
     }
   }
 
+<<<<<<< HEAD
   switch (type) {
 
     case 'block':
@@ -49,11 +57,45 @@ module.exports = env => {
   }
 
   const config = {
+=======
+  switch(type) {
+
+    case 'apps':
+
+      unit = params[1] || 'clouds' // clouds | rain | fire | 
+      mode = params[2] || 'dev' // dev | prod
+      
+      paths.entryjs = './src/' + type + '/' + unit + '/main.js',
+      // paths.entryscss = './src/' + type + '/' + unit + '/main.scss',
+      paths.output = destdir  + '/' + type + '/' + unit
+
+      break
+
+    case 'theme':
+
+      mode = params[1] || 'dev' // dev | prod
+      
+      paths.entryjs = './src/' + type + '/main.js',
+      // paths.entryscss = './src/' + type + '/main.scss',
+      paths.output = destdir  + '/' + type
+
+      break
+  }  
+
+  return {
+>>>>>>> 467a4b227d6c871c291dad6bd1ecbb0d07e514c6
     context: __dirname,
     stats: 'minimal',
     watch: true,
     name: 'minimal',
+<<<<<<< HEAD
     entry: entry,
+=======
+    entry: {
+      main: paths.entryjs,
+      // maincss: paths.entryscss
+    },
+>>>>>>> 467a4b227d6c871c291dad6bd1ecbb0d07e514c6
     output: {
       path: paths.output,
       publicPath: paths.public,
@@ -126,9 +168,16 @@ module.exports = env => {
     resolve: {
       extensions: ['.js'],
       alias: {
+<<<<<<< HEAD
         assets: path.resolve(destdir + '/assets'),       
         blocks: path.join(__dirname, pluginname, 'block'),       
         styles: path.join(__dirname, 'src', 'styles')
+=======
+        jscommon: path.join(__dirname, 'src/apps/common/js'),
+        scsscommon: path.join(__dirname, 'src/theme/scss'),
+        assets: path.resolve(destdir + '/assets'),
+        fonts: path.resolve(destdir + '/assets/fonts')
+>>>>>>> 467a4b227d6c871c291dad6bd1ecbb0d07e514c6
       }
     }
   }
