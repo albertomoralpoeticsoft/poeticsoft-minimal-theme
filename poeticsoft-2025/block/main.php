@@ -37,8 +37,6 @@ add_action(
       $blockjsondir = $blockdir . '/' . $blockname;
       
       $registered = register_block_type($blockjsondir);
-
-      // ps_log($registered);
     }
   },
   5

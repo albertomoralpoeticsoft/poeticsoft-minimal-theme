@@ -1,5 +1,6 @@
 <?php
 return array(
-  'dependencies' => array(),
+  'dependencies' => [
+  ],
   'version' => filemtime( __DIR__ . '/view.js' ),
 );

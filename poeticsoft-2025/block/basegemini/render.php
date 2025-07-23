@@ -7,10 +7,14 @@ if (!function_exists('poeticsoft_block_basegemini_render_callback')) {
     $content
   ) { 
     
-    $jsonattributes = json_encode($attributes);
+    $url = $attributes['url'];
+    $context = $attributes['context'];
+    $userInit = $attributes['userInit'];
     
     return "<div class='wp-block-poeticsoft-basegemini'>
-      Bloque dinámico: $jsonattributes
+      <div class='url'>{$url}</div>
+      <div class='context'>{$context}</div>
+      <div class='userInit'>{$userInit}</div>
     </div>";
   }
 }

@@ -9,16 +9,16 @@ const {
   Button
 } = wp.components
 import metadata from 'blocks/basegemini/block.json'
-import './editor.scss';
+import './editor.scss'
 
 const Edit = ({ attributes, setAttributes }) => {
 
-  const blockProps = useBlockProps();
+  const blockProps = useBlockProps()
   const { 
     url, 
     context,
     userInit
-  } = attributes;
+  } = attributes
 
   return (
       <div {...blockProps}>
@@ -43,7 +43,7 @@ const Edit = ({ attributes, setAttributes }) => {
           placeholder={__('Init message', 'poeticsoft')}
         />
       </div>
-  );
+  )
 }
 
 registerBlockType(
