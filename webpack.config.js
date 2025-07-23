@@ -2,59 +2,59 @@ const path = require('path')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const themename = 'poeticsoft-minimal-theme'
-const destdir = path.join(__dirname, themename)
-const themeplublic = '/wp-content/themes/' + themename
+const pluginname = 'poeticsoft-2025'
+const destdir = path.join(__dirname, pluginname)
+const themeplublic = '/wp-content/plugin/' + pluginname
 
 module.exports = env => {  
                                                     
   const input = Object.keys(env)[2] || ''
 
   const params = input.split('-')
-  const type = params[0] || 'apps' // apps | theme
+  const type = params[0] || 'block' // block 
+  const name = params[1] || 'base' // base | etc.
+  const mode = params[2] || 'dev' // dev | prod
 
-  let unit, mode
-  let paths = {
+  const paths = {
+    output: destdir  + '/' + type + '/' + name,
     public: themeplublic,
-    cssfilename: 'main.css'
+    cssfilename: '[name].css'
+  }
+  let entry = {}
+  let externals = {}  
+
+  const wpexternals = {
+    '@wordpress/element': 'wp.element',
+    '@wordpress/i18n': 'wp.i18n',
+    '@wordpress/blocks': 'wp.blocks'
   }
 
-  switch(type) {
+  switch (type) {
 
-    case 'apps':
-
-      unit = params[1] || 'clouds' // clouds | rain | fire | 
-      mode = params[2] || 'dev' // dev | prod
+    case 'block':
       
-      paths.entryjs = './src/' + type + '/' + unit + '/main.js',
-      // paths.entryscss = './src/' + type + '/' + unit + '/main.scss',
-      paths.output = destdir  + '/' + type + '/' + unit
+      paths.output = destdir  + '/' + type + '/' + name + '/build'
 
-      break
+      entry = {
+        editor: './src/' + type + '/' + name + '/editor.js',
+        view: './src/' + type + '/' + name + '/view.js'
+      }
 
-    case 'theme':
+      externals = wpexternals
 
-      mode = params[1] || 'dev' // dev | prod
-      
-      paths.entryjs = './src/' + type + '/main.js',
-      // paths.entryscss = './src/' + type + '/main.scss',
-      paths.output = destdir  + '/' + type
+      break;
+  }
 
-      break
-  }  
-
-  return {
+  const config = {
     context: __dirname,
     stats: 'minimal',
     watch: true,
     name: 'minimal',
-    entry: {
-      main: paths.entryjs,
-      // maincss: paths.entryscss
-    },
+    entry: entry,
     output: {
       path: paths.output,
-      publicPath: paths.public
+      publicPath: paths.public,
+      filename: '[name].js'
     },
     mode: mode == 'prod' ? 'production' : 'development',
     devtool: mode == 'prod' ? false : 'source-map',
@@ -109,7 +109,7 @@ module.exports = env => {
             emit: false,
             filename: content => { 
 
-              return content.filename.replace(themename, '')
+              return content.filename.replace(pluginname, '')
             }
           }
         }
@@ -123,11 +123,12 @@ module.exports = env => {
     resolve: {
       extensions: ['.js'],
       alias: {
-        jscommon: path.join(__dirname, 'src/apps/common/js'),
-        scsscommon: path.join(__dirname, 'src/theme/scss'),
-        assets: path.resolve(destdir + '/assets'),
-        fonts: path.resolve(destdir + '/assets/fonts')
+        assets: path.resolve(destdir + '/assets'),       
+        blocks: path.join(__dirname, pluginname, 'block'),       
+        styles: path.join(__dirname, 'src', 'styles')
       }
     }
   }
+
+  return config
 }
